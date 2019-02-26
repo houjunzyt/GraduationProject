@@ -1,0 +1,2 @@
+CMSIS：里面放着跟 CM4 内核有关的库文件
+STM32F4xx_StdPeriph_Driver： STM32 外设库文件

@@ -3,6 +3,7 @@
 #include "rtconfig.h"
 #include "board.h"
 #include "usart.h"
+#include "stm32f429i_discovery_ioe.h"
 
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
 #define RT_HEAP_SIZE 1536
@@ -25,7 +26,7 @@ void rt_hw_board_init()
 {	
 	SysTick_Config(SystemCoreClock / RT_TICK_PER_SECOND);
 	Usart1_Config();
-	
+	IOE_Config();
 	
     /* Call components board initial (use INIT_BOARD_EXPORT()) */
 #ifdef RT_USING_COMPONENTS_INIT

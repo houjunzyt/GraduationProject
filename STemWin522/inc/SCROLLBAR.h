@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.40 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +49,7 @@ Purpose     : SCROLLBAR include
   *
   ******************************************************************************
   */
-
+  
 #ifndef SCROLLBAR_H
 #define SCROLLBAR_H
 
@@ -85,7 +84,9 @@ Purpose     : SCROLLBAR include
 *       Create / Status flags
 */
 #define SCROLLBAR_CF_VERTICAL     WIDGET_CF_VERTICAL
-#define SCROLLBAR_CF_FOCUSSABLE   WIDGET_STATE_FOCUSSABLE
+#define SCROLLBAR_CF_FOCUSABLE    WIDGET_STATE_FOCUSABLE
+
+#define SCROLLBAR_CF_FOCUSSABLE   SCROLLBAR_CF_FOCUSABLE
 
 /************************************************************
 *
@@ -176,14 +177,21 @@ WIDGET_DRAW_ITEM_FUNC * SCROLLBAR_SetDefaultSkin(WIDGET_DRAW_ITEM_FUNC * pfDrawS
 
 /*********************************************************************
 *
-*       Global functions
+*       Managing default values
 *
 **********************************************************************
 */
 int       SCROLLBAR_GetDefaultWidth(void);
-int       SCROLLBAR_GetThumbSizeMin(void);
 GUI_COLOR SCROLLBAR_SetDefaultColor(GUI_COLOR Color, unsigned int Index); /* Not yet documented */
 int       SCROLLBAR_SetDefaultWidth(int DefaultWidth);
+
+/*********************************************************************
+*
+*       Global functions
+*
+**********************************************************************
+*/
+int       SCROLLBAR_GetThumbSizeMin(void);
 int       SCROLLBAR_SetThumbSizeMin(int ThumbSizeMin);
 
 /*********************************************************************

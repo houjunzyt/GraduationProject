@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.40 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +49,7 @@ Purpose     : Private LISTWHEEL include
   *
   ******************************************************************************
   */
-
+  
 #ifndef LISTWHEEL_PRIVATE_H
 #define LISTWHEEL_PRIVATE_H
 
@@ -78,37 +77,37 @@ Purpose     : Private LISTWHEEL include
 
 typedef struct {
   void * pData;
-  char acText[1];
+  char   acText[1];
 } LISTWHEEL_ITEM;
 
 typedef struct {
-  const GUI_FONT GUI_UNI_PTR * pFont;
-  GUI_COLOR aBackColor[2];
-  GUI_COLOR aTextColor[2];
-  I16 Align;
+  const GUI_FONT * pFont;
+  GUI_COLOR        aBackColor[2];
+  GUI_COLOR        aTextColor[2];
+  I16              Align;
+  unsigned         Deceleration;
 } LISTWHEEL_PROPS;
 
 typedef struct {
-  WIDGET Widget;
-  GUI_ARRAY ItemArray;
+  WIDGET                  Widget;
+  GUI_ARRAY               ItemArray;
   WIDGET_DRAW_ITEM_FUNC * pfOwnerDraw;
-  LISTWHEEL_PROPS Props;
-  #if GUI_DEBUG_LEVEL > 1
-    U32 DebugId;
-  #endif
-  WM_HMEM hTimer;
-  unsigned LBorder;
-  unsigned RBorder;
-  unsigned LineHeight;
-  int Sel;
-  GUI_TIMER_TIME TimeTouched;   // Time stamp of last touch event
-  int Pos;           // Current position in pixels
-  int Velocity;      // Motion in pixels
-  int SnapPosition;  // Snap position in pixels
-  int TouchPos;      // Y-position of last touch event
-  int ySizeData;     // Data size in pixels
-  int Destination;   // Destination position in pixels
-  unsigned TimerPeriod; // Period of timer events
+  LISTWHEEL_PROPS         Props;
+  WM_HMEM                 hTimer;
+  unsigned                LBorder;
+  unsigned                RBorder;
+  unsigned                LineHeight;
+  int                     Sel;
+  GUI_TIMER_TIME          TimeTouched;      // Time stamp of last touch event
+  GUI_TIMER_TIME          TimeTouchedLast;  // Time of the last touch
+  int                     PosTouchedLast;   // Last touched position in pixels
+  int                     Pos;              // Current position in pixels
+  int                     Velocity;         // Motion in pixels
+  int                     SnapPosition;     // Snap position in pixels
+  int                     TouchPos;         // Y-position of last touch event
+  int                     ySizeData;        // Data size in pixels
+  int                     Destination;      // Destination position in pixels
+  GUI_TIMER_TIME          TimerPeriod;      // Period of timer events
 } LISTWHEEL_OBJ;
 
 /*********************************************************************
@@ -118,7 +117,7 @@ typedef struct {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define LISTWHEEL_INIT_ID(p) p->DebugId = LISTWHEEL_ID
+  #define LISTWHEEL_INIT_ID(p)  (p->Widget.DebugId = LISTWHEEL_ID)
 #else
   #define LISTWHEEL_INIT_ID(p)
 #endif
@@ -146,10 +145,7 @@ extern LISTWHEEL_PROPS LISTWHEEL_DefaultProps;
 */
 const char * LISTWHEEL__GetpStringLocked(LISTWHEEL_Handle hObj, int Index, LISTWHEEL_ITEM ** ppItem);
 
-#endif /* GUI_WINSUPPORT */
-
-#else                            /* Avoid problems with empty object modules */
-  void LISTWHEEL_C(void) {}
-#endif
+#endif // GUI_WINSUPPORT
+#endif // LISTWHEEL_PRIVATE_H
 
 /*************************** End of file ****************************/

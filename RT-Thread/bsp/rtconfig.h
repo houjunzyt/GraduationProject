@@ -10,33 +10,33 @@
 // <h>Basic Configuration
 // <o>Maximal level of thread priority <8-256>
 //	<i>Default: 32
-#define RT_THREAD_PRIORITY_MAX 32
+#define RT_THREAD_PRIORITY_MAX     32  //线程优先级8-256
 
 // <o>OS tick per second
 //  <i>Default: 1000   (1ms)
-#define RT_TICK_PER_SECOND 1000
+#define RT_TICK_PER_SECOND      1000  //操作系统每秒多少个tick
 
 // <o>Alignment size for CPU architecture data access
 //	<i>Default: 4
-#define RT_ALIGN_SIZE 4
+#define RT_ALIGN_SIZE 4  //cpu字节对其方式
 
 // <o>the max length of object name<2-16>
 //	<i>Default: 8
-#define RT_NAME_MAX 8
+#define RT_NAME_MAX 8  //对象名字最大长度 取值范围：2~16
 
 // <c1>Using RT-Thread components initialization
 //  <i>Using RT-Thread components initialization
-#define RT_USING_COMPONENTS_INIT
+#define RT_USING_COMPONENTS_INIT   //是否使能RTT组件初始化
 // </c>
 
 // <c1>Using user main
 //  <i>Using user main
-#define RT_USING_USER_MAIN
+#define RT_USING_USER_MAIN   //使用用户main函数
 // </c>
 
 // <o>the size of main thread<1-4086>
 //	<i>Default: 512
-#define RT_MAIN_THREAD_STACK_SIZE 512
+#define RT_MAIN_THREAD_STACK_SIZE      512   //线程栈大小，1-4086
 
 // <c1>using tiny size of memory
 //  <i>using tiny size of memory
@@ -44,7 +44,7 @@
 // </c>
 // </h>
 
-// <h>Debug Configuration
+// <h>Debug Configuration      //调试使用，内核调试配置，组件调试配置、栈溢出检测
 // <c1>enable kernel debug configuration
 //  <i>Default: enable kernel debug configuration
 //#define RT_DEBUG
@@ -52,7 +52,7 @@
 
 // <o>enable components initialization debug configuration<0-1>
 //  <i>Default: 0
-//#define RT_DEBUG_INIT
+#define RT_DEBUG_INIT 0
 
 // <c1>thread stack over flow detect
 //  <i> Diable Thread stack over flow detect
@@ -60,22 +60,25 @@
 // </c>
 // </h>
 
-// <h>Hook Configuration
+// <h>Hook Configuration      //钩子函数配置  
 // <c1>using hook
 //  <i>using hook
-//#define RT_USING_HOOK
+#define RT_USING_HOOK
 // </c>
 
 // <c1>using idle hook
 //  <i>using idle hook
-//#define RT_USING_IDLE_HOOK
+#define RT_USING_IDLE_HOOK
 // </c>
 // </h>
 
-// <e>Software timers Configuration
+// <e>Software timers Configuration     //软件定时器配置
 // <i> Enables user timers
 //#define RT_USING_TIMER_SOFT
-
+#define RT_USING_TIMER_SOFT 0
+#if RT_USING_TIMER_SOFT == 0
+#undef RT_USING_TIMER_SOFT
+#endif
 // <o>The priority level of timer thread <0-31>
 //  <i>Default: 4
 #define RT_TIMER_THREAD_PRIO 4
@@ -89,49 +92,49 @@
 #define RT_TIMER_TICK_PER_SECOND 100
 // </e>
 
-// <h>IPC(Inter-process communication) Configuration
+// <h>IPC(Inter-process communication) Configuration     //内部通信配置
 // <c1>Using Semaphore
 //  <i>Using Semaphore
-#define RT_USING_SEMAPHORE
+#define RT_USING_SEMAPHORE     //信号
 // </c>
 
 // <c1>Using Mutex
-//  <i>Using Mutex
-#define RT_USING_MUTEX
+//  <i>Using Mutex 
+#define RT_USING_MUTEX      //互斥量
 // </c>
 
 // <c1>Using Event
 //  <i>Using Event
-#define RT_USING_EVENT
+//#define RT_USING_EVENT        //事件
 // </c>
 
 // <c1>Using MailBox
 //  <i>Using MailBox
-//#define RT_USING_MAILBOX
+#define RT_USING_MAILBOX     //邮箱
 // </c>
 
 // <c1>Using Message Queue
 //  <i>Using Message Queue
-//#define RT_USING_MESSAGEQUEUE
+#define RT_USING_MESSAGEQUEUE   //消息队列
 // </c>
 // </h>
 
-// <h>Memory Management Configuration
+// <h>Memory Management Configuration    //内存管理配置
 // <c1>Using Memory Pool Management
-//  <i>Using Memory Pool Management
-//#define RT_USING_MEMPOOL
+//  <i>Using Memory Pool Management    
+//#define RT_USING_MEMPOOL          //是否使用内存池
 // </c>
 // <c1>Dynamic Heap Management
 //  <i>Dynamic Heap Management
-#define RT_USING_HEAP
+#define RT_USING_HEAP      //是否使用堆空间
 // </c>
 // <c1>using small memory
 //  <i>using small memory
-#define RT_USING_SMALL_MEM
+#define RT_USING_SMALL_MEM    //是否使用小内存
 // </c>
 // </h>
 
-// <h>Console Configuration
+// <h>Console Configuration   //控制台配置
 // <c1>Using console
 //  <i>Using console
 #define RT_USING_CONSOLE
@@ -140,15 +143,17 @@
 // <o>the buffer size of console <1-1024>
 //  <i>the buffer size of console
 //  <i>Default: 128  (128Byte)
-#define RT_CONSOLEBUF_SIZE 128
+#define RT_CONSOLEBUF_SIZE      128
+
 #define DEBUGUSART  USART1
+
 // <s>The device name for console
 //  <i>The device name for console
 //  <i>Default: uart2
 #define RT_CONSOLE_DEVICE_NAME "uart2"
 // </h>
 
-#if defined(RTE_USING_DEVICE)
+#if defined(RTE_USING_DEVICE)    
 #define RT_USING_DEVICE
 #define RT_USING_SERIAL
 #define BSP_USING_UART2
@@ -164,7 +169,7 @@
 
 // <c1>Using Msh Shell
 //  <i>Using Msh Shell
-#define FINSH_USING_MSH
+#define FINSH_USING_MSH       //Finsh配置
 // </c>
 
 // <c1>Only using Msh Shell

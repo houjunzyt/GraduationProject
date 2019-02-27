@@ -335,9 +335,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,USE_DEFAULT_TIMEOUT_CALLBACK,</Define>
+              <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,USE_DEFAULT_TIMEOUT_CALLBACK,ARM_MATH_CM4,__CC_ARM,ARM_MATH_MATRIX_CHECK,ARM_MATH_ROUNDING,__FPU_PRESENT=1,__FPU_USED=1,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Driver\Board_Driver\STM32F429I-Discovery;..\Driver\Board_Driver\Common;..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Driver\Usart;..\Driver\Delay;..\RT-Thread\bsp;..\RT-Thread\components\finsh;..\RT-Thread\include;..\RT-Thread\include\libc</IncludePath>
+              <IncludePath>..\Driver\Board_Driver\STM32F429I-Discovery;..\Driver\Board_Driver\Common;..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Driver\Usart;..\Driver\Delay;..\RT-Thread\bsp;..\RT-Thread\components\finsh;..\RT-Thread\include;..\STemWin522\inc;..\STemWin522\Config;..\STemWin522\Application;..\DspLib\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -359,7 +359,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -368,7 +368,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>..\Output\STM32F429.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -487,16 +487,6 @@
               <FilePath>..\Driver\Board_Driver\STM32F429I-Discovery\stm32f429i_discovery_l3gd20.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f429i_discovery_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Driver\Board_Driver\STM32F429I-Discovery\stm32f429i_discovery_lcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f429i_discovery_sdram.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Driver\Board_Driver\STM32F429I-Discovery\stm32f429i_discovery_sdram.c</FilePath>
-            </File>
-            <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Driver\Usart\usart.c</FilePath>
@@ -505,6 +495,16 @@
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Driver\Delay\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_rgb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Board_Driver\STM32F429I-Discovery\lcd_rgb.c</FilePath>
+            </File>
+            <File>
+              <FileName>sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Board_Driver\STM32F429I-Discovery\sdram.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -530,6 +530,163 @@
         </Group>
         <Group>
           <GroupName>EMWIN_Config</GroupName>
+          <Files>
+            <File>
+              <FileName>GUIConf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Config\GUIConf.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDRV_stm32f429i_discovery.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Config\GUIDRV_stm32f429i_discovery.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_X_OS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\OS\GUI_X_OS.c</FilePath>
+            </File>
+            <File>
+              <FileName>STemWin540_CM4_OS_Keil_ot.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\STemWin522\Lib\STemWin540_CM4_OS_Keil_ot.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>EMWIN_DEMO</GroupName>
+          <Files>
+            <File>
+              <FileName>GUIDEMO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_AntialiasedText.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_AntialiasedText.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Automotive.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Automotive.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_BarGraph.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_BarGraph.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Bitmap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Bitmap.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_ColorBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_ColorBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Conf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Conf.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Cursor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Cursor.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Fading.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Fading.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Graph.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Graph.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_IconView.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_IconView.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_ImageFlow.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_ImageFlow.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Intro.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Intro.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Listview.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Listview.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_RadialMenu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_RadialMenu.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Resource.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Resource.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Skinning.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Skinning.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Speed.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Speed.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Speedometer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Speedometer.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Start.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Start.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_TransparentDialog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_TransparentDialog.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Treeview.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_Treeview.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_VScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_VScreen.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_WashingMachine.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_WashingMachine.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_ZoomAndRotate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\Application\GUIDEMO_ZoomAndRotate.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>RTT/Sourece</GroupName>
@@ -623,6 +780,16 @@
               <FileName>cpuport.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\RT-Thread\libcpu\arm\cortex-m4\cpuport.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>DSP_Lib</GroupName>
+          <Files>
+            <File>
+              <FileName>arm_cortexM4lf_math.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\DspLib\arm_cortexM4lf_math.lib</FilePath>
             </File>
           </Files>
         </Group>

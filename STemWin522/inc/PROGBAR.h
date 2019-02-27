@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.40 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +49,7 @@ Purpose     : Progressbar include
   *
   ******************************************************************************
   */
-
+  
 #ifndef PROGBAR_H        /* Avoid multiple inclusion  */
 #define PROGBAR_H
 
@@ -132,26 +131,16 @@ void PROGBAR_Callback(WM_MESSAGE * pMsg);
 
 /*********************************************************************
 *
-*       Standard member functions
-*
-**********************************************************************
-*/
-
-#define PROGBAR_EnableMemdev(hObj)  WM_EnableMemdev(hObj)
-#define PROGBAR_DisableMemdev(hObj) WM_DisableMemdev(hObj)
-#define PROGBAR_Delete(hObj)        WM_DeleteWindow(hObj)
-#define PROGBAR_Paint(hObj)         WM_Paint(hObj)
-
-/*********************************************************************
-*
 *       Individual member functions
 *
 **********************************************************************
 */
 
+void PROGBAR_GetMinMax   (PROGBAR_Handle hObj, int * pMin, int * pMax);
 int  PROGBAR_GetUserData (PROGBAR_Handle hObj, void * pDest, int NumBytes);
+int  PROGBAR_GetValue    (PROGBAR_Handle hObj);
 void PROGBAR_SetBarColor (PROGBAR_Handle hObj, unsigned int index, GUI_COLOR color);
-void PROGBAR_SetFont     (PROGBAR_Handle hObj, const GUI_FONT GUI_UNI_PTR * pfont);
+void PROGBAR_SetFont     (PROGBAR_Handle hObj, const GUI_FONT * pfont);
 void PROGBAR_SetMinMax   (PROGBAR_Handle hObj, int Min, int Max);
 void PROGBAR_SetText     (PROGBAR_Handle hObj, const char* s);
 void PROGBAR_SetTextAlign(PROGBAR_Handle hObj, int Align);

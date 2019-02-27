@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.40 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -54,11 +53,19 @@ Attention : Do not modify this file ! If you do, you will not
   *
   ******************************************************************************
   */
-
+  
 #ifndef  GUI_CONFDEFAULTS_H
 #define  GUI_CONFDEFAULTS_H
 
 #include "GUIConf.h"
+
+#ifndef   GUI_USE_MIXCOLORS
+  #define GUI_USE_MIXCOLORS 1
+#endif
+
+#ifndef   GUI_USE_BIDI2
+  #define GUI_USE_BIDI2 1
+#endif
 
 #ifndef   LCD_MAX_LOG_COLORS
   #define LCD_MAX_LOG_COLORS 256
@@ -84,15 +91,23 @@ Attention : Do not modify this file ! If you do, you will not
 ***********************************************************************
 */
 
+/* ATTENTION: This define swaps the meaning of a logical color from
+   ABGR to ARGB.
+   
+   It further swaps the meaning of a transparent pixel:
+   ABGR: 0x00 means opaque, 0xFF means transparent (default)
+   ARGB: 0x00 means transparent, 0xFF means opaque
+*/
+#ifndef GUI_USE_ARGB
+  #define GUI_USE_ARGB 1
+#endif
+
 /* Define "universal pointer". Normally, this is not needed (define will expand to nothing)
    However, on some systems (AVR - IAR compiler) it can be necessary ( -> __generic),
    since a default pointer can access RAM only, not the built-in Flash
 */
 #ifndef GUI_UNI_PTR
-  #define GUI_UNI_PTR
-  #define GUI_UNI_PTR_USED 0
-#else
-  #define GUI_UNI_PTR_USED 1
+  #define GUI_UNI_PTR /* Remains only for compatibility purpose, no longer used in emWin */
 #endif
 
 /* Define const storage. Normally, this is not needed (define will expand to const)
@@ -108,7 +123,11 @@ Attention : Do not modify this file ! If you do, you will not
 #endif
 
 #ifndef GUI_BIDI_MAX_CHARS_PER_LINE
-  #define GUI_BIDI_MAX_CHARS_PER_LINE 80
+  #if GUI_USE_BIDI2
+    #define GUI_BIDI_MAX_CHARS_PER_LINE 200
+  #else
+    #define GUI_BIDI_MAX_CHARS_PER_LINE  80
+  #endif
 #endif
 
 #ifndef GUI_SUPPORT_TOUCH
@@ -139,10 +158,6 @@ Attention : Do not modify this file ! If you do, you will not
   #define GUI_CURSOR_LAYER 0
 #endif
 
-#ifndef GUI_MEMCPY
-  #define GUI_MEMCPY(pDest, pSrc, NumBytes) memcpy(pDest, pSrc, NumBytes)
-#endif
-
 #ifndef GUI_SUPPORT_ROTATION
   #define GUI_SUPPORT_ROTATION 1
 #endif
@@ -171,9 +186,22 @@ Attention : Do not modify this file ! If you do, you will not
 #endif
 
 #ifndef   GUI_MEMSET
-  #define GUI_MEMSET GUI__memset
+  #define GUI_MEMSET memset
 #endif
 
+#ifndef GUI_MEMCPY
+  #define GUI_MEMCPY memcpy
+#endif
+
+/* Optional custom drawing of memory devices */
+#ifndef   GUI_MEMDEV_SUPPORT_CUSTOMDRAW
+  #define GUI_MEMDEV_SUPPORT_CUSTOMDRAW 1
+#endif
+
+/* Clip static memory devices to parent borders */
+#ifndef   GUI_MEMDEV_CLIP_AT_PARENT
+  #define GUI_MEMDEV_CLIP_AT_PARENT 0
+#endif
 
 #endif   /* ifdef GUI_CONFDEFAULTS_H */
 

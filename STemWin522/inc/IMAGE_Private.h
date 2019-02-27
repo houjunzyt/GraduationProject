@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.40 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +49,7 @@ Purpose     : Private IMAGE include
   *
   ******************************************************************************
   */
-
+  
 #ifndef IMAGE_PRIVATE_H
 #define IMAGE_PRIVATE_H
 
@@ -110,9 +109,6 @@ typedef struct {
   #if GUI_SUPPORT_MEMDEV
     GUI_MEMDEV_Handle hMem;
   #endif
-  #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-    int DebugId;
-  #endif
 } IMAGE_OBJ;
 
 /*********************************************************************
@@ -122,16 +118,16 @@ typedef struct {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define IMAGE_INIT_ID(pObj) (pObj->DebugId = IMAGE_ID)
+  #define IMAGE_INIT_ID(p) (p->Widget.DebugId = IMAGE_ID)
 #else
-  #define IMAGE_INIT_ID(pObj)
+  #define IMAGE_INIT_ID(p)
 #endif
 
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  IMAGE_OBJ * IMAGE__LockH(IMAGE_Handle hObj);
-  #define IMAGE_LOCK_H(hObj)   IMAGE__LockH(hObj)
+  IMAGE_OBJ * IMAGE__LockH(IMAGE_Handle h);
+  #define IMAGE_LOCK_H(h)   IMAGE__LockH(h)
 #else
-  #define IMAGE_LOCK_H(hObj)   (IMAGE_OBJ *)GUI_LOCK_H(hObj)
+  #define IMAGE_LOCK_H(h)   (IMAGE_OBJ *)GUI_LOCK_H(h)
 #endif
 
 /*********************************************************************

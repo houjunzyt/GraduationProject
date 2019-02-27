@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.40 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +49,7 @@ Purpose     : Private header file for sprites
   *
   ******************************************************************************
   */
-
+  
 #ifndef GUI_SPRITE_PRIVATE_H
 #define GUI_SPRITE_PRIVATE_H
 
@@ -72,13 +71,13 @@ Purpose     : Private header file for sprites
 // The sprite object
 //
 typedef struct {
-  GUI_DEVICE                   * pDevice;
-  GUI_RECT                       Rect;
-  GUI_HMEM                       hColors;
-  U16                            Flags;
-  const GUI_BITMAP GUI_UNI_PTR * pBM;
-  void (* pCB)(GUI_HSPRITE hSprite, int Cmd); // Callback routine for animated sprites
-  GUI_HMEM                       hContext;
+  GUI_DEVICE       * pDevice;
+  GUI_RECT           Rect;
+  GUI_HMEM           hColors;
+  U16                Flags;
+  const GUI_BITMAP * pBM;
+  void            (* pCB)(GUI_HSPRITE hSprite, int Cmd); // Callback routine for animated sprites
+  GUI_HMEM           hContext;
 } GUI_SPRITE_OBJ;
 
 

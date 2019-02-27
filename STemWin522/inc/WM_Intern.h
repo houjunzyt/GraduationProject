@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.40 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,8 +49,7 @@ Purpose     : Windows manager internal include
   *
   ******************************************************************************
   */
-
-
+  
 #ifndef WM_INTERN_H            /* Make sure we only include it once */
 #define WM_INTERN_H            /* Make sure we only include it once */
 
@@ -134,6 +132,7 @@ extern WM_HWIN        WM__ahWinFocus[GUI_NUM_LAYERS];
 extern char           WM__CaptureReleaseAuto;
 extern WM_tfPollPID * WM_pfPollPID;
 extern U8             WM__PaintCallbackCnt;      /* Public for assertions only */
+extern WM_HWIN        WM__hCreateStatic;
 
 #if WM_SUPPORT_TRANSPARENCY
   extern int     WM__TransWindowCnt;
@@ -146,6 +145,7 @@ extern U8             WM__PaintCallbackCnt;      /* Public for assertions only *
 
 extern WM_CRITICAL_HANDLE     WM__aCHWinModal[GUI_NUM_LAYERS];
 extern WM_CRITICAL_HANDLE     WM__aCHWinLast[GUI_NUM_LAYERS];
+extern int                    WM__ModalLayer;
 
 #if GUI_SUPPORT_MOUSE
   extern WM_CRITICAL_HANDLE   WM__aCHWinMouseOver[GUI_NUM_LAYERS];
@@ -158,6 +158,7 @@ extern WM_CRITICAL_HANDLE     WM__aCHWinLast[GUI_NUM_LAYERS];
 #endif
 
 #if (GUI_NUM_LAYERS > 1)
+  GUI_EXTERN U32                       WM__InvalidLayerMask;
   GUI_EXTERN unsigned                  WM__TouchedLayer;
   #define WM__TOUCHED_LAYER            WM__TouchedLayer
 #else
@@ -190,7 +191,7 @@ void    WM__ForEachDesc             (WM_HWIN hWin, WM_tfForEach * pcb, void * pD
 void    WM__GetClientRectWin        (const WM_Obj * pWin, GUI_RECT * pRect);
 void    WM__GetClientRectEx         (WM_HWIN hWin, GUI_RECT * pRect);
 WM_HWIN WM__GetFirstSibling         (WM_HWIN hWin);
-WM_HWIN WM__GetFocussedChild        (WM_HWIN hWin);
+WM_HWIN WM__GetFocusedChild         (WM_HWIN hWin);
 int     WM__GetHasFocus             (WM_HWIN hWin);
 WM_HWIN WM__GetLastSibling          (WM_HWIN hWin);
 WM_HWIN WM__GetPrevSibling          (WM_HWIN hWin);
@@ -216,7 +217,6 @@ void    WM__MoveWindow              (WM_HWIN hWin, int dx, int dy);
 void    WM__NotifyVisChanged        (WM_HWIN hWin, GUI_RECT * pRect);
 int     WM__RectIsNZ                (const GUI_RECT * pr);
 void    WM__RemoveWindowFromList    (WM_HWIN hWin);
-void    WM__RemoveFromLinList       (WM_HWIN hWin);
 void    WM__Screen2Client           (const WM_Obj * pWin, GUI_RECT * pRect);
 void    WM__SelectTopLevelLayer     (WM_HWIN  hWin);
 void    WM__SendMsgNoData           (WM_HWIN hWin, U8 MsgId);
@@ -251,9 +251,9 @@ void    WM__SetLastTouched          (WM_HWIN hWin);
   } EFFECT_CONTEXT;
 
   int  GUI_MEMDEV__CalcParaFadeIn    (int Period, int TimeUsed);
-  void GUI_MEMDEV__ChangeBK          (EFFECT_CONTEXT * pContext);
+  void GUI_MEMDEV__ClipBK            (EFFECT_CONTEXT * pContext);
   void GUI_MEMDEV__RemoveStaticDevice(WM_HWIN hWin);
-  void GUI_MEMDEV__UndoBK            (EFFECT_CONTEXT * pContext);
+  void GUI_MEMDEV__UndoClipBK        (EFFECT_CONTEXT * pContext);
 #endif
 
 void WM__InvalidateParent(const GUI_RECT * pInvalidRect, WM_HWIN hParent, WM_HWIN hStop);

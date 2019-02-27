@@ -1,32 +1,3 @@
-/**
-  ******************************************************************************
-  * @file    stm32f429i_discovery_ioe.h
-  * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    28-October-2013
-  * @brief   This file contains all the functions prototypes for the
-  *          stm32f429i_discovery_ioe.c driver.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT 2013 STMicroelectronics</center></h2>
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */ 
-
-/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F429I_DISCOVERY_IOE_H
 #define __STM32F429I_DISCOVERY_IOE_H
 
@@ -36,6 +7,7 @@
    
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f429i_discovery.h"
+#include <stdio.h>
    
 /** @addtogroup Utilities
   * @{
@@ -422,7 +394,7 @@ uint16_t I2C_ReadDataBuffer(uint32_t RegisterAddr);
 uint8_t  I2C_DMA_WriteDeviceRegister(uint8_t RegisterAddr, uint8_t RegisterValue);
 uint8_t  I2C_DMA_ReadDeviceRegister(uint8_t RegisterAddr);
 uint16_t I2C_DMA_ReadDataBuffer(uint32_t RegisterAddr);
-
+void Pointer_Update(void);
 
 /** 
   * @brief  Timeout user callback function. This function is called when a timeout

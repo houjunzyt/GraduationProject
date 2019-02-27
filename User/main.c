@@ -1,18 +1,23 @@
 #include "stm32f4xx.h"
 #include "usart.h"
 #include "delay.h"
-#include "stm32f429i_discovery_sdram.h"
+#include "sdram.h"
+#include "stm32f429i_discovery_ioe.h"
 #include "board.h"
 #include "rtthread.h"
+#include "arm_math.h"
+#include  "WM.h"
+#include  "GUIDEMO.h"
+#include  "GUI.h"
 
 struct rt_thread Thread1TCB;
 ALIGN(RT_ALIGN_SIZE)
-static rt_uint8_t Thread1Stk[512];
+static rt_uint8_t Thread1Stk[1024] __EXRAM ;
 static void Thread1(void* parameter);
 
 struct rt_thread Thread2TCB;
 ALIGN(RT_ALIGN_SIZE)
-static rt_uint8_t Thread2Stk[512];
+static rt_uint8_t Thread2Stk[4096] __EXRAM ;
 static void Thread2(void* parameter);
 
 int main(void)
@@ -40,21 +45,23 @@ int main(void)
 
 static void	Thread1(void *parameter)
 {
-
+	rt_kprintf("thread1\n");
 	while(1)
 	{
-		rt_kprintf("thread1\n");
-		rt_thread_delay(2000);
+		Pointer_Update();
+		rt_thread_delay(20);
 	}	
 }
 
 static void	Thread2(void *parameter)
 {
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC, ENABLE);	// 使能CRC时钟，用于emwin验证	
+	GUI_Init();
+	WM_MULTIBUF_Enable(1);											// 开启多缓冲	
 	while(1)
 	{
-		rt_kprintf("thread2\n");		
-		rt_thread_delay(1000);
-	}
+		GUIDEMO_Main();
+	}		
 }
 
 

@@ -1,75 +1,6 @@
-/**
-  ******************************************************************************
-  * @file    stm32f429i_discovery_ioe.c
-  * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    28-October-2013
-  * @brief   This file provides a set of functions needed to manage the STMPE811
-  *          IO Expander device mounted on STM32F429I-DISCO Kit.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT 2013 STMicroelectronics</center></h2>
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */ 
-
-  /* File Info : ---------------------------------------------------------------
-  
-    Note:
-    -----
-    - This driver uses the DMA method for sending and receiving data on I2C bus
-      which allow higher efficiency and reliability of the communication.  
-  
-    SUPPORTED FEATURES:
-      - Touch Panel Features: Single point mode (Polling/Interrupt)
-  ----------------------------------------------------------------------------*/
-
-/* Includes ------------------------------------------------------------------*/
 #include "stm32f429i_discovery_ioe.h"
 
-/** @addtogroup Utilities
-  * @{
-  */
 
-/** @addtogroup STM32F4_DISCOVERY
-  * @{
-  */ 
-
-/** @addtogroup STM32F429I_DISCOVERY
-  * @{
-  */
-    
-/** @defgroup STM32F429I_DISCOVERY_IOE 
-  * @brief  This file includes the IO Expander driver for STMPE811 IO Expander 
-  *         devices.
-  * @{
-  */ 
-  
-
-/** @defgroup STM32F429I_DISCOVERY_IOE_Private_TypesDefinitions
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-
-/** @defgroup STM32F429I_DISCOVERY_IOE_Private_Defines
-  * @{
-  */ 
 #define TIMEOUT_MAX    0x3000 /*<! The value of the maximal timeout for I2C waiting loops */
 /**
   * @}
@@ -1367,23 +1298,25 @@ static void delay(__IO uint32_t nCount)
   }
 }
 #endif /* USE_Delay */
-/**
-  * @}
-  */ 
+#include "GUI.h"
+#include "DIALOG.h"
 
-/**
-  * @}
-  */ 
+GUI_PID_STATE GUI_TouchState ;	// emWin触摸参数结构体
 
-/**
-  * @}
-  */ 
+void Pointer_Update(void)
+{
+  TP_STATE  *ts;
+  static uint8_t prev_state = 0;
 
-/**
-  * @}
-  */ 
+  ts = IOE_TP_GetState();
+	GUI_TouchState.x = ts->X;
+	GUI_TouchState.y = ts->Y;
+  GUI_TouchState.Pressed = (ts->TouchDetected == 0x80);
+  
+  if(prev_state != GUI_TouchState.Pressed)
+  {
+    prev_state = GUI_TouchState.Pressed;
 
-/**
-  * @}
-  */      
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+    GUI_PID_StoreState(&GUI_TouchState);	// 传递触摸参数
+  }
+}    

@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.40 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +49,7 @@ Purpose     : Optimized routines, included by GUIDRV_Lin_..._8.c
   *
   ******************************************************************************
   */
-
+  
 /*********************************************************************
 *
 *       Static functions
@@ -164,7 +163,7 @@ static void _FillRectOpt8(GUI_DEVICE * pDevice, int x0, int y0, int x1, int y1) 
       ColorMask = ColorIndex * 0x01010101;
       for (RemLines = NumLines; RemLines; RemLines--) {
         RemItems = RemPixels;
-        pDest    = ((U32 *)pContext->VRAMAddr) + Off0 + OffLine * (RemLines - 1);;
+        pDest    = ((U32 *)pContext->VRAMAddr) + Off0 + OffLine * (RemLines - 1);
         while (RemItems >= 32) {
           WRITE_MEM32P(pDest    , ColorMask);
           WRITE_MEM32P(pDest + 1, ColorMask);

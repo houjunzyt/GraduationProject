@@ -1,3 +1,43 @@
+;******************** (C) COPYRIGHT 2015 STMicroelectronics ********************
+;* File Name          : startup_stm32f429_439xx.s
+;* Author             : MCD Application Team
+;* @version           : V1.5.0
+;* @date              : 06-March-2015
+;* Description        : STM32F429xx/439xx devices vector table for MDK-ARM toolchain. 
+;*                      This module performs:
+;*                      - Set the initial SP
+;*                      - Set the initial PC == Reset_Handler
+;*                      - Set the vector table entries with the exceptions ISR address
+;*                      - Configure the system clock and the external SRAM/SDRAM mounted  
+;*                        on STM324x9I-EVAL boards to be used as data memory  
+;*                        (optional, to be enabled by user)
+;*                      - Branches to __main in the C library (which eventually
+;*                        calls main()).
+;*                      After Reset the CortexM4 processor is in Thread mode,
+;*                      priority is Privileged, and the Stack is set to Main.
+;* <<< Use Configuration Wizard in Context Menu >>>   
+;*******************************************************************************
+; 
+; Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+; You may not use this file except in compliance with the License.
+; You may obtain a copy of the License at:
+; 
+;        http://www.st.com/software_license_agreement_liberty_v2
+; 
+; Unless required by applicable law or agreed to in writing, software 
+; distributed under the License is distributed on an "AS IS" BASIS, 
+; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+; See the License for the specific language governing permissions and
+; limitations under the License.
+; 
+;*******************************************************************************
+
+; Amount of memory (in bytes) allocated for Stack
+; Tailor this value to your application needs
+; <h> Stack Configuration
+;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
+; </h>
+
 Stack_Size      EQU     0x00000400
 
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3
@@ -9,12 +49,12 @@ __initial_sp
 ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Heap_Size       EQU     0x00000200
+Heap_Size       EQU     0x00300000 ;0x00800000
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base
 Heap_Mem        SPACE   Heap_Size
-__heap_limit   
+__heap_limit    EQU     0xd0800000 ;设置堆空间的极限地址(SDRAM),
 
                 PRESERVE8
                 THUMB

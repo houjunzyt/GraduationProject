@@ -105,6 +105,36 @@ void DebugMon_Handler(void)
 {
 }
 
+/**
+  * @brief  This function handles DMA2 Stream1 global interrupt request.
+  * @param  None
+  * @retval None
+  */
+
+void DMA2_Stream1_IRQHandler(void)
+{
+}
+extern void LTDC_ISR_Handler(void);
+extern void DMA2D_ISR_Handler(void);
+/**
+  * @brief  This function handles LTDC global interrupt request.
+  * @param  None
+  * @retval None
+  */
+void LTDC_IRQHandler(void)
+{
+  LTDC_ISR_Handler();
+}
+
+/**
+  * @brief  This function handles DMA2D global interrupt request.
+  * @param  None
+  * @retval None
+  */
+void DMA2D_IRQHandler(void)
+{
+  DMA2D_ISR_Handler();
+}
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */

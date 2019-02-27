@@ -1,0 +1,6 @@
+--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Driver\Board_Driver\STM32F429I-Discovery -I ..\Driver\Board_Driver\Common -I ..\Libraries\CMSIS\Include -I ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Driver\Usart -I ..\Driver\Delay -I ..\RT-Thread\bsp -I ..\RT-Thread\components\finsh -I ..\RT-Thread\include -I ..\STemWin522\inc -I ..\STemWin522\Config -I ..\STemWin522\Application -I ..\DspLib\Include
+-I.\RTE\_Project
+-ID:\keil\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+-ID:\keil\ARM\CMSIS\Include
+-D__UVISION_VERSION="525" -DSTM32F429xx -DUSE_STDPERIPH_DRIVER -DSTM32F429_439xx -DUSE_DEFAULT_TIMEOUT_CALLBACK -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__FPU_PRESENT="1" -D__FPU_USED="1"
+-o ..\output\guidemo_resource.o --omf_browse ..\output\guidemo_resource.crf --depend ..\output\guidemo_resource.d "..\STemWin522\Application\GUIDEMO_Resource.c"

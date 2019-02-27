@@ -754,24 +754,4 @@ uint32_t sEE_TIMEOUT_UserCallback(void)
 }
 #endif /* USE_DEFAULT_TIMEOUT_CALLBACK */
 
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */  
-
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -8,7 +8,9 @@
 #include "arm_math.h"
 #include "GUI.h"
 #include "redraw.h"
+#include "sample.h"
 #include "WM.h"
+
 
 struct rt_thread Thread1TCB;
 ALIGN(RT_ALIGN_SIZE)
@@ -55,13 +57,8 @@ static void	Thread1(void *parameter)
 
 static void	Thread2(void *parameter)
 {
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC, ENABLE);	// 使能CRC时钟，用于emwin验证	
-	GUI_Init();
-	WM_MULTIBUF_Enable(1);	// 开启多缓冲	
-	while(1)
-	{
-		_DemoRedraw();  //窗口重绘测试函数
-	}		
+	_DemoRedraw();  //窗口重绘测试函数
+//	_ShowDemo();
 }
 
 

@@ -29,6 +29,7 @@
 "..\output\gui_x_os.o"
 "..\STemWin522\Lib\STemWin540_CM4_OS_Keil_ot.lib"
 "..\output\redraw.o"
+"..\output\sample.o"
 "..\output\clock.o"
 "..\output\components.o"
 "..\output\device.o"

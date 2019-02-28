@@ -32,6 +32,7 @@ SET CPU_CLOCK=0x00B71B00
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\guidrv_stm32f429i_discovery.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\gui_x_os.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\redraw.__i"
+"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\sample.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\clock.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\components.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\device.__i"

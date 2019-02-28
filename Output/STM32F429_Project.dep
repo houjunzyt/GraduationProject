@@ -893,7 +893,7 @@ I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma2d.h)(0x5C67B6E1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fmc.h)(0x5C67B6E1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_ltdc.h)(0x5C67B6E1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sai.h)(0x5C67B6E1)
-F (..\User\main.c)(0x5C7790CC)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Driver\Board_Driver\STM32F429I-Discovery -I ..\Driver\Board_Driver\Common -I ..\Libraries\CMSIS\Include -I ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Driver\Usart -I ..\Driver\Delay -I ..\RT-Thread\bsp -I ..\RT-Thread\components\finsh -I ..\RT-Thread\include -I ..\STemWin522\inc -I ..\STemWin522\Config -I ..\STemWin522\Application -I ..\DspLib\Include -I ..\STemWin522\APP-I.\RTE\_Project-ID:\keil\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F429xx -DUSE_STDPERIPH_DRIVER -DSTM32F429_439xx -DUSE_DEFAULT_TIMEOUT_CALLBACK -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__FPU_PRESENT="1" -D__FPU_USED="1"-o ..\output\main.o --omf_browse ..\output\main.crf --depend ..\output\main.d)
+F (..\User\main.c)(0x5C77B790)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Driver\Board_Driver\STM32F429I-Discovery -I ..\Driver\Board_Driver\Common -I ..\Libraries\CMSIS\Include -I ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Driver\Usart -I ..\Driver\Delay -I ..\RT-Thread\bsp -I ..\RT-Thread\components\finsh -I ..\RT-Thread\include -I ..\STemWin522\inc -I ..\STemWin522\Config -I ..\STemWin522\Application -I ..\DspLib\Include -I ..\STemWin522\APP-I.\RTE\_Project-ID:\keil\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F429xx -DUSE_STDPERIPH_DRIVER -DSTM32F429_439xx -DUSE_DEFAULT_TIMEOUT_CALLBACK -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__FPU_PRESENT="1" -D__FPU_USED="1"-o ..\output\main.o --omf_browse ..\output\main.crf --depend ..\output\main.d)
 I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C74AE44)
 I (..\Libraries\CMSIS\Include\core_cm4.h)(0x5C67B6E1)
 I (D:\keil\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -967,7 +967,8 @@ I (..\STemWin522\inc\GUI_Type.h)(0x524569BD)
 I (..\STemWin522\inc\LCD.h)(0x524569B6)
 I (..\STemWin522\inc\Global.h)(0x524569B9)
 I (..\STemWin522\inc\GUI_Version.h)(0x524569B8)
-I (..\STemWin522\APP\redraw.h)(0x5C779018)
+I (..\STemWin522\APP\redraw.h)(0x5C77963D)
+I (..\STemWin522\APP\sample.h)(0x5C77A46E)
 I (..\STemWin522\inc\WM.h)(0x524569B3)
 I (..\STemWin522\inc\WM_GUI.h)(0x524569BA)
 F (..\RT-Thread\bsp\board.c)(0x5C74D305)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Driver\Board_Driver\STM32F429I-Discovery -I ..\Driver\Board_Driver\Common -I ..\Libraries\CMSIS\Include -I ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Driver\Usart -I ..\Driver\Delay -I ..\RT-Thread\bsp -I ..\RT-Thread\components\finsh -I ..\RT-Thread\include -I ..\STemWin522\inc -I ..\STemWin522\Config -I ..\STemWin522\Application -I ..\DspLib\Include -I ..\STemWin522\APP-I.\RTE\_Project-ID:\keil\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F429xx -DUSE_STDPERIPH_DRIVER -DSTM32F429_439xx -DUSE_DEFAULT_TIMEOUT_CALLBACK -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__FPU_PRESENT="1" -D__FPU_USED="1"-o ..\output\board.o --omf_browse ..\output\board.crf --depend ..\output\board.d)
@@ -1195,8 +1196,95 @@ I (..\STemWin522\inc\LCD.h)(0x524569B6)
 I (..\STemWin522\inc\Global.h)(0x524569B9)
 I (..\STemWin522\inc\GUI_Version.h)(0x524569B8)
 F (..\STemWin522\Lib\STemWin540_CM4_OS_Keil_ot.lib)(0x5C67B6E7)()
-F (..\STemWin522\APP\redraw.c)(0x5C77902C)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Driver\Board_Driver\STM32F429I-Discovery -I ..\Driver\Board_Driver\Common -I ..\Libraries\CMSIS\Include -I ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Driver\Usart -I ..\Driver\Delay -I ..\RT-Thread\bsp -I ..\RT-Thread\components\finsh -I ..\RT-Thread\include -I ..\STemWin522\inc -I ..\STemWin522\Config -I ..\STemWin522\Application -I ..\DspLib\Include -I ..\STemWin522\APP-I.\RTE\_Project-ID:\keil\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F429xx -DUSE_STDPERIPH_DRIVER -DSTM32F429_439xx -DUSE_DEFAULT_TIMEOUT_CALLBACK -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__FPU_PRESENT="1" -D__FPU_USED="1"-o ..\output\redraw.o --omf_browse ..\output\redraw.crf --depend ..\output\redraw.d)
-I (..\STemWin522\APP\redraw.h)(0x5C779018)
+F (..\STemWin522\APP\redraw.c)(0x5C77B788)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Driver\Board_Driver\STM32F429I-Discovery -I ..\Driver\Board_Driver\Common -I ..\Libraries\CMSIS\Include -I ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Driver\Usart -I ..\Driver\Delay -I ..\RT-Thread\bsp -I ..\RT-Thread\components\finsh -I ..\RT-Thread\include -I ..\STemWin522\inc -I ..\STemWin522\Config -I ..\STemWin522\Application -I ..\DspLib\Include -I ..\STemWin522\APP-I.\RTE\_Project-ID:\keil\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F429xx -DUSE_STDPERIPH_DRIVER -DSTM32F429_439xx -DUSE_DEFAULT_TIMEOUT_CALLBACK -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__FPU_PRESENT="1" -D__FPU_USED="1"-o ..\output\redraw.o --omf_browse ..\output\redraw.crf --depend ..\output\redraw.d)
+I (..\STemWin522\APP\redraw.h)(0x5C77963D)
+I (..\STemWin522\inc\GUI.h)(0x524569B8)
+I (..\STemWin522\inc\GUI_ConfDefaults.h)(0x524569BA)
+I (..\STemWin522\Config\GUIConf.h)(0x5C75EFD9)
+I (..\STemWin522\inc\GUI_Type.h)(0x524569BD)
+I (..\STemWin522\inc\LCD.h)(0x524569B6)
+I (..\STemWin522\inc\Global.h)(0x524569B9)
+I (..\STemWin522\inc\GUI_Version.h)(0x524569B8)
+I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C74AE44)
+I (..\Libraries\CMSIS\Include\core_cm4.h)(0x5C67B6E1)
+I (D:\keil\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\Libraries\CMSIS\Include\core_cmInstr.h)(0x5C67B6E1)
+I (..\Libraries\CMSIS\Include\core_cmFunc.h)(0x5C67B6E1)
+I (..\Libraries\CMSIS\Include\core_cmSimd.h)(0x5C67B6E1)
+I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C67B6E1)
+I (..\User\stm32f4xx_conf.h)(0x5C67B6E8)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_crc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dbgmcu.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_exti.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_i2c.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_iwdg.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_pwr.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rtc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sdio.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_spi.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_syscfg.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_hash.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rng.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma2d.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fmc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_ltdc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sai.h)(0x5C67B6E1)
+I (..\STemWin522\inc\WM.h)(0x524569B3)
+I (..\STemWin522\inc\WM_GUI.h)(0x524569BA)
+I (..\STemWin522\APP\lcd_user.h)(0x5C77A75C)
+F (..\STemWin522\APP\sample.c)(0x5C77AC3A)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Driver\Board_Driver\STM32F429I-Discovery -I ..\Driver\Board_Driver\Common -I ..\Libraries\CMSIS\Include -I ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Driver\Usart -I ..\Driver\Delay -I ..\RT-Thread\bsp -I ..\RT-Thread\components\finsh -I ..\RT-Thread\include -I ..\STemWin522\inc -I ..\STemWin522\Config -I ..\STemWin522\Application -I ..\DspLib\Include -I ..\STemWin522\APP-I.\RTE\_Project-ID:\keil\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F429xx -DUSE_STDPERIPH_DRIVER -DSTM32F429_439xx -DUSE_DEFAULT_TIMEOUT_CALLBACK -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__FPU_PRESENT="1" -D__FPU_USED="1"-o ..\output\sample.o --omf_browse ..\output\sample.crf --depend ..\output\sample.d)
+I (..\STemWin522\APP\sample.h)(0x5C77A46E)
+I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C74AE44)
+I (..\Libraries\CMSIS\Include\core_cm4.h)(0x5C67B6E1)
+I (D:\keil\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (..\Libraries\CMSIS\Include\core_cmInstr.h)(0x5C67B6E1)
+I (..\Libraries\CMSIS\Include\core_cmFunc.h)(0x5C67B6E1)
+I (..\Libraries\CMSIS\Include\core_cmSimd.h)(0x5C67B6E1)
+I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C67B6E1)
+I (..\User\stm32f4xx_conf.h)(0x5C67B6E8)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_crc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dbgmcu.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_exti.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_gpio.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_i2c.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_iwdg.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_pwr.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rtc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sdio.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_spi.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_syscfg.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_hash.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rng.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma2d.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fmc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_ltdc.h)(0x5C67B6E1)
+I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sai.h)(0x5C67B6E1)
+I (D:\keil\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (..\STemWin522\inc\GUI.h)(0x524569B8)
 I (..\STemWin522\inc\GUI_ConfDefaults.h)(0x524569BA)
 I (..\STemWin522\Config\GUIConf.h)(0x5C75EFD9)
@@ -1206,6 +1294,7 @@ I (..\STemWin522\inc\Global.h)(0x524569B9)
 I (..\STemWin522\inc\GUI_Version.h)(0x524569B8)
 I (..\STemWin522\inc\WM.h)(0x524569B3)
 I (..\STemWin522\inc\WM_GUI.h)(0x524569BA)
+I (..\STemWin522\APP\lcd_user.h)(0x5C77A75C)
 F (..\RT-Thread\src\clock.c)(0x5C528DA8)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Driver\Board_Driver\STM32F429I-Discovery -I ..\Driver\Board_Driver\Common -I ..\Libraries\CMSIS\Include -I ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Driver\Usart -I ..\Driver\Delay -I ..\RT-Thread\bsp -I ..\RT-Thread\components\finsh -I ..\RT-Thread\include -I ..\STemWin522\inc -I ..\STemWin522\Config -I ..\STemWin522\Application -I ..\DspLib\Include -I ..\STemWin522\APP-I.\RTE\_Project-ID:\keil\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-ID:\keil\ARM\CMSIS\Include-D__UVISION_VERSION="525" -DSTM32F429xx -DUSE_STDPERIPH_DRIVER -DSTM32F429_439xx -DUSE_DEFAULT_TIMEOUT_CALLBACK -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__FPU_PRESENT="1" -D__FPU_USED="1"-o ..\output\clock.o --omf_browse ..\output\clock.crf --depend ..\output\clock.d)
 I (..\RT-Thread\include\rthw.h)(0x5C528DA8)
 I (..\RT-Thread\include\rtthread.h)(0x5C528DA8)

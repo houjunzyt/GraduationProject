@@ -561,6 +561,11 @@
               <FileType>1</FileType>
               <FilePath>..\STemWin522\APP\redraw.c</FilePath>
             </File>
+            <File>
+              <FileName>sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\APP\sample.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

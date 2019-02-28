@@ -76,5 +76,6 @@
 ..\output\main.o: ..\STemWin522\inc\Global.h
 ..\output\main.o: ..\STemWin522\inc\GUI_Version.h
 ..\output\main.o: ..\STemWin522\APP\redraw.h
+..\output\main.o: ..\STemWin522\APP\sample.h
 ..\output\main.o: ..\STemWin522\inc\WM.h
 ..\output\main.o: ..\STemWin522\inc\WM_GUI.h

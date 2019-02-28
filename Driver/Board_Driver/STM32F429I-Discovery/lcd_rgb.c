@@ -291,7 +291,7 @@ void LCD_Init(void)
   /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAI_N = 192 Mhz */
   /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAI_R = 192/4 = 48 Mhz */
   /* LTDC clock frequency = PLLLCDCLK / RCC_PLLSAIDivR = 48/8 = 6 Mhz */
-  RCC_PLLSAIConfig(192, 7, 4);
+  RCC_PLLSAIConfig(192, 7, 3);
   RCC_LTDCCLKDivConfig(RCC_PLLSAIDivR_Div8);
   
   /* Enable PLLSAI Clock */

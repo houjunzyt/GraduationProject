@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -49,7 +50,7 @@ Purpose     : ICONVIEW private header file
   *
   ******************************************************************************
   */
-  
+
 #ifndef ICONVIEW_PRIVATE_H
 #define ICONVIEW_PRIVATE_H
 
@@ -59,10 +60,6 @@ Purpose     : ICONVIEW private header file
 
 #if GUI_WINSUPPORT
 
-#if defined(__cplusplus)
-  extern "C" {             // Make sure we have C-declarations in C++ programs
-#endif
-
 /*********************************************************************
 *
 *       Types
@@ -70,43 +67,53 @@ Purpose     : ICONVIEW private header file
 **********************************************************************
 */
 typedef struct {
-  const GUI_FONT * pFont;
-  GUI_COLOR        aBkColor[3];
-  GUI_COLOR        aTextColor[3];
-  int              FrameX, FrameY;
-  int              SpaceX, SpaceY;
-  int              TextAlign;
-  int              IconAlign;
-  GUI_WRAPMODE     WrapMode;
+  const GUI_FONT GUI_UNI_PTR * pFont;
+  GUI_COLOR                    aBkColor[3];
+  GUI_COLOR                    aTextColor[3];
+  int                          FrameX, FrameY;
+  int                          SpaceX, SpaceY;
+  int                          TextAlign;
+  int                          IconAlign;
+  GUI_WRAPMODE                 WrapMode;
 } ICONVIEW_PROPS;
 
 typedef struct {
-  WIDGET                  Widget;
-  WM_SCROLL_STATE         ScrollStateV;
-  WM_SCROLL_STATE         ScrollStateH;
-  ICONVIEW_PROPS          Props;
-  GUI_ARRAY               ItemArray;
-  int                     xSizeItems;
-  int                     ySizeItems;
-  int                     Sel;
-  U16                     Flags;
-  WIDGET_DRAW_ITEM_FUNC * pfDrawItem;
+  WIDGET          Widget;
+  WM_SCROLL_STATE ScrollStateV;
+  WM_SCROLL_STATE ScrollStateH;
+  ICONVIEW_PROPS  Props;
+  GUI_ARRAY       ItemArray;
+  int             xSizeItems;
+  int             ySizeItems;
+  int             Sel;
+  U16             Flags;
+  /* Type check in debug version */
+  #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
+    U32 DebugId;
+  #endif  
 } ICONVIEW_OBJ;
 
-typedef void tDrawImage    (const void * pData, GUI_GET_DATA_FUNC * pfGetData, int xPos, int yPos);
+typedef void tDrawImage    (const void * pData, int xPos, int yPos);
 typedef void tDrawText     (ICONVIEW_OBJ * pObj, GUI_RECT * pRect, const char * s);
-typedef void tGetImageSizes(const void * pData, GUI_GET_DATA_FUNC * pfGetData, int * xSize, int * ySize);
+typedef void tGetImageSizes(const void * pData, int * xSize, int * ySize);
 
 typedef struct {
-  tDrawImage        * pfDrawImage;
-  tDrawText         * pfDrawText;
-  tGetImageSizes    * pfGetImageSizes;
-  GUI_GET_DATA_FUNC * pfGetData;
-  const void        * pData;
-  U32                 UserData;
-  int                 SizeOfData;
-  char                acText[1];
+  tDrawImage     * pfDrawImage;
+  tDrawText      * pfDrawText;
+  tGetImageSizes * pfGetImageSizes;
+  const void     * pData;
+  U32              UserData;
+  int              SizeofData;
+  char             acText[1];
 } ICONVIEW_ITEM;
+
+/*********************************************************************
+*
+*       Function pointer(s)
+*
+**********************************************************************
+*/
+extern void (* ICONVIEW__pfDrawStreamedBitmap)(const void * p, int x, int y);
 
 /*********************************************************************
 *
@@ -115,7 +122,7 @@ typedef struct {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define ICONVIEW_INIT_ID(p) (p->Widget.DebugId = ICONVIEW_ID)
+  #define ICONVIEW_INIT_ID(p) (p->DebugId = ICONVIEW_ID)
 #else
   #define ICONVIEW_INIT_ID(p)
 #endif
@@ -127,20 +134,7 @@ typedef struct {
   #define ICONVIEW_LOCK_H(h)   (ICONVIEW_OBJ *)GUI_LOCK_H(h)
 #endif
 
-/*********************************************************************
-*
-*       Private functions
-*
-**********************************************************************
-*/
-void ICONVIEW__DrawText        (ICONVIEW_OBJ    * pObj, GUI_RECT * pRect, const char * pText);
-void ICONVIEW__ManageAutoScroll(ICONVIEW_Handle   hObj);
-
-#if defined(__cplusplus)
-  }
-#endif
-
-#endif  // GUI_WINSUPPORT
-#endif  // ICONVIEW_H
+#endif   /* GUI_WINSUPPORT */
+#endif   /* ICONVIEW_H */
 
 /*************************** End of file ****************************/

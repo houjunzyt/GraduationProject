@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -49,7 +50,7 @@ Purpose     : FRAMEWIN private header file
   *
   ******************************************************************************
   */
-  
+
 #ifndef FRAMEWIN_PRIVATE_H
 #define FRAMEWIN_PRIVATE_H
 
@@ -70,11 +71,7 @@ Purpose     : FRAMEWIN private header file
 //Support for 3D effects
 //
 #ifndef FRAMEWIN_CLIENTCOLOR_DEFAULT
-  #if WIDGET_USE_FLEX_SKIN
-    #define FRAMEWIN_CLIENTCOLOR_DEFAULT GUI_WHITE
-  #else
-    #define FRAMEWIN_CLIENTCOLOR_DEFAULT GUI_GRAY_C0
-  #endif
+  #define FRAMEWIN_CLIENTCOLOR_DEFAULT 0xc0c0c0
 #endif
 
 //
@@ -102,22 +99,12 @@ Purpose     : FRAMEWIN private header file
 // Default font
 //
 #ifndef FRAMEWIN_DEFAULT_FONT
-  #if WIDGET_USE_FLEX_SKIN
-    #if   WIDGET_USE_SCHEME_SMALL
-      #define FRAMEWIN_DEFAULT_FONT &GUI_Font13_1
-    #elif WIDGET_USE_SCHEME_MEDIUM
-      #define FRAMEWIN_DEFAULT_FONT &GUI_Font16_1
-    #elif WIDGET_USE_SCHEME_LARGE
-      #define FRAMEWIN_DEFAULT_FONT &GUI_Font24_1
-    #endif
-  #else
-    #if   WIDGET_USE_SCHEME_SMALL
-      #define FRAMEWIN_DEFAULT_FONT &GUI_Font8_1
-    #elif WIDGET_USE_SCHEME_MEDIUM
-      #define FRAMEWIN_DEFAULT_FONT &GUI_Font13_1
-    #elif WIDGET_USE_SCHEME_LARGE
-      #define FRAMEWIN_DEFAULT_FONT &GUI_Font16_1
-    #endif
+  #if   WIDGET_USE_SCHEME_SMALL
+    #define FRAMEWIN_DEFAULT_FONT &GUI_Font8_1
+  #elif WIDGET_USE_SCHEME_MEDIUM
+    #define FRAMEWIN_DEFAULT_FONT &GUI_Font13_1
+  #elif WIDGET_USE_SCHEME_LARGE
+    #define FRAMEWIN_DEFAULT_FONT &GUI_Font16_1
   #endif
 #endif
 
@@ -125,43 +112,35 @@ Purpose     : FRAMEWIN private header file
 // Default bar color when framewin is active
 //
 #ifndef FRAMEWIN_BARCOLOR_ACTIVE_DEFAULT
-  #define FRAMEWIN_BARCOLOR_ACTIVE_DEFAULT GUI_BLUE
+  #define FRAMEWIN_BARCOLOR_ACTIVE_DEFAULT 0xFF0000
 #endif
 
 //
 // Default bar color when framewin is inactive
 //
 #ifndef FRAMEWIN_BARCOLOR_INACTIVE_DEFAULT
-  #define FRAMEWIN_BARCOLOR_INACTIVE_DEFAULT GUI_DARKGRAY
+  #define FRAMEWIN_BARCOLOR_INACTIVE_DEFAULT 0x404040
 #endif
 
 //
 // Default frame color
 //
 #ifndef FRAMEWIN_FRAMECOLOR_DEFAULT
-  #define FRAMEWIN_FRAMECOLOR_DEFAULT GUI_GRAY_AA
+  #define FRAMEWIN_FRAMECOLOR_DEFAULT 0xAAAAAA
 #endif
 
 //
 // Default text color when framewin is active
 //
-#ifndef FRAMEWIN_TEXTCOLOR_INACTIVE_DEFAULT
-  #if WIDGET_USE_FLEX_SKIN
-    #define FRAMEWIN_TEXTCOLOR_INACTIVE_DEFAULT GUI_BLACK
-  #else
-    #define FRAMEWIN_TEXTCOLOR_INACTIVE_DEFAULT GUI_WHITE
-  #endif
+#ifndef FRAMEWIN_TEXTCOLOR0_DEFAULT
+  #define FRAMEWIN_TEXTCOLOR0_DEFAULT GUI_WHITE
 #endif
 
 //
 // Default text color when framewin is inactive
 //
-#ifndef FRAMEWIN_TEXTCOLOR_ACTIVE_DEFAULT
-  #if WIDGET_USE_FLEX_SKIN
-    #define FRAMEWIN_TEXTCOLOR_ACTIVE_DEFAULT GUI_BLACK
-  #else
-    #define FRAMEWIN_TEXTCOLOR_ACTIVE_DEFAULT GUI_WHITE
-  #endif
+#ifndef FRAMEWIN_TEXTCOLOR1_DEFAULT
+  #define FRAMEWIN_TEXTCOLOR1_DEFAULT GUI_WHITE
 #endif
 
 //
@@ -183,15 +162,15 @@ typedef struct {
 } FRAMEWIN_SKIN_PRIVATE;
 
 typedef struct {
-  const GUI_FONT      * pFont;
-  GUI_COLOR             aBarColor[2];
-  GUI_COLOR             aTextColor[2];
-  GUI_COLOR             ClientColor;
-  FRAMEWIN_SKIN_PRIVATE SkinPrivate;
-  I16                   TitleHeight;
-  I16                   BorderSize;
-  I16                   IBorderSize;
-  I16                   TextAlign;
+  const GUI_FONT GUI_UNI_PTR * pFont;
+  GUI_COLOR                    aBarColor[2];
+  GUI_COLOR                    aTextColor[2];
+  GUI_COLOR                    ClientColor;
+  FRAMEWIN_SKIN_PRIVATE        SkinPrivate;
+  I16                          TitleHeight;
+  I16                          BorderSize;
+  I16                          IBorderSize;
+  I16                          TextAlign;
 } FRAMEWIN_PROPS;
 
 typedef struct {
@@ -205,9 +184,12 @@ typedef struct {
   WM_HWIN                 hText;
   GUI_RECT                rRestore;
   U16                     Flags;
-  WM_HWIN                 hFocusedChild;   // Handle to focused child .. default none (0)
+  WM_HWIN                 hFocussedChild;  // Handle to focussed child .. default none (0)
   WM_DIALOG_STATUS      * pDialogStatus;
   GUI_HOOK              * pFirstHook;
+  #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
+    U32 DebugId;
+  #endif  
 } FRAMEWIN_Obj;
 
 typedef struct {
@@ -224,7 +206,7 @@ typedef struct {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define FRAMEWIN_INIT_ID(p) (p->Widget.DebugId = FRAMEWIN_ID)
+  #define FRAMEWIN_INIT_ID(p) (p->DebugId = FRAMEWIN_ID)
 #else
   #define FRAMEWIN_INIT_ID(p)
 #endif
@@ -264,5 +246,3 @@ unsigned FRAMEWIN__GetBorderSize  (FRAMEWIN_Handle hObj, unsigned Index);
 
 #endif   // GUI_WINSUPPORT
 #endif   // FRAMEWIN_PRIVATE_H
-
-/*************************** End of file ****************************/

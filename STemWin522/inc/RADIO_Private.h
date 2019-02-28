@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -49,7 +50,7 @@ Purpose     : RADIO private header file
   *
   ******************************************************************************
   */
-  
+
 #ifndef RADIO_PRIVATE_H
 #define RADIO_PRIVATE_H
 
@@ -108,7 +109,7 @@ Purpose     : RADIO private header file
 
 /* Define default background color */
 #ifndef   RADIO_DEFAULT_BKCOLOR
-  #define RADIO_DEFAULT_BKCOLOR       GUI_GRAY_C0
+  #define RADIO_DEFAULT_BKCOLOR       0xC0C0C0
 #endif
 
 #ifndef   RADIO_FOCUSCOLOR_DEFAULT
@@ -132,7 +133,7 @@ typedef struct {
   GUI_COLOR BkColor;
   GUI_COLOR TextColor;
   GUI_COLOR FocusColor;
-  const GUI_FONT * pFont;
+  const GUI_FONT GUI_UNI_PTR* pFont;
   const GUI_BITMAP * apBmRadio[2];
   const GUI_BITMAP * pBmCheck;
   RADIO_SKIN_PRIVATE SkinPrivate;
@@ -147,6 +148,9 @@ typedef struct {
   U16 Spacing;
   U16 NumItems;
   U8  GroupId;
+  #if GUI_DEBUG_LEVEL >1
+    U32 DebugId;
+  #endif  
 } RADIO_Obj;
 
 /*********************************************************************
@@ -156,7 +160,7 @@ typedef struct {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define RADIO_INIT_ID(p) p->Widget.DebugId = RADIO_ID
+  #define RADIO_INIT_ID(p) p->DebugId = RADIO_ID
 #else
   #define RADIO_INIT_ID(p)
 #endif

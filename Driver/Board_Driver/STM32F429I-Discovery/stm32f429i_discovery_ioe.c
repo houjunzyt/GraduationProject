@@ -1315,6 +1315,7 @@ void Pointer_Update(void)
   
   if(prev_state != GUI_TouchState.Pressed)
   {
+		printf("X:%d Y:%d\n",GUI_TouchState.x,GUI_TouchState.y);
     prev_state = GUI_TouchState.Pressed;
 
     GUI_PID_StoreState(&GUI_TouchState);	// ´«µÝ´¥Ãþ²ÎÊý

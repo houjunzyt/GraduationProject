@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -27,7 +28,7 @@ Full source code is available at: www.segger.com
 We appreciate your understanding and fairness.
 ----------------------------------------------------------------------
 File        : SPINBOX_Private.h
-Purpose     : Private SPINBOX include
+Purpose     : Private SpinButton include
 --------------------END-OF-HEADER-------------------------------------
 */
 
@@ -49,7 +50,7 @@ Purpose     : Private SPINBOX include
   *
   ******************************************************************************
   */
-  
+
 #ifndef SPINBOX_PRIVATE_H
 #define SPINBOX_PRIVATE_H
 
@@ -84,9 +85,9 @@ typedef struct {
   GUI_COLOR            aTriangleColor[3];    // Color of the triangle for the button states (disabled, pressed, unpressed).
   GUI_COLOR            aBkColor[2];          // Background color for the states (enabled, disabled).
   GUI_COLOR            aTextColor[2];        // Text       color for the states (enabled, disabled).
-  I32                  Min;                  // Minimum allowed value.
-  I32                  Max;                  // Maximum allowed value.
-  U16                  Step;                 // Value will be increased/decreased by this amount when a button is clicked.
+  int                  Min;                  // Minimum allowed value.
+  int                  Max;                  // Maximum allowed value.
+  I16                  Step;                 // Value will be increased/decreased by this amount when a button is clicked.
   U16                  ButtonSize;           // Size of the button depending on the orientation.
   U8                   Edge;                 // Buttons reside on the left or right edge of the widget.
   SPINBOX_SKIN_PRIVATE SkinPrivate;          // Structure containing a pointer to the used DrawSkin-function.
@@ -94,14 +95,17 @@ typedef struct {
 
 typedef struct {
   WIDGET              Widget;
-  SPINBOX_PROPS       Props;
   const WIDGET_SKIN * pWidgetSkin;
+  SPINBOX_PROPS       Props;
   EDIT_Handle         hEdit;
   GUI_TIMER_HANDLE    hTimer;
   I8                  TimerButton;
   I8                  LastButton;
   I8                  NoAction;
   U8                  State;       // Pressed state
+#if (GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL)
+  U32                 DebugId;
+#endif  
 } SPINBOX_OBJ;
 
 /*********************************************************************
@@ -111,7 +115,7 @@ typedef struct {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define SPINBOX_INIT_ID(p) (p->Widget.DebugId = SPINBOX_ID)
+  #define SPINBOX_INIT_ID(p) (p->DebugId = SPINBOX_ID)
 #else
   #define SPINBOX_INIT_ID(p)
 #endif
@@ -123,11 +127,11 @@ typedef struct {
   #define SPINBOX_LOCK_H(h)   (SPINBOX_OBJ *)GUI_LOCK_H(h)
 #endif
 
-#define SPINBOX_BUTTON_NONE     -1
-#define SPINBOX_BUTTON_0         0
-#define SPINBOX_BUTTON_1         1
+#define SPINBOX_BUTTON_NONE -1
+#define SPINBOX_BUTTON_0     0
+#define SPINBOX_BUTTON_1     1
 
-#define SPINBOX_TIMER_ID         1234
+#define SPINBOX_TIMER_ID 1234
 
 /*********************************************************************
 *
@@ -139,8 +143,8 @@ void SPINBOX__ApplyProps     (SPINBOX_Handle hObj, SPINBOX_SKINFLEX_PROPS * cons
 void SPINBOX__DrawBk         (SPINBOX_Handle hObj, GUI_COLOR   Color);
 void SPINBOX__GetButtonRect  (SPINBOX_Handle hObj, GUI_RECT  * pButtonRect, U8  ButtonIndex);
 void SPINBOX__GetButtonRectEx(SPINBOX_Handle hObj, WIDGET_ITEM_DRAW_INFO * ItemInfo);
-int  SPINBOX__GetDefaultMax  (void);
-int  SPINBOX__GetDefaultMin  (void);
+int  SPINBOX__GetDefaultMax   (void);
+int  SPINBOX__GetDefaultMin   (void);
 
 /*********************************************************************
 *
@@ -159,7 +163,6 @@ extern const WIDGET_SKIN     SPINBOX__SkinClassic;
 extern       WIDGET_SKIN     SPINBOX__Skin;
 extern const WIDGET_SKIN   * SPINBOX__pSkinDefault;
 
-#endif  // GUI_WINSUPPORT
-#endif  // SPINBOX_PRIVATE_H
 
-/*************************** End of file ****************************/
+#endif   /* if GUI_WINSUPPORT */
+#endif   /* SPINBOX_PRIVATE_H */

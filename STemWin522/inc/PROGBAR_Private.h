@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -49,7 +50,7 @@ Purpose     : Internal header file
   *
   ******************************************************************************
   */
-  
+
 #ifndef PROGBAR_PRIVATE_H
 #define PROGBAR_PRIVATE_H
 
@@ -79,7 +80,7 @@ typedef struct {
 } PROGBAR_SKIN_PRIVATE;
 
 typedef struct {
-  const GUI_FONT * pFont;
+  const GUI_FONT GUI_UNI_PTR * pFont;
   GUI_COLOR aBarColor[2];
   GUI_COLOR aTextColor[2];
   PROGBAR_SKIN_PRIVATE SkinPrivate;
@@ -92,6 +93,9 @@ typedef struct {
   I16 XOff, YOff;
   I16 TextAlign;
   int Min, Max;
+  #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
+    U32 DebugId;
+  #endif
   PROGBAR_PROPS Props;
   WIDGET_SKIN const * pWidgetSkin;
   U8 Flags;
@@ -104,7 +108,7 @@ typedef struct {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define PROGBAR_INIT_ID(p) p->Widget.DebugId = PROGBAR_ID
+  #define PROGBAR_INIT_ID(p) p->DebugId = PROGBAR_ID
 #else
   #define PROGBAR_INIT_ID(p)
 #endif

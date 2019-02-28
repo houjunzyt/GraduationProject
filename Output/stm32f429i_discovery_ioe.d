@@ -82,7 +82,5 @@
 ..\output\stm32f429i_discovery_ioe.o: ..\STemWin522\inc\RADIO.h
 ..\output\stm32f429i_discovery_ioe.o: ..\STemWin522\inc\SLIDER.h
 ..\output\stm32f429i_discovery_ioe.o: ..\STemWin522\inc\SPINBOX.h
-..\output\stm32f429i_discovery_ioe.o: ..\STemWin522\inc\SWIPELIST.h
 ..\output\stm32f429i_discovery_ioe.o: ..\STemWin522\inc\TEXT.h
 ..\output\stm32f429i_discovery_ioe.o: ..\STemWin522\inc\TREEVIEW.h
-..\output\stm32f429i_discovery_ioe.o: ..\STemWin522\inc\KNOB.h

@@ -1,0 +1,11 @@
+..\output\redraw.o: ..\STemWin522\APP\redraw.c
+..\output\redraw.o: ..\STemWin522\APP\redraw.h
+..\output\redraw.o: ..\STemWin522\inc\GUI.h
+..\output\redraw.o: ..\STemWin522\inc\GUI_ConfDefaults.h
+..\output\redraw.o: ..\STemWin522\Config\GUIConf.h
+..\output\redraw.o: ..\STemWin522\inc\GUI_Type.h
+..\output\redraw.o: ..\STemWin522\inc\LCD.h
+..\output\redraw.o: ..\STemWin522\inc\Global.h
+..\output\redraw.o: ..\STemWin522\inc\GUI_Version.h
+..\output\redraw.o: ..\STemWin522\inc\WM.h
+..\output\redraw.o: ..\STemWin522\inc\WM_GUI.h

@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -61,7 +62,7 @@ Explanation of terms:
   *
   ******************************************************************************
   */
-  
+
 #ifndef GUI_JPEG_PRIVATE_H
 #define GUI_JPEG_PRIVATE_H
 
@@ -135,12 +136,8 @@ Explanation of terms:
 #define M_DRI   0xdd /* Define Restart Interval */
 
 #define M_APP0  0xe0 /* Application Usage */
-#define M_APP14 0xee /* Adobe marker */
 
 #define M_TEM   0x01
-
-#define ADOBE_TRANSFORM_RGB   0
-#define ADOBE_TRANSFORM_YCBCR 1
 
 /*********************************************************************
 *
@@ -172,6 +169,8 @@ typedef struct {
 typedef struct GUI_JPEG_DCONTEXT GUI_JPEG_DCONTEXT;
 
 struct GUI_JPEG_DCONTEXT {
+  /* Function pointer for drawing one line of completely decoded pixels */
+  void (* pfWritePixels)(int x0, int y0, GUI_JPEG_DCONTEXT * pContext, GUI_COLOR (* pfGetColor)(const U8 ** ppData, unsigned SkipCnt), tLCDDEV_Color2Index * pfColor2Index);
   /* Function pointer for reading one byte */
   int (* pfGetU8)(GUI_JPEG_DCONTEXT * pContext, U8 * pByte);
 
@@ -200,33 +199,28 @@ struct GUI_JPEG_DCONTEXT {
   /* Quantization tables */
   U16 aaQuantTbl[MAX_QUANTTABLES][64];
   U16 * apQuantTbl[MAX_QUANTTABLES];
-  //
-  // Component information
-  //
-  U8 NumCompsPerFrame;                      // Number of components per frame
-  U8 aCompHSamp[MAX_COMPONENTS];            // Component's horizontal sampling factor
-  U8 aCompVSamp[MAX_COMPONENTS];            // Component's vertical sampling factor
-  U8 aCompQuant[MAX_COMPONENTS];            // Component's quantization table selector
-  U8 aCompId   [MAX_COMPONENTS];            // Component's ID
-  U8 NumCompsPerScan;                       // Number of components per scan
-  U8 aCompList[MAX_COMPSINSCAN];            // Components in this scan
-  U8 aCompDC_Tab[MAX_COMPONENTS];           // Component's DC Huffman coding table selector
-  U8 aCompAC_Tab[MAX_COMPONENTS];           // Component's AC Huffman coding table selector
-  unsigned * apComponent[MAX_BLOCKSPERMCU]; // Points into the table aLastDC_Val[]
-  unsigned   aLastDC_Val[MAX_COMPONENTS];   // Table of last DC values
-  //
-  // Data used for progressive scans
-  //
-  U8 SpectralStart;                        // Spectral selection start
-  U8 SpectralEnd;                          // Spectral selection end
-  U8 SuccessiveLow;                        // Successive approximation low
-  U8 SuccessiveHigh;                       // Successive approximation high
-  COEFF_BUFFER aDC_Coeffs[MAX_COMPONENTS]; // DC coefficient buffer for progressive scan
-  COEFF_BUFFER aAC_Coeffs[MAX_COMPONENTS]; // AC coefficient buffer for progressive scan
-  int aBlockY_MCU[MAX_COMPONENTS];         // 
-  //
-  // Common
-  //
+  /* Component information */
+  U8 NumCompsPerFrame;                      /* Number of components per frame */
+  U8 aCompHSamp[MAX_COMPONENTS];            /* Component's horizontal sampling factor */
+  U8 aCompVSamp[MAX_COMPONENTS];            /* Component's vertical sampling factor */
+  U8 aCompQuant[MAX_COMPONENTS];            /* Component's quantization table selector */
+  U8 aCompId   [MAX_COMPONENTS];            /* Component's ID */
+  U8 NumCompsPerScan;                       /* Number of components per scan */
+  U8 aCompList[MAX_COMPSINSCAN];            /* Components in this scan */
+  U8 aCompDC_Tab[MAX_COMPONENTS];           /* Component's DC Huffman coding table selector */
+  U8 aCompAC_Tab[MAX_COMPONENTS];           /* Component's AC Huffman coding table selector */
+  unsigned * apComponent[MAX_BLOCKSPERMCU]; /* Points into the table aLastDC_Val[] */
+  unsigned   aLastDC_Val[MAX_COMPONENTS];   /* Table of last DC values */
+  /* Data used for progressive scans */
+  U8 SpectralStart;                        /* Spectral selection start */
+  U8 SpectralEnd;                          /* Spectral selection end */
+  U8 SuccessiveLow;                        /* Successive approximation low */
+  U8 SuccessiveHigh;                       /* Successive approximation high */
+  COEFF_BUFFER aDC_Coeffs[MAX_COMPONENTS]; /* DC coefficient buffer for progressive scan */
+  COEFF_BUFFER aAC_Coeffs[MAX_COMPONENTS]; /* AC coefficient buffer for progressive scan */
+  int aBlockY_MCU[MAX_COMPONENTS];         /*  */
+  GUI_HMEM hBmpLine;
+  /* Common */
   U8 TransformationRequired;
   U8 IsProgressive;             /* Flag is set to 1 if JPEG is progressive */
   U8 ScanType;                  /* Gray, Yh1v1, Yh1v2, Yh2v1, Yh2v2 */
@@ -271,7 +265,6 @@ struct GUI_JPEG_DCONTEXT {
   int NumBlocksPerBand; /* Number of vertical blocks per band */
   int FirstBlockOfBand;
   int aFirstBlockOfBand[MAX_COMPONENTS];
-  int bpp;
 };
 
 /*********************************************************************
@@ -294,5 +287,3 @@ int       GUI_JPEG__SkipLine                (GUI_JPEG_DCONTEXT * pContext);
 int       GUI_JPEG__GetInfoEx               (GUI_HMEM hContext, GUI_JPEG_INFO * pInfo);
 
 #endif
-
-/*************************** End of file ****************************/

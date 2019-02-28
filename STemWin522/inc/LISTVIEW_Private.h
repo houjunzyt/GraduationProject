@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -49,7 +50,7 @@ Purpose     : Private LISTVIEW include
   *
   ******************************************************************************
   */
-  
+
 #ifndef LISTVIEW_PRIVATE_H
 #define LISTVIEW_PRIVATE_H
 
@@ -84,7 +85,7 @@ typedef struct {
   GUI_COLOR                    aBkColor[4];
   GUI_COLOR                    aTextColor[4];
   GUI_COLOR                    GridColor;
-  const GUI_FONT             * pFont;
+  const GUI_FONT GUI_UNI_PTR * pFont;
   U16                          ScrollStepH;
   GUI_WRAPMODE                 WrapMode;
   int                          DefaultAlign;
@@ -133,7 +134,6 @@ struct LISTVIEW_Obj {
   GUI_ARRAY                    hColumnArray;                                      // Each entry is a handle of LISTVIEW_COLUMN structure.
   LISTVIEW_PROPS               Props;
   int                          Sel;
-  int                          SelCol;
   int                          ShowGrid;
   int                          SortIndex;                                         // Column for sorting
   unsigned                     RowDistY;
@@ -147,6 +147,9 @@ struct LISTVIEW_Obj {
   U8                           IsPresorted;
   U8                           ReverseSort;                                       // Set to 1 if reverse sorting is required
   U8                           Flags;
+  #if GUI_DEBUG_LEVEL > 1
+    U32 DebugId;
+  #endif  
 };
 
 /*********************************************************************
@@ -156,7 +159,7 @@ struct LISTVIEW_Obj {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define LISTVIEW_INIT_ID(p) (p->Widget.DebugId = LISTVIEW_ID)
+  #define LISTVIEW_INIT_ID(p) (p->DebugId = LISTVIEW_ID)
 #else
   #define LISTVIEW_INIT_ID(p)
 #endif
@@ -193,7 +196,6 @@ void                 LISTVIEW__InvalidateInsideArea (LISTVIEW_Handle   hObj);
 void                 LISTVIEW__InvalidateRow        (LISTVIEW_Handle   hObj, int Sel);
 void                 LISTVIEW__InvalidateRowAndBelow(LISTVIEW_Handle   hObj, int Sel);
 void                 LISTVIEW__SetSel               (LISTVIEW_Handle   hObj, int NewSel);
-void                 LISTVIEW__SetSelCol            (LISTVIEW_Handle   hObj, int NewSelCol);
 int                  LISTVIEW__UpdateScrollParas    (LISTVIEW_Handle   hObj);
 
 #endif // GUI_WINSUPPORT

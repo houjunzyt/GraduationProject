@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -49,7 +50,7 @@ Purpose     : Internal header file
   *
   ******************************************************************************
   */
-  
+
 #ifndef MENU_PRIVATE_H
 #define MENU_PRIVATE_H
 
@@ -107,11 +108,11 @@ typedef struct {
 // MENU_PROPS
 //
 typedef struct {
-  GUI_COLOR           aTextColor[5];
-  GUI_COLOR           aBkColor[5];
-  U8                  aBorder[4];
-  const GUI_FONT    * pFont;
-  MENU_SKIN_PRIVATE   SkinPrivate;
+  GUI_COLOR                    aTextColor[5];
+  GUI_COLOR                    aBkColor[5];
+  U8                           aBorder[4];
+  const GUI_FONT GUI_UNI_PTR * pFont;
+  MENU_SKIN_PRIVATE            SkinPrivate;
 } MENU_PROPS;
 
 //
@@ -129,6 +130,9 @@ typedef struct {
   int                 Sel;
   unsigned            ArrowAreaWidth;
   WIDGET_SKIN const * pWidgetSkin;
+  #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
+    U32 DebugId;
+  #endif  
 } MENU_Obj;
 
 /*********************************************************************
@@ -138,7 +142,7 @@ typedef struct {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define MENU_INIT_ID(pObj)  (pObj->Widget.DebugId = MENU_ID)
+  #define MENU_INIT_ID(pObj)  (pObj->DebugId = MENU_ID)
 #else
   #define MENU_INIT_ID(pObj)
 #endif

@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -49,7 +50,7 @@ Purpose     : SCROLLBAR internal header file
   *
   ******************************************************************************
   */
-  
+
 #ifndef SCROLLBAR_PRIVATE_H
 #define SCROLLBAR_PRIVATE_H
 
@@ -79,7 +80,7 @@ Purpose     : SCROLLBAR internal header file
 
 /* Define colors */
 #ifndef   SCROLLBAR_COLOR_SHAFT_DEFAULT
-  #define SCROLLBAR_COLOR_SHAFT_DEFAULT GUI_GRAY
+  #define SCROLLBAR_COLOR_SHAFT_DEFAULT 0x808080
 #endif
 
 #ifndef   SCROLLBAR_COLOR_ARROW_DEFAULT
@@ -87,7 +88,7 @@ Purpose     : SCROLLBAR internal header file
 #endif
 
 #ifndef   SCROLLBAR_COLOR_THUMB_DEFAULT
-  #define SCROLLBAR_COLOR_THUMB_DEFAULT GUI_GRAY_C0
+  #define SCROLLBAR_COLOR_THUMB_DEFAULT 0xc0c0c0
 #endif
 
 #ifndef   SCROLLBAR_THUMB_SIZE_MIN_DEFAULT
@@ -156,6 +157,9 @@ struct SCROLLBAR_OBJ {
   int TimerStep;
   int TouchPos;
   WM_HMEM hTimer;
+  #if GUI_DEBUG_LEVEL >1
+    U32 DebugId;
+  #endif  
 };
 
 /*********************************************************************
@@ -165,7 +169,7 @@ struct SCROLLBAR_OBJ {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define SCROLLBAR_INIT_ID(p) (p->Widget.DebugId = SCROLLBAR_ID)
+  #define SCROLLBAR_INIT_ID(p) (p->DebugId = SCROLLBAR_ID)
 #else
   #define SCROLLBAR_INIT_ID(p)
 #endif
@@ -201,5 +205,3 @@ extern WIDGET_SKIN const * SCROLLBAR__pSkinDefault;
 
 #endif        /* GUI_WINSUPPORT */
 #endif        /* Avoid multiple inclusion */
-
-/*************************** End of file ****************************/

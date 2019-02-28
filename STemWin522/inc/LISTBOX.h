@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -49,7 +50,7 @@ Purpose     : LISTBOX widget include
   *
   ******************************************************************************
   */
-  
+
 #ifndef LISTBOX_H
 #define LISTBOX_H
 
@@ -103,19 +104,22 @@ typedef WM_HMEM LISTBOX_Handle;
 #define LISTBOX_CF_AUTOSCROLLBAR_H   (1<<0)
 #define LISTBOX_CF_AUTOSCROLLBAR_V   (1<<1)
 #define LISTBOX_CF_MULTISEL          (1<<2)
-#define LISTBOX_CF_WRAP              (1<<3)
 #define LISTBOX_SF_AUTOSCROLLBAR_H   LISTBOX_CF_AUTOSCROLLBAR_H
 #define LISTBOX_SF_AUTOSCROLLBAR_V   LISTBOX_CF_AUTOSCROLLBAR_V
 #define LISTBOX_SF_MULTISEL          LISTBOX_CF_MULTISEL
-#define LISTBOX_SF_WRAP              LISTBOX_CF_WRAP
 
-/************************************************************
+/*********************************************************************
 *
-*       Fixed scroll mode flags
+*       Standard member functions
+*
+**********************************************************************
 */
-#define LISTBOX_FM_OFF               0  // Turn fixed mode off
-#define LISTBOX_FM_ON                1  // Turn fixed mode on
-#define LISTBOX_FM_CENTER            2  // Set fixed mode to center
+
+#define LISTBOX_EnableMemdev(hObj)  WM_EnableMemdev(hObj)
+#define LISTBOX_DisableMemdev(hObj) WM_DisableMemdev(hObj)
+#define LISTBOX_Delete(hObj)        WM_DeleteWindow(hObj)
+#define LISTBOX_Paint(hObj)         WM_Paint(hObj)
+#define LISTBOX_Invalidate(hObj)    WM_InvalidateWindow(hObj)
 
 /*********************************************************************
 *
@@ -151,17 +155,14 @@ void         LISTBOX_AddString       (LISTBOX_Handle hObj, const char * s);
 void         LISTBOX_AddStringH      (LISTBOX_Handle hObj, WM_HMEM hString); /* Not to be documented!!! */
 void         LISTBOX_DecSel          (LISTBOX_Handle hObj);
 void         LISTBOX_DeleteItem      (LISTBOX_Handle hObj, unsigned int Index);
-void         LISTBOX_EnableFixedScrollMode(LISTBOX_Handle hObj, unsigned int OnOff, U8 FixedPos);
-void         LISTBOX_EnableWrapMode  (LISTBOX_Handle hObj, int OnOff);
 unsigned     LISTBOX_GetItemSpacing  (LISTBOX_Handle hObj);
 unsigned     LISTBOX_GetNumItems     (LISTBOX_Handle hObj);
 int          LISTBOX_GetSel          (LISTBOX_Handle hObj);
-const GUI_FONT * LISTBOX_GetFont     (LISTBOX_Handle hObj);
+const GUI_FONT GUI_UNI_PTR * LISTBOX_GetFont    (LISTBOX_Handle hObj);
 int          LISTBOX_GetItemDisabled (LISTBOX_Handle hObj, unsigned Index);
 int          LISTBOX_GetItemSel      (LISTBOX_Handle hObj, unsigned Index);
 void         LISTBOX_GetItemText     (LISTBOX_Handle hObj, unsigned Index, char * pBuffer, int MaxSize);
 int          LISTBOX_GetMulti        (LISTBOX_Handle hObj);
-WM_HWIN      LISTBOX_GetOwner        (LISTBOX_Handle hObj);
 int          LISTBOX_GetScrollStepH  (LISTBOX_Handle hObj);
 int          LISTBOX_GetTextAlign    (LISTBOX_Handle hObj);
 int          LISTBOX_GetUserData     (LISTBOX_Handle hObj, void * pDest, int NumBytes);
@@ -172,7 +173,7 @@ int          LISTBOX_OwnerDraw       (const WIDGET_ITEM_DRAW_INFO * pDrawItemInf
 void         LISTBOX_SetAutoScrollH  (LISTBOX_Handle hObj, int OnOff);
 void         LISTBOX_SetAutoScrollV  (LISTBOX_Handle hObj, int OnOff);
 void         LISTBOX_SetBkColor      (LISTBOX_Handle hObj, unsigned int Index, GUI_COLOR color);
-void         LISTBOX_SetFont         (LISTBOX_Handle hObj, const GUI_FONT * pFont);
+void         LISTBOX_SetFont         (LISTBOX_Handle hObj, const GUI_FONT GUI_UNI_PTR * pFont);
 void         LISTBOX_SetItemDisabled (LISTBOX_Handle hObj, unsigned Index, int OnOff);
 void         LISTBOX_SetItemSel      (LISTBOX_Handle hObj, unsigned Index, int OnOff);
 void         LISTBOX_SetItemSpacing  (LISTBOX_Handle hObj, unsigned Value);
@@ -192,23 +193,21 @@ int          LISTBOX_UpdateScrollers (LISTBOX_Handle hObj);
 
 /*********************************************************************
 *
-*       Managing default values
+*       Global functions
 *
 **********************************************************************
 */
 
-const GUI_FONT * LISTBOX_GetDefaultFont(void);
-int              LISTBOX_GetDefaultScrollStepH (void);
-GUI_COLOR        LISTBOX_GetDefaultBkColor     (unsigned Index);
-int              LISTBOX_GetDefaultTextAlign   (void);
-GUI_COLOR        LISTBOX_GetDefaultTextColor   (unsigned Index);
-int              LISTBOX_GetDefaultScrollMode  (void);
-void             LISTBOX_SetDefaultFont        (const GUI_FONT * pFont);
-void             LISTBOX_SetDefaultScrollStepH (int Value);
-void             LISTBOX_SetDefaultBkColor     (unsigned Index, GUI_COLOR Color);
-void             LISTBOX_SetDefaultTextAlign   (int Align);
-void             LISTBOX_SetDefaultTextColor   (unsigned Index, GUI_COLOR Color);
-void             LISTBOX_SetDefaultScrollMode  (U8 ScrollMode);
+const GUI_FONT GUI_UNI_PTR* LISTBOX_GetDefaultFont(void);
+int         LISTBOX_GetDefaultScrollStepH (void);
+GUI_COLOR   LISTBOX_GetDefaultBkColor     (unsigned Index);
+int         LISTBOX_GetDefaultTextAlign   (void);
+GUI_COLOR   LISTBOX_GetDefaultTextColor   (unsigned Index);
+void        LISTBOX_SetDefaultFont        (const GUI_FONT GUI_UNI_PTR * pFont);
+void        LISTBOX_SetDefaultScrollStepH (int Value);
+void        LISTBOX_SetDefaultBkColor     (unsigned Index, GUI_COLOR Color);
+void        LISTBOX_SetDefaultTextAlign   (int Align);
+void        LISTBOX_SetDefaultTextColor   (unsigned Index, GUI_COLOR Color);
 
 /*********************************************************************
 *

@@ -1,15 +1,16 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.40 - Graphical user interface for embedded applications **
+** emWin V5.22 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -49,7 +50,7 @@ Purpose     : Private LISTBOX include
   *
   ******************************************************************************
   */
-  
+
 #ifndef LISTBOX_PRIVATE_H
 #define LISTBOX_PRIVATE_H
 
@@ -84,13 +85,12 @@ typedef struct {
 } LISTBOX_ITEM;
 
 typedef struct {
-  const GUI_FONT * pFont;
-  U16              ScrollStepH;
+  const GUI_FONT GUI_UNI_PTR* pFont;
+  U16                         ScrollStepH;
   GUI_COLOR aBackColor[4];
   GUI_COLOR aTextColor[4];
   GUI_COLOR aScrollbarColor[3];
   I16 Align;
-  U8  FixedScrollMode;
 } LISTBOX_PROPS;
 
 typedef struct {
@@ -101,12 +101,14 @@ typedef struct {
   WM_SCROLL_STATE ScrollStateH;
   LISTBOX_PROPS Props;
   WM_HWIN hOwner;
+  #if GUI_DEBUG_LEVEL >1
+    U32 DebugId;
+  #endif  
   I16 Sel;                        /* current selection */
   U8 Flags;
   U8  ScrollbarWidth;
   U16 ItemSpacing;
   U16 ContentSizeX;
-  U8  FixedScrollPos;
 } LISTBOX_Obj;
 
 /*********************************************************************
@@ -116,7 +118,7 @@ typedef struct {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define LISTBOX_INIT_ID(p) p->Widget.DebugId = LISTBOX_ID
+  #define LISTBOX_INIT_ID(p) p->DebugId = LISTBOX_ID
 #else
   #define LISTBOX_INIT_ID(p)
 #endif

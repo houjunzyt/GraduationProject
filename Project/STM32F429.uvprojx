@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,USE_DEFAULT_TIMEOUT_CALLBACK,ARM_MATH_CM4,__CC_ARM,ARM_MATH_MATRIX_CHECK,ARM_MATH_ROUNDING,__FPU_PRESENT=1,__FPU_USED=1,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Driver\Board_Driver\STM32F429I-Discovery;..\Driver\Board_Driver\Common;..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Driver\Usart;..\Driver\Delay;..\RT-Thread\bsp;..\RT-Thread\components\finsh;..\RT-Thread\include;..\STemWin522\inc;..\STemWin522\Config;..\STemWin522\Application;..\DspLib\Include</IncludePath>
+              <IncludePath>..\Driver\Board_Driver\STM32F429I-Discovery;..\Driver\Board_Driver\Common;..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Driver\Usart;..\Driver\Delay;..\RT-Thread\bsp;..\RT-Thread\components\finsh;..\RT-Thread\include;..\STemWin522\inc;..\STemWin522\Config;..\STemWin522\Application;..\DspLib\Include;..\STemWin522\APP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -554,137 +554,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>EMWIN_DEMO</GroupName>
+          <GroupName>EMWIN_APP</GroupName>
           <Files>
             <File>
-              <FileName>GUIDEMO.c</FileName>
+              <FileName>redraw.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO.h</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_AntialiasedText.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_AntialiasedText.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Automotive.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Automotive.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_BarGraph.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_BarGraph.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Bitmap.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Bitmap.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_ColorBar.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_ColorBar.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Conf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Conf.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Cursor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Cursor.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Fading.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Fading.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Graph.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Graph.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_IconView.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_IconView.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_ImageFlow.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_ImageFlow.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Intro.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Intro.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Listview.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Listview.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_RadialMenu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_RadialMenu.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Resource.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Resource.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Skinning.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Skinning.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Speed.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Speed.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Speedometer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Speedometer.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Start.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Start.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_TransparentDialog.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_TransparentDialog.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Treeview.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_Treeview.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_VScreen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_VScreen.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_WashingMachine.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_WashingMachine.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_ZoomAndRotate.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin522\Application\GUIDEMO_ZoomAndRotate.c</FilePath>
+              <FilePath>..\STemWin522\APP\redraw.c</FilePath>
             </File>
           </Files>
         </Group>

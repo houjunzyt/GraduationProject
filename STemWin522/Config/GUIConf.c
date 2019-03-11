@@ -3,16 +3,11 @@
 #include <rtthread.h>
 #include <stdlib.h>
 
-#define GUI_NUMBYTES  1024 * 2096	// 分配4M字节的SDRAM给emWin
+#define GUI_NUMBYTES  1024 * 4096	// 分配4M字节的SDRAM给emWin
 
+uint32_t * aMemory[GUI_NUMBYTES/4] __EXRAM;
 void GUI_X_Config(void) 
 {
-	uint32_t * aMemory=NULL;
-	aMemory=(uint32_t *)malloc(GUI_NUMBYTES);
-	if(aMemory==NULL)
-	{
-		rt_kprintf("aMemory malloc fail\n");
-	}
   GUI_ALLOC_AssignMemory(aMemory, GUI_NUMBYTES);
 }
 

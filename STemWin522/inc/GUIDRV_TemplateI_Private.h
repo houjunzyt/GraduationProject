@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.44 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -27,29 +26,24 @@ Full source code is available at: www.segger.com
 
 We appreciate your understanding and fairness.
 ----------------------------------------------------------------------
+
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics. 
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under Ultimate Liberty license SLA0044,
+  * the "License"; You may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at:
+  *                      http://www.st.com/SLA0044
+  *
+  ******************************************************************************
+----------------------------------------------------------------------
 File        : GUIDRV_TemplateI_Private.h
 Purpose     : Interface definition for GUIDRV_TemplateI driver
 ---------------------------END-OF-HEADER------------------------------
 */
-
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
 
 #include "GUIDRV_TemplateI.h"
 #include "GUIDRV_NoOpt_1_8.h"
@@ -59,11 +53,26 @@ Purpose     : Interface definition for GUIDRV_TemplateI driver
 
 /*********************************************************************
 *
+*       Defines
+*
+**********************************************************************
+*/
+#define PRIVATE_DEVFUNC_ONINITHOOK 0x1000
+
+//
+// Use unique context identified
+//
+#define DRIVER_CONTEXT DRIVER_CONTEXT_TEMPLATE_I
+
+/*********************************************************************
+*
 *       Types
 *
 **********************************************************************
 */
 typedef struct DRIVER_CONTEXT DRIVER_CONTEXT;
+
+typedef void (* T_ONINITHOOK)(DRIVER_CONTEXT * pContext);
 
 /*********************************************************************
 *
@@ -86,13 +95,9 @@ struct DRIVER_CONTEXT {
   //
   int xSize, ySize;
   int vxSize, vySize;
-  int UseCache;
-  int MemSize;
   //
   // Driver specific data
   //
-  int FirstSEG;
-  int FirstCOM;
   //
   // Accelerators for calculation
   //
@@ -140,26 +145,28 @@ struct DRIVER_CONTEXT {
 *
 *       _SetPixelIndex_##EXT
 */
-#define DEFINE_SETPIXELINDEX(EXT, X_PHYS, Y_PHYS)                                      \
-static void _SetPixelIndex_##EXT(GUI_DEVICE * pDevice, int x, int y, int PixelIndex) { \
-  DRIVER_CONTEXT * pContext;                                                           \
-                                                                                       \
-  pContext = (DRIVER_CONTEXT *)pDevice->u.pContext;                                    \
-  _SetPixelIndex(pContext, X_PHYS, Y_PHYS, PixelIndex);                                \
+#define DEFINE_SETPIXELINDEX(EXT, X_PHYS, Y_PHYS)                                                 \
+static void _SetPixelIndex_##EXT(GUI_DEVICE * pDevice, int x, int y, LCD_PIXELINDEX PixelIndex) { \
+  DRIVER_CONTEXT * pContext;                                                                      \
+                                                                                                  \
+  pContext = (DRIVER_CONTEXT *)pDevice->u.pContext;                                               \
+  pContext->xSize = pContext->xSize; /* Keep compiler happy */                                    \
+  _SetPixelIndex(pDevice, X_PHYS, Y_PHYS, PixelIndex);                                            \
 }
 
 /*********************************************************************
 *
 *       _GetPixelIndex_##EXT
 */
-#define DEFINE_GETPIXELINDEX(EXT, X_PHYS, Y_PHYS)                              \
-static unsigned int _GetPixelIndex_##EXT(GUI_DEVICE * pDevice, int x, int y) { \
-  DRIVER_CONTEXT * pContext;                                                   \
-  LCD_PIXELINDEX PixelIndex;                                                   \
-                                                                               \
-  pContext = (DRIVER_CONTEXT *)pDevice->u.pContext;                            \
-  PixelIndex = _GetPixelIndex(pContext, X_PHYS, Y_PHYS);                       \
-  return PixelIndex;                                                           \
+#define DEFINE_GETPIXELINDEX(EXT, X_PHYS, Y_PHYS)                                \
+static LCD_PIXELINDEX _GetPixelIndex_##EXT(GUI_DEVICE * pDevice, int x, int y) { \
+  LCD_PIXELINDEX PixelIndex;                                                     \
+  DRIVER_CONTEXT * pContext;                                                     \
+                                                                                 \
+  pContext = (DRIVER_CONTEXT *)pDevice->u.pContext;                              \
+  pContext->xSize = pContext->xSize; /* Keep compiler happy */                   \
+  PixelIndex = _GetPixelIndex(pDevice, X_PHYS, Y_PHYS);                          \
+  return PixelIndex;                                                             \
 }
 
 /*********************************************************************

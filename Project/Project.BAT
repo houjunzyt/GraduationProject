@@ -1,4 +1,4 @@
-SET PATH=D:\keil\ARM\ARMCC\Bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\putty\;C:\Android;C:\Windows\System32;D:\git\Git\cmd
+SET PATH=D:\keil\ARM\ARMCC\Bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\putty\;C:\Android;C:\Windows\System32;D:\git\Git\cmd;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\
 SET CPU_TYPE=STM32F429ZITx
 SET CPU_VENDOR=STMicroelectronics
 SET UV2_TARGET=Project
@@ -31,8 +31,11 @@ SET CPU_CLOCK=0x00B71B00
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\guiconf.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\guidrv_stm32f429i_discovery.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\gui_x_os.__i"
-"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\redraw.__i"
-"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\sample.__i"
+"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\background.__i"
+"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\iconbitmap.__i"
+"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\iconviewdemo.__i"
+"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\testapp.__i"
+"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\sys_startup.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\clock.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\components.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\device.__i"

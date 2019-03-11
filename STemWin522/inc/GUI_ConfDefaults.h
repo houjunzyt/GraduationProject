@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.44 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -27,6 +26,20 @@ Full source code is available at: www.segger.com
 
 We appreciate your understanding and fairness.
 ----------------------------------------------------------------------
+
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics. 
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under Ultimate Liberty license SLA0044,
+  * the "License"; You may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at:
+  *                      http://www.st.com/SLA0044
+  *
+  ******************************************************************************
+----------------------------------------------------------------------
 File        : GUI_ConfDefaults.h
 Purpose     : Defaults for GUI config switches.
 ---------------------------END-OF-HEADER------------------------------
@@ -36,29 +49,18 @@ Attention : Do not modify this file ! If you do, you will not
 
 */
 
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-
 #ifndef  GUI_CONFDEFAULTS_H
 #define  GUI_CONFDEFAULTS_H
 
 #include "GUIConf.h"
+
+#ifndef   GUI_USE_MIXCOLORS
+  #define GUI_USE_MIXCOLORS 1
+#endif
+
+#ifndef   GUI_USE_BIDI2
+  #define GUI_USE_BIDI2 1
+#endif
 
 #ifndef   LCD_MAX_LOG_COLORS
   #define LCD_MAX_LOG_COLORS 256
@@ -84,15 +86,23 @@ Attention : Do not modify this file ! If you do, you will not
 ***********************************************************************
 */
 
+/* ATTENTION: This define swaps the meaning of a logical color from
+   ABGR to ARGB.
+   
+   It further swaps the meaning of a transparent pixel:
+   ABGR: 0x00 means opaque, 0xFF means transparent (default)
+   ARGB: 0x00 means transparent, 0xFF means opaque
+*/
+#ifndef GUI_USE_ARGB
+  #define GUI_USE_ARGB 0
+#endif
+
 /* Define "universal pointer". Normally, this is not needed (define will expand to nothing)
    However, on some systems (AVR - IAR compiler) it can be necessary ( -> __generic),
    since a default pointer can access RAM only, not the built-in Flash
 */
 #ifndef GUI_UNI_PTR
-  #define GUI_UNI_PTR
-  #define GUI_UNI_PTR_USED 0
-#else
-  #define GUI_UNI_PTR_USED 1
+  #define GUI_UNI_PTR /* Remains only for compatibility purpose, no longer used in emWin */
 #endif
 
 /* Define const storage. Normally, this is not needed (define will expand to const)
@@ -108,7 +118,11 @@ Attention : Do not modify this file ! If you do, you will not
 #endif
 
 #ifndef GUI_BIDI_MAX_CHARS_PER_LINE
-  #define GUI_BIDI_MAX_CHARS_PER_LINE 80
+  #if GUI_USE_BIDI2
+    #define GUI_BIDI_MAX_CHARS_PER_LINE 200
+  #else
+    #define GUI_BIDI_MAX_CHARS_PER_LINE  80
+  #endif
 #endif
 
 #ifndef GUI_SUPPORT_TOUCH
@@ -139,10 +153,6 @@ Attention : Do not modify this file ! If you do, you will not
   #define GUI_CURSOR_LAYER 0
 #endif
 
-#ifndef GUI_MEMCPY
-  #define GUI_MEMCPY(pDest, pSrc, NumBytes) memcpy(pDest, pSrc, NumBytes)
-#endif
-
 #ifndef GUI_SUPPORT_ROTATION
   #define GUI_SUPPORT_ROTATION 1
 #endif
@@ -171,9 +181,22 @@ Attention : Do not modify this file ! If you do, you will not
 #endif
 
 #ifndef   GUI_MEMSET
-  #define GUI_MEMSET GUI__memset
+  #define GUI_MEMSET memset
 #endif
 
+#ifndef GUI_MEMCPY
+  #define GUI_MEMCPY memcpy
+#endif
+
+/* Optional custom drawing of memory devices */
+#ifndef   GUI_MEMDEV_SUPPORT_CUSTOMDRAW
+  #define GUI_MEMDEV_SUPPORT_CUSTOMDRAW 0
+#endif
+
+/* Clip static memory devices to parent borders */
+#ifndef   GUI_MEMDEV_CLIP_AT_PARENT
+  #define GUI_MEMDEV_CLIP_AT_PARENT 0
+#endif
 
 #endif   /* ifdef GUI_CONFDEFAULTS_H */
 

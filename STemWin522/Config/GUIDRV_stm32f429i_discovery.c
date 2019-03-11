@@ -311,9 +311,6 @@ static void DMA_AlphaBlendingBulk(LCD_COLOR * pColorFG, LCD_COLOR * pColorBG, LC
   }
 }
 
-#if defined (__GNUC__) /*!< GNU Compiler */
- #pragma GCC optimize ("O0")
-#endif
 /**
   * @brief  Function for mixing up 2 colors with the given intensity.
   *         If the background color is completely transparent the

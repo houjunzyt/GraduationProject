@@ -3,7 +3,7 @@
 
 #include "stm32f4xx.h"
 
-void _ShowDemo(void);
+void sample_ShowDemo(void);
 #endif
 
 

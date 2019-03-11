@@ -1,6 +1,7 @@
 #include "redraw.h"
 #include "WM.h"
 #include "lcd_user.h"	
+#include "rtthread.h"
 
 //背景窗口回调函数
 static void _cbBkWindow(WM_MESSAGE *pMsg)
@@ -88,13 +89,13 @@ void _DemoRedraw(void)//新建个线程直接调用这个便可
 		GUI_Delay(1000);
 		
 		//为背景窗口设置回调函数
-		_cbOldBK = WM_SetCallback(WM_HBKWIN,_cbBkWindow);
-		
+		_cbOldBK = WM_SetCallback(WM_HBKWIN,_cbBkWindow);//每次绘制一个窗口前这个区域填充为背景色，使得新的移动窗口建立前把以前的窗口消失掉
+		//回调函数通过收到对应的消息来执行 一般都带有WM_PAINT消息
 		//移动窗口
 		_MoveWindow("Background has been redraw");
 		
 		//窗口WM_HBKWIN的回调函数重新设置为上一个回调函数
-		WM_SetCallback(WM_HBKWIN,_cbOldBK);		
+		WM_SetCallback(WM_HBKWIN,_cbOldBK);		//取消回调
 	}
 }
 

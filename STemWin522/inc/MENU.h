@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.44 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -27,29 +26,24 @@ Full source code is available at: www.segger.com
 
 We appreciate your understanding and fairness.
 ----------------------------------------------------------------------
+
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics. 
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under Ultimate Liberty license SLA0044,
+  * the "License"; You may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at:
+  *                      http://www.st.com/SLA0044
+  *
+  ******************************************************************************
+----------------------------------------------------------------------
 File        : MENU.h
 Purpose     : MENU include
 --------------------END-OF-HEADER-------------------------------------
 */
-
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
 
 #ifndef MENU_H
 #define MENU_H
@@ -212,59 +206,50 @@ void MENU_Callback(WM_MESSAGE * pMsg);
 
 /*********************************************************************
 *
-*       Standard member functions
-*
-**********************************************************************
-*/
-#define MENU_EnableMemdev(hObj)   WM_EnableMemdev(hObj)
-#define MENU_DisableMemdev(hObj)  WM_DisableMemdev(hObj)
-#define MENU_Delete(hObj)         WM_DeleteWindow(hObj)
-#define MENU_Paint(hObj)          WM_Paint(hObj)
-#define MENU_Invalidate(hObj)     WM_InvalidateWindow(hObj)
-
-/*********************************************************************
-*
 *       Individual member functions
 *
 **********************************************************************
 */
-void      MENU_AddItem      (MENU_Handle hObj, const MENU_ITEM_DATA * pItemData);
-void      MENU_Attach       (MENU_Handle hObj, WM_HWIN hDestWin, int x, int y, int xSize, int ySize, int Flags);
-void      MENU_DeleteItem   (MENU_Handle hObj, U16 ItemId);
-void      MENU_DisableItem  (MENU_Handle hObj, U16 ItemId);
-void      MENU_EnableItem   (MENU_Handle hObj, U16 ItemId);
-void      MENU_GetItem      (MENU_Handle hObj, U16 ItemId, MENU_ITEM_DATA * pItemData);
-void      MENU_GetItemText  (MENU_Handle hObj, U16 ItemId, char * pBuffer, unsigned BufferSize);
-unsigned  MENU_GetNumItems  (MENU_Handle hObj);
-WM_HWIN   MENU_GetOwner     (MENU_Handle hObj);
-int       MENU_GetUserData  (MENU_Handle hObj, void * pDest, int NumBytes);
-void      MENU_InsertItem   (MENU_Handle hObj, U16 ItemId, const MENU_ITEM_DATA * pItemData);
-void      MENU_Popup        (MENU_Handle hObj, WM_HWIN hDestWin, int x, int y, int xSize, int ySize, int Flags);
-void      MENU_SetBkColor   (MENU_Handle hObj, unsigned ColorIndex, GUI_COLOR Color);
-void      MENU_SetBorderSize(MENU_Handle hObj, unsigned BorderIndex, U8 BorderSize);
-void      MENU_SetFont      (MENU_Handle hObj, const GUI_FONT GUI_UNI_PTR * pFont);
-void      MENU_SetItem      (MENU_Handle hObj, U16 ItemId, const MENU_ITEM_DATA * pItemData);
-void      MENU_SetOwner     (MENU_Handle hObj, WM_HWIN hOwner);
-int       MENU_SetSel       (MENU_Handle hObj, int Sel);
-void      MENU_SetTextColor (MENU_Handle hObj, unsigned ColorIndex, GUI_COLOR Color);
-int       MENU_SetUserData  (MENU_Handle hObj, const void * pSrc, int NumBytes);
+void             MENU_AddItem       (MENU_Handle hObj, const MENU_ITEM_DATA * pItemData);
+void             MENU_Attach        (MENU_Handle hObj, WM_HWIN hDestWin, int x, int y, int xSize, int ySize, int Flags);
+void             MENU_DeleteItem    (MENU_Handle hObj, U16 ItemId);
+void             MENU_DisableItem   (MENU_Handle hObj, U16 ItemId);
+void             MENU_EnableItem    (MENU_Handle hObj, U16 ItemId);
+GUI_COLOR        MENU_GetBkColor    (MENU_Handle hObj, unsigned ColorIndex);
+const GUI_FONT * MENU_GetFont       (MENU_Handle hObj);
+void             MENU_GetItem       (MENU_Handle hObj, U16 ItemId, MENU_ITEM_DATA * pItemData);
+void             MENU_GetItemText   (MENU_Handle hObj, U16 ItemId, char * pBuffer, unsigned BufferSize);
+unsigned         MENU_GetNumItems   (MENU_Handle hObj);
+WM_HWIN          MENU_GetOwner      (MENU_Handle hObj);
+GUI_COLOR        MENU_GetTextColor  (MENU_Handle hObj, unsigned ColorIndex);
+int              MENU_GetUserData   (MENU_Handle hObj, void * pDest, int NumBytes);
+void             MENU_InsertItem    (MENU_Handle hObj, U16 ItemId, const MENU_ITEM_DATA * pItemData);
+void             MENU_Popup         (MENU_Handle hObj, WM_HWIN hDestWin, int x, int y, int xSize, int ySize, int Flags);
+void             MENU_SetBkColor    (MENU_Handle hObj, unsigned ColorIndex, GUI_COLOR Color);
+void             MENU_SetBorderSize (MENU_Handle hObj, unsigned BorderIndex, U8 BorderSize);
+void             MENU_SetFont       (MENU_Handle hObj, const GUI_FONT * pFont);
+void             MENU_SetItem       (MENU_Handle hObj, U16 ItemId, const MENU_ITEM_DATA * pItemData);
+void             MENU_SetOwner      (MENU_Handle hObj, WM_HWIN hOwner);
+int              MENU_SetSel        (MENU_Handle hObj, int Sel);
+void             MENU_SetTextColor  (MENU_Handle hObj, unsigned ColorIndex, GUI_COLOR Color);
+int              MENU_SetUserData   (MENU_Handle hObj, const void * pSrc, int NumBytes);
 
 /*********************************************************************
 *
-*       Member functions, get / set defaults
+*       Managing default values
 *
 **********************************************************************
 */
-GUI_COLOR                    MENU_GetDefaultTextColor  (unsigned ColorIndex);
-GUI_COLOR                    MENU_GetDefaultBkColor    (unsigned ColorIndex);
-U8                           MENU_GetDefaultBorderSize (unsigned BorderIndex);
-const WIDGET_EFFECT *        MENU_GetDefaultEffect     (void);
-const GUI_FONT GUI_UNI_PTR * MENU_GetDefaultFont       (void);
-void                         MENU_SetDefaultTextColor  (unsigned ColorIndex, GUI_COLOR Color);
-void                         MENU_SetDefaultBkColor    (unsigned ColorIndex, GUI_COLOR Color);
-void                         MENU_SetDefaultBorderSize (unsigned BorderIndex, U8 BorderSize);
-void                         MENU_SetDefaultEffect     (const WIDGET_EFFECT * pEffect);
-void                         MENU_SetDefaultFont       (const GUI_FONT GUI_UNI_PTR * pFont);
+GUI_COLOR             MENU_GetDefaultTextColor  (unsigned ColorIndex);
+GUI_COLOR             MENU_GetDefaultBkColor    (unsigned ColorIndex);
+U8                    MENU_GetDefaultBorderSize (unsigned BorderIndex);
+const WIDGET_EFFECT * MENU_GetDefaultEffect     (void);
+const GUI_FONT      * MENU_GetDefaultFont       (void);
+void                  MENU_SetDefaultTextColor  (unsigned ColorIndex, GUI_COLOR Color);
+void                  MENU_SetDefaultBkColor    (unsigned ColorIndex, GUI_COLOR Color);
+void                  MENU_SetDefaultBorderSize (unsigned BorderIndex, U8 BorderSize);
+void                  MENU_SetDefaultEffect     (const WIDGET_EFFECT * pEffect);
+void                  MENU_SetDefaultFont       (const GUI_FONT * pFont);
 
 /*********************************************************************
 *

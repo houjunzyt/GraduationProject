@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2017  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.44 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -27,56 +26,70 @@ Full source code is available at: www.segger.com
 
 We appreciate your understanding and fairness.
 ----------------------------------------------------------------------
-File    : GLOBAL.h
-Purpose : Global types etc.
----------------------------END-OF-HEADER------------------------------
-*/
 
-/**
   ******************************************************************************
   * @attention
   *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics. 
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under Ultimate Liberty license SLA0044,
+  * the "License"; You may not use this file except in compliance with the License.
   * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
+  *                      http://www.st.com/SLA0044
   *
   ******************************************************************************
-  */
+----------------------------------------------------------------------
+File    : Global.h
+Purpose : Global types
+          In case your application already has a Global.h, you should
+          merge the files. In order to use Segger code, the types
+          U8, U16, U32, I8, I16, I32 need to be defined in Global.h;
+          additional definitions do not hurt.
+Revision: $Rev: 6050 $
+---------------------------END-OF-HEADER------------------------------
+*/
 
 #ifndef GLOBAL_H            // Guard against multiple inclusion
 #define GLOBAL_H
 
-/*********************************************************************
-*
-*       Macros
-*
-**********************************************************************
-*/
-#ifndef   U8
-  #define U8  unsigned char
+#define U8    unsigned char
+#define I8    signed char
+#define U16   unsigned short
+#define I16   signed short
+#ifdef __x86_64__
+#define U32   unsigned
+#define I32   int
+#else
+#define U32   unsigned long
+#define I32   signed long
 #endif
-#ifndef   U16
-  #define U16 unsigned short
-#endif
-#ifndef   U32
-  #define U32 unsigned long
-#endif
-#ifndef   I8
-  #define I8  signed char
-#endif
-#ifndef   I16
-  #define I16 signed short
-#endif
-#ifndef   I32
-  #define I32 signed long
+
+#ifdef _WIN32
+  //
+  // Microsoft VC6 compiler related
+  //
+  #ifdef __MINGW32__
+    #define U64   unsigned long long
+    #define I64   long long
+  #else
+    #define U64   unsigned __int64
+    #define U128  unsigned __int128
+    #define I64   __int64
+    #define I128  __int128
+    #if _MSC_VER <= 1200
+      #define U64_C(x) x##UI64
+    #else
+      #define U64_C(x) x##ULL
+    #endif
+  #endif
+#else
+  //
+  // C99 compliant compiler
+  //
+  #define U64   unsigned long long
+  #define I64   signed long long
+  #define U64_C(x) x##ULL
 #endif
 
 #endif                      // Avoid multiple inclusion

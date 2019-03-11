@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,USE_DEFAULT_TIMEOUT_CALLBACK,ARM_MATH_CM4,__CC_ARM,ARM_MATH_MATRIX_CHECK,ARM_MATH_ROUNDING,__FPU_PRESENT=1,__FPU_USED=1,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Driver\Board_Driver\STM32F429I-Discovery;..\Driver\Board_Driver\Common;..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Driver\Usart;..\Driver\Delay;..\RT-Thread\bsp;..\RT-Thread\components\finsh;..\RT-Thread\include;..\STemWin522\inc;..\STemWin522\Config;..\STemWin522\Application;..\DspLib\Include;..\STemWin522\APP</IncludePath>
+              <IncludePath>..\Driver\Board_Driver\STM32F429I-Discovery;..\Driver\Board_Driver\Common;..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Driver\Usart;..\Driver\Delay;..\RT-Thread\bsp;..\RT-Thread\components\finsh;..\RT-Thread\include;..\STemWin522\inc;..\STemWin522\Config;..\STemWin522\Application;..\DspLib\Include;..\STemWin522\APP;..\STemWin522\APP\desk</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -373,7 +373,7 @@
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
             <LinkerInputFile></LinkerInputFile>
-            <DisabledWarnings></DisabledWarnings>
+            <DisabledWarnings>6329</DisabledWarnings>
           </LDads>
         </TargetArmAds>
       </TargetOption>
@@ -557,14 +557,29 @@
           <GroupName>EMWIN_APP</GroupName>
           <Files>
             <File>
-              <FileName>redraw.c</FileName>
+              <FileName>background.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STemWin522\APP\redraw.c</FilePath>
+              <FilePath>..\STemWin522\APP\desk\background.c</FilePath>
             </File>
             <File>
-              <FileName>sample.c</FileName>
+              <FileName>iconbitmap.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\STemWin522\APP\sample.c</FilePath>
+              <FilePath>..\STemWin522\APP\desk\iconbitmap.c</FilePath>
+            </File>
+            <File>
+              <FileName>iconviewdemo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\APP\desk\iconviewdemo.c</FilePath>
+            </File>
+            <File>
+              <FileName>TestAPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\APP\desk\TestAPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys_startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\APP\desk\sys_startup.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,4 +1,4 @@
-SET PATH=D:\keil\ARM\ARMCC\Bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\putty\;C:\Android;C:\Windows\System32;D:\git\Git\cmd;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\
+SET PATH=D:\keil\ARM\ARMCC\Bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\putty\;C:\Android;C:\Windows\System32;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files (x86)\Microchip\xc8\v1.41\bin;C:\Program Files (x86)\Microchip\xc8\v2.05\bin;D:\git\Git\cmd;C:\Program Files\doxygen\bin
 SET CPU_TYPE=STM32F429ZITx
 SET CPU_VENDOR=STMicroelectronics
 SET UV2_TARGET=Project
@@ -25,6 +25,7 @@ SET CPU_CLOCK=0x00B71B00
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\delay.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\lcd_rgb.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\sdram.__i"
+"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\cpuusage.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\stm32f4xx_it.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\main.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\board.__i"
@@ -36,6 +37,7 @@ SET CPU_CLOCK=0x00B71B00
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\iconviewdemo.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\testapp.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\sys_startup.__i"
+"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\buttonuser.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\clock.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\components.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\device.__i"

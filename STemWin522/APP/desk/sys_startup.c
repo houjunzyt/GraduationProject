@@ -5234,27 +5234,15 @@ void k_StartUp(void)
 {
   uint8_t loop;
   GUI_RECT Rect = {45, 230, 195, 280}; 
-
   WM_SetCallback(WM_HBKWIN, BackGroundCallback);
-
   loop = 16;
   while (loop--)
   {
     idx = (16- loop) % 5;
-
     WM_InvalidateArea(&Rect);
-    
     GUI_Delay(200);
   }
 }
-
-
-
-
-
-
-
-
 
 
 /*************************** End of file ****************************/

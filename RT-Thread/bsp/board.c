@@ -4,10 +4,12 @@
 #include "board.h"
 #include "usart.h"
 #include "stm32f429i_discovery_ioe.h"
+#include <stdlib.h>
+#include "cpuusage.h"
 
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
-#define RT_HEAP_SIZE 1536
-static uint32_t rt_heap[RT_HEAP_SIZE];	// heap default size: 6K(1536 * 4)
+#define RT_HEAP_SIZE 0x00090000 //max£º0x00100000
+static uint8_t *rt_heap=NULL;	
 RT_WEAK void *rt_heap_begin_get(void)
 {
     return rt_heap;
@@ -19,6 +21,7 @@ RT_WEAK void *rt_heap_end_get(void)
 }
 #endif
 
+
 /**
  * This function will initial your board.
  */
@@ -27,6 +30,9 @@ void rt_hw_board_init()
 	SysTick_Config(SystemCoreClock / RT_TICK_PER_SECOND);
 	Usart1_Config();
 	IOE_Config();
+	rt_heap=malloc(RT_HEAP_SIZE);
+	cpu_usage_init();
+	
 	
     /* Call components board initial (use INIT_BOARD_EXPORT()) */
 #ifdef RT_USING_COMPONENTS_INIT

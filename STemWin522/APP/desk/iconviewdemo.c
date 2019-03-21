@@ -58,27 +58,25 @@ static const BITMAP_ITEM BitmapItemTab1[]={
 
 
 
-
+/********************************************************
+*函数功能：菜单参数
+*传入参数：
+*返回值  ：
+********************************************************/
 static MENU_ITEM _aMenuItems[] = 
 {
-  {"Kernel Log"         , ID_MENU_LOG,  0},
-  {"Process Viewer"    , ID_MENU_PMGR, 0},
-  {"CPU Usage", ID_MENU_PERF, 0},  
-  {0                    , 0           ,  MENU_IF_SEPARATOR},
-  {"Cancel"             , ID_MENU_EXIT, 0},
+  {"Kernel Log"         , ID_MENU_LOG,  0},//内核log
+  {"Process Viewer"    , ID_MENU_PMGR, 0},//任务窗口
+  {"CPU Usage", ID_MENU_PERF, 0},  //cpu使用率
+  {0          , 0           ,  MENU_IF_SEPARATOR},//分界线
+  {"Cancel"             , ID_MENU_EXIT, 0},//取消
 };
 
-
-
-/**
-  * @brief  Adds one menu item to the given menu
-  * @param  hMenu:    pointer to the handle of menu
-  * @param  hSubmenu: pointer to the handle of Sub menu
-  * @param  pText:    pointer to menu item description
-  * @param  Id:       ID of the menu item
-  * @param  Flags:    window creation flags
-  * @retval None
-  */
+/********************************************************
+*函数功能：添加菜单类目
+*传入参数：
+*返回值  ：
+********************************************************/
 static void _AddMenuItem(MENU_Handle hMenu, MENU_Handle hSubmenu, const char* pText, U16 Id, U16 Flags) 
 {
   MENU_ITEM_DATA Item;
@@ -89,17 +87,11 @@ static void _AddMenuItem(MENU_Handle hMenu, MENU_Handle hSubmenu, const char* pT
   MENU_AddItem(hMenu, &Item);
 }
 
-
-/**
-  * @brief  The function opens a popup menu at the given position. It returns
-  *         immediately after creation. On the first call it creates the menu.
-  * @param  hParent:    pointer to the handle of the parent
-  * @param  pMenuItems: pointer to menu items 
-  * @param  NumItems:   number of menu items 
-  * @param  x:          x position of the popup
-  * @param  y:          y position of the popup 
-  * @retval None
-  */
+/********************************************************
+*函数功能：弹出菜单
+*传入参数：
+*返回值  ：
+********************************************************/
 static void _OpenPopup(WM_HWIN hParent, MENU_ITEM * pMenuItems, int NumItems, int x, int y) 
 {
   static MENU_Handle hMenu;
@@ -117,13 +109,17 @@ static void _OpenPopup(WM_HWIN hParent, MENU_ITEM * pMenuItems, int NumItems, in
   MENU_Popup(hMenu, hParent, x, y, 0, 0, 0);
 }
 
-
-//桌面窗口WM_HBKWIN回调函数
+/********************************************************
+*函数功能：背景窗口回调函数
+*传入参数：
+*返回值  ：
+********************************************************/
 void cb_BkWindow(WM_MESSAGE *pMsg)
 {
 	int Id;
 	int NCode;
 	static int Iconview0_Sel;
+	MENU_MSG_DATA* pData;
 	
 	switch(pMsg->MsgId)
 	{
@@ -182,6 +178,30 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
 							break;				
 					}
 					break;	
+			}
+			break;
+		//菜单类操作
+		case WM_MENU:
+			pData = (MENU_MSG_DATA*)pMsg->Data.p;
+			switch (pData->MsgType) 
+			{
+				//菜单内的东西已经被选中,便会调用这个信号
+				case MENU_ON_ITEMSELECT:
+					switch(pData->ItemId)//具体的类目信号
+					{
+						case ID_MENU_LOG:
+							rt_kprintf("kernel log\n");
+							break;
+						case ID_MENU_PMGR:
+							rt_kprintf("thread viewer\n");
+							break;
+						case ID_MENU_PERF:
+							rt_kprintf("CPU usage\n");
+							break;
+					  case ID_MENU_EXIT:
+							rt_kprintf("cancel\n");
+							break;
+					}
 			}
 			break;
 		default:

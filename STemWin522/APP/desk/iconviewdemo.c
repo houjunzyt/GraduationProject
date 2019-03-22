@@ -10,16 +10,40 @@
 #include <string.h>
 #include <math.h>
 #include "MESSAGEBOX.h"
+#include "userguiid.h"
+#include "getthreadinfo.h"
+
+static GRAPH_DATA_Handle hData = 0;
+static GRAPH_SCALE_Handle hScale = 0;
+static WM_HWIN  hPerformance = 0;
+static WM_HWIN  hProcess = 0;
+static WM_HWIN  hLog = 0;
 
 
-#define ID_ICONVIEW_0   (GUI_ID_USER + 0x01)
-#define ID_TIMER_TIME   (GUI_ID_USER + 0x02)
-#define ID_SPRITE_TIME  (GUI_ID_USER + 0x03)
-#define ID_BUTTON_BKGND (GUI_ID_USER + 0x04)
-#define ID_MENU_LOG     (GUI_ID_USER + 0x05)
-#define ID_MENU_PMGR    (GUI_ID_USER + 0x06)
-#define ID_MENU_EXIT    (GUI_ID_USER + 0x07)
-#define ID_MENU_PERF    (GUI_ID_USER + 0x08)
+
+
+//菜单栏的组件
+static const GUI_WIDGET_CREATE_INFO _aPerformanceDialogCreate[] = 
+{
+  { FRAMEWIN_CreateIndirect, "CPU Usage", ID_FRAMEWIN_PERFORMANCE, 10, 30, 220, 180, 0, 0x0, 0 },
+  { GRAPH_CreateIndirect, "", ID_GRAPH_CPU, 5, 9, 200, 130, 0, 0x0, 0 },
+  { BUTTON_CreateIndirect, "Hide", ID_BUTTON_HIDE, 70, 142, 80, 30, 0, 0x0, 0 },
+};
+
+static const GUI_WIDGET_CREATE_INFO _aKernelLogDialogCreate[] = 
+{
+  { FRAMEWIN_CreateIndirect, "Kernel Log", ID_FRAMEWIN_KERNELLOG, 10, 30, 220, 180, 0, 0x0, 0 },
+  { BUTTON_CreateIndirect, "Cancel", ID_BUTTON_CANCEL_KERNELLOG, 70, 142, 80, 30, 0, 0x0, 0 },
+  { MULTIEDIT_CreateIndirect, "Multiedit", ID_MULTIEDIT_KERNELLOG, 5, 9, 200, 130, 0, 0x0, 0 },
+};
+
+static const GUI_WIDGET_CREATE_INFO _aProcessManagerDialogCreate[] = 
+{
+  { FRAMEWIN_CreateIndirect, "Process viewer", ID_FRAMEWIN_PROCESSMANAGER, 10, 30, 220, 180, 0, 0x0, 0 },
+  { BUTTON_CreateIndirect, "Cancel", ID_BUTTON_CANCEL_PROCESSMANAGER, 70, 142, 80, 30, 0, 0x0, 0 },
+  { LISTVIEW_CreateIndirect, "Listview", ID_LISTVIEW_PROCESSMANAGER, 5, 5, 200, 130, 0, 0x0, 0 },
+};
+
 
 uint8_t strMonth[][12] = {"01","02","03","04","05","06","07","08","09","10","11","12"};
 
@@ -110,6 +134,245 @@ static void _OpenPopup(WM_HWIN hParent, MENU_ITEM * pMenuItems, int NumItems, in
 }
 
 /********************************************************
+*函数功能：定时绘制CPU使用曲线
+*传入参数：
+*返回值  ：
+********************************************************/
+static void _cbCpuWindow(WM_MESSAGE * pMsg) {
+  uint8_t major,minor;
+  static WM_HTIMER hTimerTime; 
+  switch (pMsg->MsgId) 
+  {
+		case WM_CREATE:
+			hTimerTime = WM_CreateTimer(pMsg->hWin, 0, 400, 0); //创建一个定时器       
+			break;
+			
+		case WM_TIMER:
+			cpu_usage_get(&major,&minor);//获取cpu使用率
+			GRAPH_DATA_YT_AddValue(hData , major);
+			WM_InvalidateWindow(pMsg->hWin);
+			WM_RestartTimer(pMsg->Data.v, 400);
+			break; 
+			
+		case WM_DELETE:
+			WM_DeleteTimer(hTimerTime);
+			break;
+			
+		default:
+			WM_DefaultProc(pMsg);
+  }
+}
+
+/********************************************************
+*函数功能：菜单栏CPU使用率组件（主要生成一个框架界面 具体显示在上面的回调函数_cbCpuWindow）
+*传入参数：
+*返回值  ：
+********************************************************/
+static void _cbPerformanceDialog(WM_MESSAGE * pMsg) {
+  int NCode;
+  int Id;
+  WM_HWIN hGraph;
+
+  GUI_RECT Rect;
+
+  switch (pMsg->MsgId) 
+  {
+		case WM_INIT_DIALOG:
+
+			FRAMEWIN_SetTitleVis(pMsg->hWin, 0);
+			hGraph = WM_GetDialogItem(pMsg->hWin, ID_GRAPH_CPU);
+			hData = GRAPH_DATA_YT_Create(GUI_LIGHTGREEN, 500, 0, 20);
+			GRAPH_SetGridVis(hGraph, 1);
+			GRAPH_SetBorder(hGraph, 30, 2, 2, 2); 
+			GRAPH_AttachData(hGraph, hData);
+			hScale = GRAPH_SCALE_Create(20, GUI_TA_RIGHT, GRAPH_SCALE_CF_VERTICAL, 25);
+			GRAPH_AttachScale(hGraph, hScale);  
+			GRAPH_SCALE_SetTextColor(hScale, GUI_YELLOW);
+			GRAPH_SetGridDistX(hGraph, 25);
+			GRAPH_SetGridDistY(hGraph, 25);
+			WM_GetClientRect(&Rect);
+			WM_CreateWindowAsChild(230, 0, 10, 10, pMsg->hWin, WM_CF_SHOW | WM_CF_HASTRANS, _cbCpuWindow , 0); 
+			
+			break;
+			
+		case WM_NOTIFY_PARENT:
+			Id    = WM_GetId(pMsg->hWinSrc);
+			NCode = pMsg->Data.v;
+			switch(Id) {
+				
+			case ID_BUTTON_HIDE: /* Notifications sent by Hide Button */
+				switch(NCode) 
+				{
+				case WM_NOTIFICATION_RELEASED:
+					
+					if(hPerformance != 0)
+					{
+						WM_HideWindow(hPerformance);
+					}
+					break;
+				}
+				break;
+			}
+			break;
+		default:
+			WM_DefaultProc(pMsg);
+			break;
+  }
+}
+
+/********************************************************
+*函数功能：任务管理器任务信息定时刷新
+*传入参数：
+*返回值  ：
+********************************************************/
+static void _cbTaskWindow(WM_MESSAGE * pMsg) {
+  
+  static WM_HTIMER hTimerTime; 
+
+  switch (pMsg->MsgId) 
+  {
+  case WM_CREATE:
+    /* Create timer */
+    hTimerTime = WM_CreateTimer(pMsg->hWin, 0, 1000, 0);        
+    break;
+    
+  case WM_TIMER:
+    WM_InvalidateWindow(WM_GetParent(pMsg->hWin));
+    WM_RestartTimer(pMsg->Data.v, 1000);
+    break; 
+    
+  case WM_DELETE:
+    WM_DeleteTimer(hTimerTime);
+    break;
+    
+  default:
+    WM_DefaultProc(pMsg);
+  }
+}
+
+/********************************************************
+*函数功能：任务管理器获取线程的状态
+*传入参数：
+*返回值  ：
+********************************************************/
+static void _UpdateProcessManagerView(WM_HWIN  hItem) {
+  int      Idx;
+  char     str[3];
+  RT_Thread_Info thread_info[LIST_FIND_OBJ_NR]={0};
+	list_thread(thread_info );//获取线程信息
+  for (Idx = 0; Idx < thread_info[0].num; Idx ++)
+  {
+    LISTVIEW_SetItemText(hItem, 0, Idx, (char *)(thread_info[Idx].name)); 
+    sprintf(str, "%lu", (unsigned long)thread_info[Idx].current_priority);
+    LISTVIEW_SetItemText(hItem, 1, Idx, str);
+    
+    switch (thread_info[Idx].stat)
+    {
+			case RT_THREAD_READY:
+				LISTVIEW_SetItemText(hItem, 2, Idx, "Ready"); 
+				break;
+				
+			case RT_THREAD_SUSPEND:
+				LISTVIEW_SetItemText(hItem, 2, Idx, "Suspended"); 
+				break;
+				
+			case RT_THREAD_INIT:
+				LISTVIEW_SetItemText(hItem, 2, Idx, "Init"); 
+				break;
+				
+			case RT_THREAD_CLOSE:
+				LISTVIEW_SetItemText(hItem, 2, Idx, "Close"); 
+				break;
+				
+			case RT_THREAD_RUNNING:
+				LISTVIEW_SetItemText(hItem, 2, Idx, "Running"); 
+				break;        
+			default:
+				LISTVIEW_SetItemText(hItem, 2, Idx, "Unknown"); 
+				break;        
+    }
+  }
+  LISTVIEW_SetSort(hItem, 1, 0);
+}
+
+/********************************************************
+*函数功能：任务管理器界面回调函数
+*传入参数：
+*返回值  ：
+********************************************************/
+static void _cbProcessManagerDialog(WM_MESSAGE * pMsg) 
+{
+  WM_HWIN  hItem;
+  int      NCode;
+  int      Id, Idx;
+  switch (pMsg->MsgId) 
+	{
+    
+		case WM_INIT_DIALOG:
+			hItem = pMsg->hWin;
+			FRAMEWIN_SetTitleVis(hItem, 0);
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTVIEW_PROCESSMANAGER);
+			LISTVIEW_AddColumn(hItem, 90, "Threads", GUI_TA_HCENTER | GUI_TA_VCENTER);//添加条目
+			LISTVIEW_AddColumn(hItem, 50, "Priority", GUI_TA_HCENTER | GUI_TA_VCENTER);
+			LISTVIEW_AddColumn(hItem, 60, "State", GUI_TA_HCENTER | GUI_TA_VCENTER);
+			
+			LISTVIEW_SetGridVis(hItem, 1);
+			LISTVIEW_SetTextAlign(hItem, 0, GUI_TA_LEFT);
+			LISTVIEW_SetTextAlign(hItem, 1, GUI_TA_HCENTER);
+			LISTVIEW_SetTextAlign(hItem, 2, GUI_TA_HCENTER);
+			HEADER_SetDragLimit(LISTVIEW_GetHeader(hItem), 1);
+			LISTVIEW_SetCompareFunc(hItem, 1, LISTVIEW_CompareDec);
+			LISTVIEW_SetTextColor(hItem, LISTVIEW_CI_SELFOCUS, GUI_LIGHTBLUE);  
+
+			for (Idx = 0; Idx < 16; Idx ++)
+			{
+				LISTVIEW_AddRow(hItem, NULL);
+			}
+
+			_UpdateProcessManagerView(hItem);
+			
+			WM_CreateWindowAsChild(230, 0, 10, 10, pMsg->hWin, WM_CF_SHOW | WM_CF_HASTRANS, _cbTaskWindow , 0); 
+			break;
+
+		case WM_PAINT:
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_LISTVIEW_PROCESSMANAGER);
+			_UpdateProcessManagerView(hItem);
+			break;
+
+		case WM_NOTIFY_PARENT:
+			Id    = WM_GetId(pMsg->hWinSrc);
+			NCode = pMsg->Data.v;
+			switch(Id) 
+			{
+				case ID_BUTTON_CANCEL_PROCESSMANAGER: /* Notifications sent by 'Cancel' button */
+				switch(NCode) 
+				{
+					case WM_NOTIFICATION_RELEASED:
+						GUI_EndDialog(pMsg->hWin, 0);
+						hProcess = 0;       
+						break;
+				}
+				break;
+			case ID_LISTVIEW_PROCESSMANAGER: /* Notifications sent by 'Listview' */
+				switch(NCode) 
+				{
+					case WM_NOTIFICATION_CLICKED:
+						break;
+					case WM_NOTIFICATION_RELEASED:
+						break;
+					case WM_NOTIFICATION_SEL_CHANGED:
+						break;
+				}
+				break;
+			}
+			break;
+		default:
+			WM_DefaultProc(pMsg);
+			break;
+  }
+}
+
+/********************************************************
 *函数功能：背景窗口回调函数
 *传入参数：
 *返回值  ：
@@ -194,9 +457,36 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
 							break;
 						case ID_MENU_PMGR:
 							rt_kprintf("thread viewer\n");
+							if(hProcess == 0)
+							{
+								hProcess = GUI_CreateDialogBox(_aProcessManagerDialogCreate, 
+																							 GUI_COUNTOF(_aProcessManagerDialogCreate), 
+																							 _cbProcessManagerDialog, 
+																							 pMsg->hWin, 
+																							 0, 
+																							 0);  
+							}
+							else
+							{
+								WM_ShowWindow(hProcess);
+								WM_BringToTop(hProcess);
+							}
 							break;
 						case ID_MENU_PERF:
-							rt_kprintf("CPU usage\n");
+						  if(hPerformance == 0)//创建一个图形组件框架
+							{
+								hPerformance = GUI_CreateDialogBox(_aPerformanceDialogCreate, 
+																									 GUI_COUNTOF(_aPerformanceDialogCreate), 
+																									 _cbPerformanceDialog, //绘制
+																									 pMsg->hWin, 
+																									 0, 
+																									 0);
+							}
+							else
+							{
+								WM_ShowWindow(hPerformance);
+								WM_BringToTop(hPerformance);
+							}
 							break;
 					  case ID_MENU_EXIT:
 							rt_kprintf("cancel\n");
@@ -314,27 +604,14 @@ static void _cbStatus(WM_MESSAGE * pMsg)
 //       GUI_DrawBitmap(&bmusbdisk, xSize - 80, 0);
 //    }
     cpu_usage_get(&major,&minor);
-    sprintf((char *)TempStr, "%d %%", minor);
-    
-//    sprintf((char *)TempStr, "%d %%", rt_get_CPUusage());
-//    
-//    if(rt_get_CPUusage() > 95 )
-//    {
-//      /* waiting for user input when using dialog box*/
-//      sprintf((char *)TempStr, "95 %%");
-//    }   
-    GUI_DispStringAt( (char *)TempStr, 42, 4);   
+    sprintf((char *)TempStr, "%d.%d%%", major,minor); 
+    GUI_DispStringAt( (char *)TempStr,33, 4);   
     break;
     
   default:
     WM_DefaultProc(pMsg);
   }
 }
-
-
-
-
-
 
 /************************************************
 *函数功能：按键重绘回调函数
@@ -382,8 +659,11 @@ static void _cbButton(WM_MESSAGE * pMsg) {
 }
 
 
-
-//ICONVIEW演示例程
+/************************************************
+*函数功能：创建桌面图标
+*传入参数：
+*返回值  ：
+************************************************/
 void iconviewdemo(void) 
 {
 	int i;

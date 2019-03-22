@@ -1,22 +1,7 @@
 #include "TestAPP.h"
 #include "DIALOG.h"
 #include "FRAMEWIN.h"
-
-//BagAPP内部小控件ID
-#define ID_FRAMEWIN_0   (GUI_ID_USER + 0x02)
-#define ID_TEXT_0       (GUI_ID_USER + 0x03)
-
-//BookAPP内部小控件ID
-#define ID_FRAMEWIN_1   (GUI_ID_USER + 0x04)
-#define ID_TEXT_1       (GUI_ID_USER + 0x05)
-
-//BookshAPP内部小控件ID
-#define ID_FRAMEWIN_2   (GUI_ID_USER + 0x06)
-#define ID_TEXT_2       (GUI_ID_USER + 0x07)
-
-//BrowerAPP内部小控件ID
-#define ID_FRAMEWIN_3   (GUI_ID_USER + 0x08)
-#define ID_TEXT_3       (GUI_ID_USER + 0x09)
+#include "userguiid.h"
 
 WM_HWIN BagAPPWin=NULL;         //BagAPP窗口
 WM_HWIN BookAPPWin=NULL;        //BookAPP窗口

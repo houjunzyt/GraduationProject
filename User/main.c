@@ -27,7 +27,7 @@ int main(void)
 {	
 	printf("clk:%d\n",SystemCoreClock);
 	rt_thread_init(&Thread1TCB, /* 线程控制块 */
-									"Thread1", /* 线程名字 */
+									"Touch", /* 线程名字 */
 									Thread1, /* 线程入口函数 */
 									RT_NULL, /* 线程入口函数参数 */
 									&Thread1Stk[0], /* 线程栈起始地址 */
@@ -36,7 +36,7 @@ int main(void)
 									40); /* 线程时间片 */									
 	rt_thread_startup(&Thread1TCB); /* 启动线程，开启调度 */	
 	rt_thread_init(&Thread2TCB, /* 线程控制块 */
-									"Thread2", /* 线程名字 */
+									"STemwin", /* 线程名字 */
 									Thread2, /* 线程入口函数 */
 									RT_NULL, /* 线程入口函数参数 */
 									&Thread2Stk[0], /* 线程栈起始地址 */
@@ -63,8 +63,8 @@ static void	Thread2(void *parameter)
 	WM_SetCreateFlags(WM_CF_MEMDEV); //启动所有窗口的存储设备
 	GUI_Init();  			//STemWin初始化
 	WM_MULTIBUF_Enable(1);  //开启STemWin多缓冲,RGB屏可能会用到
-	k_StartUp();
-	iconviewdemo(); 
+	k_StartUp();//开机动画
+	iconviewdemo(); //桌面显示
 	while(1)
 	{
 		GUI_Exec();  

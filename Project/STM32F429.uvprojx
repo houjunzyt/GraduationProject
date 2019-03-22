@@ -511,6 +511,11 @@
               <FileType>1</FileType>
               <FilePath>..\Driver\System\CPUusage.c</FilePath>
             </File>
+            <File>
+              <FileName>getThreadInfo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\System\getThreadInfo.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

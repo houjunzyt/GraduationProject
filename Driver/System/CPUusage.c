@@ -11,9 +11,8 @@ static void cpu_usage_idle_hook(void)
 	rt_tick_t tick;
 	rt_uint32_t count;
 	volatile rt_uint32_t loop;
-	if (total_count == 0)
+	if (total_count == 0)//调用只运行一次，计算时间在没有调度时用时时间
 	{
-		/* get total count */
 		rt_enter_critical();
 		tick = rt_tick_get();
 		while(rt_tick_get() - tick < CPU_USAGE_CALC_TICK)
@@ -26,7 +25,7 @@ static void cpu_usage_idle_hook(void)
 		rt_exit_critical();
 	}
 	count = 0;
-	/* get CPU usage */
+	//计算在有系统调度的时间
 	tick = rt_tick_get();
 	while (rt_tick_get() - tick < CPU_USAGE_CALC_TICK)
 	{
@@ -35,7 +34,7 @@ static void cpu_usage_idle_hook(void)
 		while (loop < CPU_USAGE_LOOP) loop ++;
 	}
 
-	/* calculate major and minor */
+	//计算出使用率，整数部分以及小数部分
 	if (count < total_count)
 	{
 		count = total_count - count;
@@ -46,7 +45,7 @@ static void cpu_usage_idle_hook(void)
 	{
 		total_count = count;
 
-		/* no CPU usage */
+		/* CPU就一个空闲钩子 */
 		cpu_usage_major = 0;
 		cpu_usage_minor = 0;
 	}
@@ -63,7 +62,7 @@ void cpu_usage_get(rt_uint8_t *major, rt_uint8_t *minor)
 
 void cpu_usage_init(void)
 {
-  /* set idle thread hook */
+  /*添加idle线程钩子 */
   rt_thread_idle_sethook(cpu_usage_idle_hook);
 }
 

@@ -583,6 +583,9 @@ static void _cbStatus(WM_MESSAGE * pMsg)
   static uint8_t TempStr[50];
   static WM_HTIMER hTimerTime; 
 	rt_uint8_t major,minor;
+	RTC_TimeTypeDef RTC_TimeStructure;
+	RTC_DateTypeDef RTC_DateStructure;
+	
   uint8_t sec, min, hour, day, month;
   uint16_t year;
   WM_HWIN hWin;
@@ -641,20 +644,19 @@ static void _cbStatus(WM_MESSAGE * pMsg)
     GUI_SetTextMode(GUI_TM_TRANS);
     GUI_SetColor(GUI_WHITE);
     GUI_SetFont(GUI_FONT_13B_ASCII);
-    
-//    k_GetTime(&RTC_Time);
-    sec    =  16;
-    min    =  16;
-    hour   =  16;
-    
-//    k_GetDate(&RTC_DateStructure);
-    
+	
+    RTC_GetTime(RTC_Format_BIN, &RTC_TimeStructure);
+	  RTC_GetDate(RTC_Format_BIN, &RTC_DateStructure);  
+    sec    =  RTC_TimeStructure.RTC_Seconds;
+    min    =  RTC_TimeStructure.RTC_Minutes;
+    hour   =  RTC_TimeStructure.RTC_Hours;
+  
     sprintf((char *)TempStr,"%02d:%02d:%02d",hour, min, sec);
     GUI_DispStringAt((char *)TempStr, xSize - 50, 4);
     
-    year =3 + 2015;
-    month =2;
-    day =1;
+    year =RTC_DateStructure.RTC_Year+2000;
+    month =RTC_DateStructure.RTC_Month;
+    day =RTC_DateStructure.RTC_Date;
     
     if((day > 0) && (day <= 31) && 
        (month > 0)&& (month <= 12) && 

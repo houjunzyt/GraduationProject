@@ -1,11 +1,4 @@
-#include <rthw.h>
-#include <rtthread.h>
-#include "rtconfig.h"
 #include "board.h"
-#include "usart.h"
-#include "stm32f429i_discovery_ioe.h"
-#include <stdlib.h>
-#include "cpuusage.h"
 
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
 #define RT_HEAP_SIZE 0x00090000 //max£º0x00100000
@@ -32,7 +25,8 @@ void rt_hw_board_init()
 	IOE_Config();
 	rt_heap=malloc(RT_HEAP_SIZE);
 	cpu_usage_init();
-	
+	RTC_CLK_Config();
+	RTC_TimeAndDate_Set();
 	
     /* Call components board initial (use INIT_BOARD_EXPORT()) */
 #ifdef RT_USING_COMPONENTS_INIT

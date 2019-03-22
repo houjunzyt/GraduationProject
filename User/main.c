@@ -49,7 +49,6 @@ int main(void)
 
 static void	Thread1(void *parameter)
 {
-	rt_kprintf("thread1\n");
 	while(1)
 	{
 		Pointer_Update();

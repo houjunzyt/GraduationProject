@@ -47,14 +47,14 @@ void Usart1_Config(void)
 	USART_Cmd(USART1,ENABLE);	//使能串口1
 }
 
-/**********************************************************
-*函数功能:输出从定向
-*传入参数:无
-*返回值  :无
-**********************************************************/
-int fputc(int c, FILE *fp)
-{
-	USART_SendData( USART1,(u8)c );	// 发送单字节数据
-	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);	//等待发送完毕 
-	return (c); //返回字符
-}
+///**********************************************************
+//*函数功能:输出从定向
+//*传入参数:无
+//*返回值  :无
+//**********************************************************/
+//int fputc(int c, FILE *fp)
+//{
+//	USART_SendData( USART1,(u8)c );	// 发送单字节数据
+//	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);	//等待发送完毕 
+//	return (c); //返回字符
+//}

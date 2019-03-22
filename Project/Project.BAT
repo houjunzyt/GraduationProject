@@ -27,6 +27,7 @@ SET CPU_CLOCK=0x00B71B00
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\sdram.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\cpuusage.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\getthreadinfo.__i"
+"D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\kernellog.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\stm32f4xx_it.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\main.__i"
 "D:\keil\ARM\ARMCC\Bin\ArmCC" --Via "..\output\board.__i"

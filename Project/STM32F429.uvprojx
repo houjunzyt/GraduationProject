@@ -516,6 +516,11 @@
               <FileType>1</FileType>
               <FilePath>..\Driver\System\getThreadInfo.c</FilePath>
             </File>
+            <File>
+              <FileName>kernellog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\System\kernellog.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

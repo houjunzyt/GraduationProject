@@ -1,26 +1,10 @@
 #include "iconviewdemo.h"
-#include "iconbitmap.h"
-#include "background.h"
-#include "DIALOG.h"
-#include "FRAMEWIN.h"
-#include "TestAPP.h"
-#include "cpuusage.h"
-#include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include "MESSAGEBOX.h"
-#include "userguiid.h"
-#include "getthreadinfo.h"
 
 static GRAPH_DATA_Handle hData = 0;
 static GRAPH_SCALE_Handle hScale = 0;
 static WM_HWIN  hPerformance = 0;
 static WM_HWIN  hProcess = 0;
 static WM_HWIN  hLog = 0;
-
-
-
 
 //菜单栏的组件
 static const GUI_WIDGET_CREATE_INFO _aPerformanceDialogCreate[] = 
@@ -372,6 +356,73 @@ static void _cbProcessManagerDialog(WM_MESSAGE * pMsg)
   }
 }
 
+void k_UpdateLog(char *Msg)
+{
+  WM_HWIN hItem;
+  
+  if(hLog != 0)
+  {
+    hItem = WM_GetDialogItem(hLog, ID_MULTIEDIT_KERNELLOG);
+    MULTIEDIT_SetText(hItem, Msg);
+    MULTIEDIT_SetCursorOffset(hItem, LOG_IN_ptr);    
+  }
+}
+
+/**
+  * @brief  Callback function of the kernel log dialog
+  * @param  pMsg: pointer to data structure of type WM_MESSAGE
+  * @retval None
+  */
+static void _cbKernelLogDialog(WM_MESSAGE * pMsg) {
+  WM_HWIN hItem;
+  int     NCode;
+  int     Id;
+
+  switch (pMsg->MsgId) {
+  case WM_INIT_DIALOG:
+    
+    hItem = pMsg->hWin;
+    FRAMEWIN_SetTitleVis(hItem, 0);
+    
+    hItem = WM_GetDialogItem(pMsg->hWin, ID_MULTIEDIT_KERNELLOG);
+    MULTIEDIT_SetFont(hItem, GUI_FONT_8_1);
+    MULTIEDIT_SetTextColor(hItem, MULTIEDIT_CI_READONLY, GUI_GREEN); 
+    MULTIEDIT_SetBkColor(hItem, MULTIEDIT_CI_READONLY, GUI_BLACK); 
+    MULTIEDIT_SetReadOnly(hItem, 1);
+    MULTIEDIT_SetText(hItem, (char *)pLOG_CacheBuffer);
+    MULTIEDIT_SetCursorOffset(hItem, LOG_IN_ptr);
+    MULTIEDIT_SetAutoScrollV(hItem, 1);
+    break;
+  case WM_NOTIFY_PARENT:
+    Id    = WM_GetId(pMsg->hWinSrc);
+    NCode = pMsg->Data.v;
+    switch(Id) {
+    case ID_BUTTON_CANCEL_KERNELLOG: /* Notifications sent by 'Cancel' button */
+      switch(NCode) {
+      case WM_NOTIFICATION_RELEASED:
+        GUI_EndDialog(pMsg->hWin, 0); 
+        hLog = 0;
+        break;
+      }
+      break;
+    case ID_MULTIEDIT_KERNELLOG: /* Notifications sent by 'Multiedit' */
+      switch(NCode) {
+      case WM_NOTIFICATION_CLICKED:
+        break;
+      case WM_NOTIFICATION_RELEASED:
+        break;
+      case WM_NOTIFICATION_VALUE_CHANGED:
+        break;
+      }
+      break;
+    }
+    break;
+  default:
+    WM_DefaultProc(pMsg);
+    break;
+  }
+}
+
 /********************************************************
 *函数功能：背景窗口回调函数
 *传入参数：
@@ -421,6 +472,13 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
                 case 3:		//APP3
                   if(BrowerAPPWin==NULL)CreateBrowerAPP();    //创建BrowerAPP
 									break;
+								case 4:
+//									k_UpdateLog("touch app5\n");
+									break;
+								case 5:
+//									k_UpdateLog("touch app6\n");
+									break;
+									
 							}
 							break;
 						case WM_NOTIFICATION_SEL_CHANGED:
@@ -454,9 +512,22 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
 					{
 						case ID_MENU_LOG:
 							rt_kprintf("kernel log\n");
+							if (hLog == 0)
+							{
+							hLog = GUI_CreateDialogBox(_aKernelLogDialogCreate, 
+																				 GUI_COUNTOF(_aProcessManagerDialogCreate), 
+																				 _cbKernelLogDialog, 
+																				 pMsg->hWin, 
+																				 0, 
+																				 0);  
+							}
+							else
+							{
+							WM_ShowWindow(hLog);
+							WM_BringToTop(hLog);
+							}        
 							break;
 						case ID_MENU_PMGR:
-							rt_kprintf("thread viewer\n");
 							if(hProcess == 0)
 							{
 								hProcess = GUI_CreateDialogBox(_aProcessManagerDialogCreate, 
@@ -680,6 +751,8 @@ void iconviewdemo(void)
 	HEADER_SetDefaultSkin(HEADER_SKIN_FLEX);
 	RADIO_SetDefaultSkin(RADIO_SKIN_FLEX);
 	MULTIPAGE_SetDefaultSkin(MULTIPAGE_SKIN_FLEX);
+	
+	KernelLogInit();//初始化内核缓冲区
 	
 	WM_SetCallback(WM_HBKWIN,cb_BkWindow); //设置桌面窗口WM_HBKWIN的回调函数
 	//建立一个ICONVIEW作为主界面

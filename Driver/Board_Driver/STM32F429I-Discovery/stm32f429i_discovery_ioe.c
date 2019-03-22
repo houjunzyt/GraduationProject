@@ -1,33 +1,11 @@
 #include "stm32f429i_discovery_ioe.h"
-
-
+#include "rtthread.h"
 #define TIMEOUT_MAX    0x3000 /*<! The value of the maximal timeout for I2C waiting loops */
-/**
-  * @}
-  */ 
 
-
-/** @defgroup STM32F429I_DISCOVERY_IOE_Private_Macros
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM32F429I_DISCOVERY_IOE_Private_Variables
-  * @{
-  */ 
 TP_STATE TP_State;              /* The global structure holding the TS state */
 
 uint32_t IOE_TimeOut = TIMEOUT_MAX; /* Value of Timeout when I2C communication fails */
-/**
-  * @}
-  */ 
 
-
-/** @defgroup STM32F429I_DISCOVERY_IOE_Private_FunctionPrototypes
-  * @{
-  */ 
 static uint16_t IOE_TP_Read_X(void);
 static uint16_t IOE_TP_Read_Y(void);
 static uint16_t IOE_TP_Read_Z(void);
@@ -38,14 +16,6 @@ static void     IOE_DMA_Config(IOE_DMADirection_TypeDef Direction, uint8_t* buff
 #ifndef USE_Delay
 static void delay(__IO uint32_t nCount);
 #endif /* USE_Delay */
-/**
-  * @}
-  */ 
-
-
-/** @defgroup STM32F429I_DISCOVERY_IOE_Private_Functions
-  * @{
-  */ 
 
 
 /**
@@ -1315,7 +1285,7 @@ void Pointer_Update(void)
   
   if(prev_state != GUI_TouchState.Pressed)
   {
-		printf("X:%d Y:%d\n",GUI_TouchState.x,GUI_TouchState.y);
+		rt_kprintf("X:%d Y:%d\n",GUI_TouchState.x,GUI_TouchState.y);
     prev_state = GUI_TouchState.Pressed;
 
     GUI_PID_StoreState(&GUI_TouchState);	// ´«µÝ´¥Ãþ²ÎÊý

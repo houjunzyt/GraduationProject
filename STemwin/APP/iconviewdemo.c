@@ -40,32 +40,14 @@ typedef struct{
 }BITMAP_ITEM;
 
 //ICONVIEW显示的APP图标
-static const BITMAP_ITEM BitmapItemTab1[]={
-//	{&bmbag,		"Bag"},
+static const BITMAP_ITEM BitmapItemTab1[]=
+{
 	{&bmsettings,	"Set"},
 	{&bmcalendar,	"Calendar"},
-	{&bmbook,		"Book"},
-	{&bmbookshelf,	"Booksh"	},
-	{&bmbrowser,	"Brower"},
-	{&bmclipboard,	"Clipboard"},
-//	{&bmcompass,	"Compass"},
-//	{&bmcompose,	"Cmpose"},
-//	{&bmdocument,	"Cument"},
-//	{&bmfolder,		"Folder"},
-//	{&bmmail,		"Mail"},
-//	{&bmpaint,		"Paint"},
-//	{&bmpin,		"Pin"},
-//	{&bmsettings,	"Set"},
-//	{&bmtools,		"Tool"},
-//	{&bmturntable,	"TurnTab"},
-//	{&bmvideo,		"Video"},
-//	{&bmwallet,		"Wallet"},
-//	{&bmlightbulb,	"Light"},
-//	{&bmstar,		"Star"},
+	{&bmhumifity,	"Humifity"},
+	{&bmtemperature,	"Temperature"},
+	{&bmwhenther,		"whenther"},
 };
-
-
-
 
 /********************************************************
 *函数功能：菜单参数
@@ -678,9 +660,9 @@ static void _cbStatus(WM_MESSAGE * pMsg)
     GUI_DispStringHCenterAt((char *)TempStr, xSize / 2, 4);
     
     /* USB */
-//    if(k_StorageGetStatus(USB_DISK_UNIT))
-//    {
-//       GUI_DrawBitmap(&bmusbdisk, xSize - 80, 0);
+////    if(k_StorageGetStatus(USB_DISK_UNIT))
+////    {
+       GUI_DrawBitmap(&bmwifi, xSize - 80, 0);
 //    }
     cpu_usage_get(&major,&minor);
     sprintf((char *)TempStr, "%d.%d%%", major,minor); 

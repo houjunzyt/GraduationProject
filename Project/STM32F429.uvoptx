@@ -614,19 +614,19 @@
 
   <Group>
     <GroupName>EMWIN_Config</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>6</GroupNumber>
       <FileNumber>32</FileNumber>
-      <FileType>1</FileType>
+      <FileType>4</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\Config\GUIConf.c</PathWithFileName>
-      <FilenameWithoutPath>GUIConf.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\Lib\STemWin540_CM4_OS_Keil_ot.lib</PathWithFileName>
+      <FilenameWithoutPath>STemWin540_CM4_OS_Keil_ot.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -637,8 +637,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\Config\GUIDRV_stm32f429i_discovery.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDRV_stm32f429i_discovery.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\OS\GUI_X_OS.c</PathWithFileName>
+      <FilenameWithoutPath>GUI_X_OS.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -649,20 +649,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\OS\GUI_X_OS.c</PathWithFileName>
-      <FilenameWithoutPath>GUI_X_OS.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\Config\GUIConf.c</PathWithFileName>
+      <FilenameWithoutPath>GUIConf.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
       <FileNumber>35</FileNumber>
-      <FileType>4</FileType>
+      <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\Lib\STemWin540_CM4_OS_Keil_ot.lib</PathWithFileName>
-      <FilenameWithoutPath>STemWin540_CM4_OS_Keil_ot.lib</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\Config\GUIDRV_stm32f429i_discovery.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDRV_stm32f429i_discovery.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -681,7 +681,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\APP\desk\background.c</PathWithFileName>
+      <PathWithFileName>..\STemwin\APP\background.c</PathWithFileName>
       <FilenameWithoutPath>background.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -693,8 +693,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\APP\desk\iconbitmap.c</PathWithFileName>
-      <FilenameWithoutPath>iconbitmap.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\APP\buttonuser.c</PathWithFileName>
+      <FilenameWithoutPath>buttonuser.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -705,8 +705,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\APP\desk\iconviewdemo.c</PathWithFileName>
-      <FilenameWithoutPath>iconviewdemo.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\APP\calender.c</PathWithFileName>
+      <FilenameWithoutPath>calender.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -717,8 +717,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\APP\desk\TestAPP.c</PathWithFileName>
-      <FilenameWithoutPath>TestAPP.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\APP\iconbitmap.c</PathWithFileName>
+      <FilenameWithoutPath>iconbitmap.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -729,8 +729,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\APP\desk\sys_startup.c</PathWithFileName>
-      <FilenameWithoutPath>sys_startup.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\APP\iconviewdemo.c</PathWithFileName>
+      <FilenameWithoutPath>iconviewdemo.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -741,8 +741,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\APP\desk\buttonuser.c</PathWithFileName>
-      <FilenameWithoutPath>buttonuser.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\APP\sys_startup.c</PathWithFileName>
+      <FilenameWithoutPath>sys_startup.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -753,8 +753,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\APP\desk\systemset.c</PathWithFileName>
-      <FilenameWithoutPath>systemset.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\APP\systemrec.c</PathWithFileName>
+      <FilenameWithoutPath>systemrec.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -765,8 +765,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\APP\desk\calender.c</PathWithFileName>
-      <FilenameWithoutPath>calender.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\APP\systemset.c</PathWithFileName>
+      <FilenameWithoutPath>systemset.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -777,8 +777,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\STemWin522\APP\desk\systemrec.c</PathWithFileName>
-      <FilenameWithoutPath>systemrec.c</FilenameWithoutPath>
+      <PathWithFileName>..\STemwin\APP\TestAPP.c</PathWithFileName>
+      <FilenameWithoutPath>TestAPP.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

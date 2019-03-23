@@ -16,6 +16,8 @@
 #include "userguiid.h"
 #include "getthreadinfo.h"
 #include "kernellog.h"
+#include "systemset.h"
+#include "calender.h"
 
 typedef struct {
   char * sText;

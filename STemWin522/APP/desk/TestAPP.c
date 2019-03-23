@@ -12,28 +12,28 @@ WM_HWIN BrowerAPPWin=NULL;      //BrowerAPP窗口
 static const GUI_WIDGET_CREATE_INFO BagAPPDialogCreate[]=
 {
     { FRAMEWIN_CreateIndirect, "Framewin", ID_FRAMEWIN_0, 0, 0, 240, 240,0,0x64},
-    { TEXT_CreateIndirect, "Text", ID_TEXT_0, 200, 200, 200, 20, 0, 0x64, 0 },
+    { TEXT_CreateIndirect, "Text", ID_TEXT_BAG, 200, 200, 200, 20, 0, 0x64, 0 },
 };
 
 //BookAPP资源表
 static const GUI_WIDGET_CREATE_INFO BookAPPDialogCreate[]=
 {
     { FRAMEWIN_CreateIndirect, "Framewin", ID_FRAMEWIN_1, 0, 0, 240, 240,FRAMEWIN_CF_MOVEABLE,0x64},
-    { TEXT_CreateIndirect, "Text", ID_TEXT_1, 70,85, 200, 20, 0, 0x64, 0 },
+    { TEXT_CreateIndirect, "Text", ID_TEXT_BOOK, 70,85, 200, 20, 0, 0x64, 0 },
 };
 
 //BookshAPP资源表
 static const GUI_WIDGET_CREATE_INFO BookshAPPDialogCreate[]=
 {
     { FRAMEWIN_CreateIndirect, "Framewin", ID_FRAMEWIN_2, 0, 0, 240, 240,FRAMEWIN_CF_MOVEABLE,0x64},
-    { TEXT_CreateIndirect, "Text", ID_TEXT_2,150,100, 200, 20, 0, 0x64, 0 },
+    { TEXT_CreateIndirect, "Text", ID_TEXT_SH,150,100, 200, 20, 0, 0x64, 0 },
 };
 
 //BrowerAPP资源表
 static const GUI_WIDGET_CREATE_INFO BrowerAPPDialogCreate[]=
 {
     { FRAMEWIN_CreateIndirect, "Framewin", ID_FRAMEWIN_3, 0, 0, 240, 240,0,0x64},
-    { TEXT_CreateIndirect, "Text", ID_TEXT_3,200, 230, 200, 20, 0, 0x64, 0 },
+    { TEXT_CreateIndirect, "Text", ID_TEXT_BR,200, 230, 200, 20, 0, 0x64, 0 },
 };
 
 //BagAPP的回调函数
@@ -54,7 +54,7 @@ static void _cbBagAPPDialog(WM_MESSAGE * pMsg)
             FRAMEWIN_AddMinButton(hItem,FRAMEWIN_BUTTON_RIGHT,2);   //添加最小化按钮
         
             //初始化TEXT
-            hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_0);
+            hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_BAG);
             TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
             TEXT_SetText(hItem, "This is Bag APP");
             TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
@@ -90,7 +90,7 @@ static void _cbBookAPPDialog(WM_MESSAGE * pMsg)
             FRAMEWIN_AddMinButton(hItem,FRAMEWIN_BUTTON_RIGHT,2);   //添加最小化按钮
         
             //初始化TEXT
-            hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_1);
+            hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_BOOK);
             TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
             TEXT_SetText(hItem, "This is Book APP");
             TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
@@ -126,7 +126,7 @@ static void _cbBookshAPPDialog(WM_MESSAGE * pMsg)
             FRAMEWIN_AddMinButton(hItem,FRAMEWIN_BUTTON_RIGHT,2);   //添加最小化按钮
         
             //初始化TEXT
-            hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_2);
+            hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_SH);
             TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
             TEXT_SetText(hItem, "This is Booksh APP");
             TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
@@ -162,7 +162,7 @@ static void _cbBrowerAPPDialog(WM_MESSAGE * pMsg)
             FRAMEWIN_AddMinButton(hItem,FRAMEWIN_BUTTON_RIGHT,2);   //添加最小化按钮
         
             //初始化TEXT
-            hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_3);
+            hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_BR);
             TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
             TEXT_SetText(hItem, "This is Brower APP");
             TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);

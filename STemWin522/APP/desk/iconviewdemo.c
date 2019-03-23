@@ -41,11 +41,12 @@ typedef struct{
 
 //ICONVIEW显示的APP图标
 static const BITMAP_ITEM BitmapItemTab1[]={
-	{&bmbag,		"Bag"},
+//	{&bmbag,		"Bag"},
+	{&bmsettings,	"Set"},
+	{&bmcalendar,	"Calendar"},
 	{&bmbook,		"Book"},
 	{&bmbookshelf,	"Booksh"	},
 	{&bmbrowser,	"Brower"},
-	{&bmcalendar,	"Calendar"},
 	{&bmclipboard,	"Clipboard"},
 //	{&bmcompass,	"Compass"},
 //	{&bmcompose,	"Cmpose"},
@@ -356,6 +357,11 @@ static void _cbProcessManagerDialog(WM_MESSAGE * pMsg)
   }
 }
 
+/********************************************************
+*函数功能：内核打印调用函数
+*传入参数：
+*返回值  ：
+********************************************************/
 void k_UpdateLog(char *Msg)
 {
   WM_HWIN hItem;
@@ -368,11 +374,11 @@ void k_UpdateLog(char *Msg)
   }
 }
 
-/**
-  * @brief  Callback function of the kernel log dialog
-  * @param  pMsg: pointer to data structure of type WM_MESSAGE
-  * @retval None
-  */
+/********************************************************
+*函数功能：创建内核log
+*传入参数：
+*返回值  ：
+********************************************************/
 static void _cbKernelLogDialog(WM_MESSAGE * pMsg) {
   WM_HWIN hItem;
   int     NCode;
@@ -461,10 +467,10 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
 							switch(Iconview0_Sel)
 							{
 								case 0:		//APP0
-                  if(BagAPPWin==NULL)CreateBagAPP();      //创建BagAPP
+                  if(BagAPPWin==NULL)CreateSystemSetting(pMsg->hWin);      //创建SET
 									break;
 								case 1:		//APP1
-                  if(BookAPPWin==NULL)CreateBookAPP();    //创建BookAPP
+                  if(BookAPPWin==NULL)CreateCalender(pMsg->hWin);    //创建Calender
 									break;
                 case 2:		//APP2
                   if(BookshAPPWin==NULL)CreateBookshAPP();    //创建BookshAPP
@@ -753,6 +759,11 @@ void iconviewdemo(void)
 	HEADER_SetDefaultSkin(HEADER_SKIN_FLEX);
 	RADIO_SetDefaultSkin(RADIO_SKIN_FLEX);
 	MULTIPAGE_SetDefaultSkin(MULTIPAGE_SKIN_FLEX);
+	//设置日历属性
+	CALENDAR_SetDefaultSize(CALENDAR_SI_HEADER,20);
+	CALENDAR_SetDefaultSize(CALENDAR_SI_CELL_Y,20);
+	CALENDAR_SetDefaultSize(CALENDAR_SI_CELL_X,28);
+	SPINBOX_SetDefaultButtonSize(15);//设置时钟设置button
 	
 	KernelLogInit();//初始化内核缓冲区
 	

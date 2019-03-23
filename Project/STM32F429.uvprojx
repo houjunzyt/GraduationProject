@@ -616,6 +616,21 @@
               <FileType>1</FileType>
               <FilePath>..\STemWin522\APP\desk\buttonuser.c</FilePath>
             </File>
+            <File>
+              <FileName>systemset.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\APP\desk\systemset.c</FilePath>
+            </File>
+            <File>
+              <FileName>calender.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\APP\desk\calender.c</FilePath>
+            </File>
+            <File>
+              <FileName>systemrec.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin522\APP\desk\systemrec.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

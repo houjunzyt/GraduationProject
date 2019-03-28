@@ -6,7 +6,6 @@
 #include "background.h"
 #include "DIALOG.h"
 #include "FRAMEWIN.h"
-#include "TestAPP.h"
 #include "cpuusage.h"
 #include <stddef.h>
 #include <stdlib.h>

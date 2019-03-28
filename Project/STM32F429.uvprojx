@@ -626,11 +626,6 @@
               <FileType>1</FileType>
               <FilePath>..\STemwin\APP\systemset.c</FilePath>
             </File>
-            <File>
-              <FileName>TestAPP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemwin\APP\TestAPP.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

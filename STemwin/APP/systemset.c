@@ -1,5 +1,7 @@
 #include "systemset.h"
 
+SystemConfig syssetting={0};
+
 static const GUI_WIDGET_CREATE_INFO _aDialog[] = 
 {
   
@@ -18,15 +20,30 @@ static const GUI_WIDGET_CREATE_INFO _aDialogSystemInformation[] = {
 };
 
 static const GUI_WIDGET_CREATE_INFO _aDialogGeneralSettings[] = {
-//  { WINDOW_CreateIndirect, "General Settings", 0, 0,   0, 220, 240, FRAMEWIN_CF_MOVEABLE },
-//  { CHECKBOX_CreateIndirect, "Checkbox", ID_CHECKBOX_SPRITES, 26, 30, 147, 20, 0, 0x0, 0 },
-//  { CHECKBOX_CreateIndirect, "Checkbox", ID_CHECKBOX_CPU180, 26, 60, 215, 20, 0, 0x0, 0 },
-//  { CHECKBOX_CreateIndirect, "Checkbox", ID_CHECKBOX_FLEXSKIN, 26, 90, 147, 20, 0, 0x0, 0 },
-//  { TEXT_CreateIndirect, "[!! Restart the demonstration to apply", ID_TEXT_WARNING0, 6, 180, 210, 20, 0, 0x0, 0 }, 
-//  { TEXT_CreateIndirect, "    the new settings !!]", ID_TEXT_WARNING1, 6, 200, 210, 20, 0, 0x0, 0 },
+  { WINDOW_CreateIndirect, "WIFI", 0, 0,   0, 220, 240, FRAMEWIN_CF_MOVEABLE },
+  { BUTTON_CreateIndirect, "Button", ID_BUTTON_WIFI,165,35, 45, 25, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "WIFI", ID_TEXT_WIFI, 40, 41, 80, 25, 0, 0x0, 0 },	
 };
 
+/*************************************************************
+*函数功能:获取系统设置APP设置保存结构体地址
+*传入参数:无
+*返回值  :结构体变量地址
+**************************************************************/
+SystemConfig * GetSystemConfigStruct(void)
+{
+	return &syssetting;
+}
 
+/*************************************************************
+*函数功能:获取系统设置APP设置保存结体变量初始化
+*传入参数:无
+*返回值  :无
+**************************************************************/
+void InitSystemConfigStruct(void)
+{
+	memset(&syssetting,0,sizeof(syssetting));
+}
 
 /**************************************************************
 *函数功能：设置复用回调函数
@@ -81,58 +98,40 @@ static void _cbSystemInformation(WM_MESSAGE * pMsg)
 **************************************************************/
 static void _cbGeneralSettings(WM_MESSAGE * pMsg) 
 {
-  WM_HWIN hItem;
-  hItem = pMsg->hWin;
-  switch (pMsg->MsgId) 
+	WM_HWIN hItem;
+  int     NCode;
+  int     Id;
+  switch (pMsg->MsgId)
 	{
-    
-		case WM_INIT_DIALOG:    
-    
-//		settings.d32 = k_BkupRestoreParameter(CALIBRATION_GENERAL_SETTINGS_BKP);
-
-//		/* Initialization of 'Checkbox' (sprite field) */
-//		hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_SPRITES);
-//		CHECKBOX_SetText(hItem, "Enable Sprites");
-//		CHECKBOX_SetState(hItem, settings.b.enable_sprite);
-//			
-//		/* Initialization of 'Checkbox' (CPU field) */
-//		hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_CPU180);
-//		CHECKBOX_SetText(hItem, "Run CPU at 180 MHz");
-//		CHECKBOX_SetState(hItem, settings.b.use_180Mhz);      
-//		/* Initialization of 'Checkbox' (flex skin field) */
-//		hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_FLEXSKIN);
-//		CHECKBOX_SetText(hItem, "Disable Flex skin");
-//		CHECKBOX_SetState(hItem, settings.b.disable_flex_skin);       
-
-//		hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_WARNING0);
-//		TEXT_SetTextColor(hItem, GUI_DARKRED);
-
-//		hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_WARNING1);
-//		TEXT_SetTextColor(hItem, GUI_DARKRED);
+		case WM_INIT_DIALOG:
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_0);
+			TEXT_SetTextAlign(hItem, GUI_TA_HCENTER | GUI_TA_VCENTER);
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_BUTTON_WIFI);
+			BUTTON_SetBitmapEx(hItem,0,syssetting.Button_Wifi?&bmon:&bmoff,0,0);
+			BUTTON_SetText(hItem, "");
 			break;
-    
-		case WM_DELETE:  
-//    /* Save Setting before delete settings frame */
-//    hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_SPRITES);
-//    settings.b.enable_sprite = CHECKBOX_IsChecked(hItem);
-//    
-//    hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_CPU180);
-//    settings.b.use_180Mhz = CHECKBOX_IsChecked(hItem);
-//    
-//    hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_FLEXSKIN);
-//    settings.b.disable_flex_skin = CHECKBOX_IsChecked(hItem);
-//    
-//    tmp = k_BkupRestoreParameter(CALIBRATION_GENERAL_SETTINGS_BKP);
-//	
-//    /* check if new settings have to be saved */
-//    if(settings.d32 != tmp)
-//    {
-//      k_BkupSaveParameter(CALIBRATION_GENERAL_SETTINGS_BKP, settings.d32); 
-//    }
-			break;    
-    
+		case WM_NOTIFY_PARENT:
+			Id    = WM_GetId(pMsg->hWinSrc);
+			NCode = pMsg->Data.v;
+			switch(Id) 
+			{
+				case ID_BUTTON_WIFI: 
+					hItem = WM_GetDialogItem(pMsg->hWin, ID_BUTTON_WIFI);
+					switch(NCode) 
+					{
+						case WM_NOTIFICATION_CLICKED:
+							break;
+						case WM_NOTIFICATION_RELEASED:
+							syssetting.Button_Wifi=~syssetting.Button_Wifi;
+							BUTTON_SetBitmapEx(hItem,0,syssetting.Button_Wifi?&bmon:&bmoff,0,0);
+							break;
+					}
+					break;
+				}
+			break;
 		default:
 			WM_DefaultProc(pMsg);
+			break;
   }
 }
 
@@ -161,10 +160,10 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 																		&_cbSystemInformation, WM_UNATTACHED, 0, 0);
 			MULTIPAGE_AddPage(hItem, hDialog, "System Information");
 			
-		//    hDialog = GUI_CreateDialogBox(_aDialogGeneralSettings, 
-		//                                  GUI_COUNTOF(_aDialogGeneralSettings), 
-		//                                  &_cbGeneralSettings, WM_UNATTACHED, 0, 0);
-		//    MULTIPAGE_AddPage(hItem, hDialog, "General Settings");
+			hDialog = GUI_CreateDialogBox(_aDialogGeneralSettings, 
+																		GUI_COUNTOF(_aDialogGeneralSettings), 
+																		&_cbGeneralSettings, WM_UNATTACHED, 0, 0);
+			MULTIPAGE_AddPage(hItem, hDialog, "WIFI");
 			
 
 			MULTIPAGE_SelectPage(hItem, 0);  

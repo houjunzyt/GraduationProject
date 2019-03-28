@@ -63,6 +63,7 @@ static void	Thread2(void *parameter)
 	GUI_Init();  			//STemWin初始化
 	WM_MULTIBUF_Enable(1);  //开启STemWin多缓冲,RGB屏可能会用到
 	k_StartUp();//开机动画
+	InitSystemConfigStruct();//初始化设置信息结构体变量
 	iconviewdemo(); //桌面显示
 	while(1)
 	{

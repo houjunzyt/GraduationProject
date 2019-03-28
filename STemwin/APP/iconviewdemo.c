@@ -449,16 +449,16 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
 							switch(Iconview0_Sel)
 							{
 								case 0:		//APP0
-                  if(BagAPPWin==NULL)CreateSystemSetting(pMsg->hWin);      //创建SET
+                  CreateSystemSetting(pMsg->hWin);      //创建SET
 									break;
 								case 1:		//APP1
-                  if(BookAPPWin==NULL)CreateCalender(pMsg->hWin);    //创建Calender
+                  CreateCalender(pMsg->hWin);    //创建Calender
 									break;
                 case 2:		//APP2
-                  if(BookshAPPWin==NULL)CreateBookshAPP();    //创建BookshAPP
+               
 									break;
                 case 3:		//APP3
-                  if(BrowerAPPWin==NULL)CreateBrowerAPP();    //创建BrowerAPP
+    
 									break;
 								case 4:
 //									k_UpdateLog("touch app5\n");
@@ -573,6 +573,7 @@ static void _cbStatus(WM_MESSAGE * pMsg)
 	rt_uint8_t major,minor;
 	RTC_TimeTypeDef RTC_TimeStructure;
 	RTC_DateTypeDef RTC_DateStructure;
+	SystemConfig *p_sysset=NULL;
 	
   uint8_t sec, min, hour, day, month;
   uint16_t year;
@@ -583,18 +584,10 @@ static void _cbStatus(WM_MESSAGE * pMsg)
   {
   case WM_CREATE:
     hTimerTime = WM_CreateTimer(hWin, ID_TIMER_TIME, 1000, 0);
-//    if(settings.b.enable_sprite)
-//    {
-//      hSpriteTime = WM_CreateTimer(hWin, ID_SPRITE_TIME, 50, 0);    
-//    }
     break;
     
   case WM_DELETE:
     WM_DeleteTimer(hTimerTime);
-//    if(settings.b.enable_sprite)
-//    {    
-//      WM_DeleteTimer(hSpriteTime);    
-//    }
     break;
     
   case WM_TIMER:
@@ -605,13 +598,6 @@ static void _cbStatus(WM_MESSAGE * pMsg)
     }
     else if( WM_GetTimerId(pMsg->Data.v) == ID_SPRITE_TIME)
     {
-//      if(settings.b.enable_sprite)
-//      {    
-//        if(SpriteDisabled == 0)
-//        {
-//          _MoveSprite(&_aSprite[0]);
-//        }
-//      }
       WM_RestartTimer(pMsg->Data.v, 100);
     }
     break;
@@ -658,12 +644,12 @@ static void _cbStatus(WM_MESSAGE * pMsg)
     }
 
     GUI_DispStringHCenterAt((char *)TempStr, xSize / 2, 4);
-    
-    /* USB */
-////    if(k_StorageGetStatus(USB_DISK_UNIT))
-////    {
+    p_sysset=GetSystemConfigStruct();
+		
+		if(p_sysset->Button_Wifi)//判断wifi开启与否
+		{
        GUI_DrawBitmap(&bmwifi, xSize - 80, 0);
-//    }
+		}
     cpu_usage_get(&major,&minor);
     sprintf((char *)TempStr, "%d.%d%%", major,minor); 
     GUI_DispStringAt( (char *)TempStr,33, 4);   
@@ -767,7 +753,7 @@ void iconviewdemo(void)
 							WM_CF_SHOW|WM_CF_HASTRANS,      
 							ICONVIEW_CF_AUTOSCROLLBAR_V,    //自动增加垂直滚动条
 							ID_ICONVIEW_0,                  //小工具ID
-							105,                            //图标的水平尺寸为100
+							115,                            //图标的水平尺寸为100
 							85);                           //图标的垂直尺寸为100
 	ICONVIEW_SetFont(IconviewWin,&GUI_Font16_ASCII);
 	ICONVIEW_SetBkColor(IconviewWin,ICONVIEW_CI_SEL,GUI_WHITE|0X70000000);

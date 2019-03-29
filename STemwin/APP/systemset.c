@@ -20,7 +20,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialogSystemInformation[] = {
 };
 
 static const GUI_WIDGET_CREATE_INFO _aDialogGeneralSettings[] = {
-  { WINDOW_CreateIndirect, "WIFI", 0, 0,   0, 220, 240, FRAMEWIN_CF_MOVEABLE },
+  { WINDOW_CreateIndirect, "GeneralSettings", 0, 0,   0, 220, 240, FRAMEWIN_CF_MOVEABLE },
   { BUTTON_CreateIndirect, "Button", ID_BUTTON_WIFI,165,35, 45, 25, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "WIFI", ID_TEXT_WIFI, 40, 41, 80, 25, 0, 0x0, 0 },	
 };

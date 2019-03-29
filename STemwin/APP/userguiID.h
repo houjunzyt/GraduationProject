@@ -73,8 +73,10 @@
 #define ID_SPINBOX_SEC          (GUI_ID_USER_SYSTEMSET + 0x18)
 #define ID_BUTTON_WIFI          (GUI_ID_USER_SYSTEMSET + 0x19)
 
-
-
+//ÎÂ¶ÈAPP
+#define GUI_ID_USER_Temp  (GUI_ID_USER+0x60)
+#define ID_GRAPH_Temp  	  (GUI_ID_USER_Temp +0x01)
+#define ID_FRAMEWIN_Temp  (GUI_ID_USER_Temp +0x02)
 
 
 

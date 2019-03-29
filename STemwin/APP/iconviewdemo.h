@@ -1,7 +1,6 @@
 #ifndef _ICONVIEWDEMO_H
 #define _ICONVIEWDEMO_H
 
-#include "DIALOG.h"
 #include "iconbitmap.h"
 #include "background.h"
 #include "DIALOG.h"
@@ -17,6 +16,7 @@
 #include "kernellog.h"
 #include "systemset.h"
 #include "calender.h"
+#include "temperature.h"
 
 typedef struct {
   char * sText;

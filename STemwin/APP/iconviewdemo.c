@@ -9,23 +9,23 @@ static WM_HWIN  hLog = 0;
 //菜单栏的组件
 static const GUI_WIDGET_CREATE_INFO _aPerformanceDialogCreate[] = 
 {
-  { FRAMEWIN_CreateIndirect, "CPU Usage", ID_FRAMEWIN_PERFORMANCE, 10, 30, 220, 180, 0, 0x0, 0 },
+  { FRAMEWIN_CreateIndirect, "CPU Usage", ID_FRAMEWIN_PERFORMANCE, 10, 81, 220, 180, 0, 0x0, 0 },
   { GRAPH_CreateIndirect, "", ID_GRAPH_CPU, 5, 9, 200, 130, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "Hide", ID_BUTTON_HIDE, 70, 142, 80, 30, 0, 0x0, 0 },
 };
 
 static const GUI_WIDGET_CREATE_INFO _aKernelLogDialogCreate[] = 
 {
-  { FRAMEWIN_CreateIndirect, "Kernel Log", ID_FRAMEWIN_KERNELLOG, 10, 30, 220, 180, 0, 0x0, 0 },
+  { FRAMEWIN_CreateIndirect, "Kernel Log", ID_FRAMEWIN_KERNELLOG, 10, 81, 220, 180, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "Cancel", ID_BUTTON_CANCEL_KERNELLOG, 70, 142, 80, 30, 0, 0x0, 0 },
   { MULTIEDIT_CreateIndirect, "Multiedit", ID_MULTIEDIT_KERNELLOG, 5, 9, 200, 130, 0, 0x0, 0 },
 };
 
 static const GUI_WIDGET_CREATE_INFO _aProcessManagerDialogCreate[] = 
 {
-  { FRAMEWIN_CreateIndirect, "Process viewer", ID_FRAMEWIN_PROCESSMANAGER, 10, 30, 220, 180, 0, 0x0, 0 },
+  { FRAMEWIN_CreateIndirect, "Process viewer", ID_FRAMEWIN_PROCESSMANAGER, 10, 81, 220, 180, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "Cancel", ID_BUTTON_CANCEL_PROCESSMANAGER, 70, 142, 80, 30, 0, 0x0, 0 },
-  { LISTVIEW_CreateIndirect, "Listview", ID_LISTVIEW_PROCESSMANAGER, 5, 5, 200, 130, 0, 0x0, 0 },
+  { LISTVIEW_CreateIndirect, "Listview", ID_LISTVIEW_PROCESSMANAGER, 5, 9, 200, 130, 0, 0x0, 0 },
 };
 
 
@@ -105,7 +105,8 @@ static void _OpenPopup(WM_HWIN hParent, MENU_ITEM * pMenuItems, int NumItems, in
 *传入参数：
 *返回值  ：
 ********************************************************/
-static void _cbCpuWindow(WM_MESSAGE * pMsg) {
+static void _cbCpuWindow(WM_MESSAGE * pMsg) 
+{
   uint8_t major,minor;
   static WM_HTIMER hTimerTime; 
   switch (pMsg->MsgId) 
@@ -135,7 +136,8 @@ static void _cbCpuWindow(WM_MESSAGE * pMsg) {
 *传入参数：
 *返回值  ：
 ********************************************************/
-static void _cbPerformanceDialog(WM_MESSAGE * pMsg) {
+static void _cbPerformanceDialog(WM_MESSAGE * pMsg) 
+{
   int NCode;
   int Id;
   WM_HWIN hGraph;
@@ -146,16 +148,16 @@ static void _cbPerformanceDialog(WM_MESSAGE * pMsg) {
   {
 		case WM_INIT_DIALOG:
 
-			FRAMEWIN_SetTitleVis(pMsg->hWin, 0);
+			FRAMEWIN_SetTitleVis(pMsg->hWin,0);//隐藏对话框
 			hGraph = WM_GetDialogItem(pMsg->hWin, ID_GRAPH_CPU);
-			hData = GRAPH_DATA_YT_Create(GUI_LIGHTGREEN, 500, 0, 20);
-			GRAPH_SetGridVis(hGraph, 1);
-			GRAPH_SetBorder(hGraph, 30, 2, 2, 2); 
-			GRAPH_AttachData(hGraph, hData);
-			hScale = GRAPH_SCALE_Create(20, GUI_TA_RIGHT, GRAPH_SCALE_CF_VERTICAL, 25);
-			GRAPH_AttachScale(hGraph, hScale);  
-			GRAPH_SCALE_SetTextColor(hScale, GUI_YELLOW);
-			GRAPH_SetGridDistX(hGraph, 25);
+			hData = GRAPH_DATA_YT_Create(GUI_LIGHTGREEN, 500, 0, 20);//绘制数据使用的颜色、数据项的最大数值、指向对象数据的指针、添加的数据项数目
+			GRAPH_SetGridVis(hGraph, 1);//启用网格绘制
+			GRAPH_SetBorder(hGraph, 30, 2, 2, 2); //设置图标的边框属性：句柄、距离左边、右边、上边、下边的像素
+			GRAPH_AttachData(hGraph, hData);//添加数据对象
+			hScale = GRAPH_SCALE_Create(20, GUI_TA_RIGHT, GRAPH_SCALE_CF_VERTICAL, 25);//创建刻度对象：左边/顶边的位置、对齐方式（右）、刻度方向（垂直）、刻度线间距
+			GRAPH_AttachScale(hGraph, hScale); //添加刻度对象 
+			GRAPH_SCALE_SetTextColor(hScale, GUI_YELLOW);//设置刻度的文本颜色
+			GRAPH_SetGridDistX(hGraph, 25);//设置网格间距
 			GRAPH_SetGridDistY(hGraph, 25);
 			WM_GetClientRect(&Rect);
 			WM_CreateWindowAsChild(230, 0, 10, 10, pMsg->hWin, WM_CF_SHOW | WM_CF_HASTRANS, _cbCpuWindow , 0); 
@@ -458,10 +460,10 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
                
 									break;
                 case 3:		//APP3
-    
+									CreateTempAPP(pMsg->hWin);//创建temp
 									break;
 								case 4:
-//									k_UpdateLog("touch app5\n");
+								
 									break;
 								case 5:
 //									k_UpdateLog("touch app6\n");

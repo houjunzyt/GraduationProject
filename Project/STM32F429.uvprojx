@@ -631,6 +631,11 @@
               <FileType>1</FileType>
               <FilePath>..\STemwin\APP\temperature.c</FilePath>
             </File>
+            <File>
+              <FileName>hum.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemwin\APP\hum.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

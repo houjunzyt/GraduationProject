@@ -17,6 +17,7 @@
 #include "systemset.h"
 #include "calender.h"
 #include "temperature.h"
+#include "hum.h"
 
 typedef struct {
   char * sText;

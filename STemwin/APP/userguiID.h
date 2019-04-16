@@ -94,6 +94,17 @@
 #define ID_IMAGE_T1  (GUI_ID_USER_Temp + 0x11)
 
 
+//Êª¶ÈAPP
+#define GUI_ID_USER_Hum (GUI_ID_USER+0x80)
+#define ID_FRAMEWIN_H0  (GUI_ID_USER_Hum + 0x00)
+#define ID_IMAGE_H0     (GUI_ID_USER_Hum + 0x01)
+#define ID_IMAGE_H1     (GUI_ID_USER_Hum + 0x02)
+#define ID_IMAGE_H2     (GUI_ID_USER_Hum + 0x03)
+#define ID_TEXT_H0      (GUI_ID_USER_Hum + 0x04)
+#define ID_TEXT_H1      (GUI_ID_USER_Hum + 0x05)
+
+
+
 
 
 

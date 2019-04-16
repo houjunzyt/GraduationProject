@@ -457,8 +457,8 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
 								case 1:		//APP1
                   CreateCalender(pMsg->hWin);    //创建Calender
 									break;
-                case 2:		//APP2
-               
+                case 2:		
+									CreateHumApp();
 									break;
                 case 3:		
 									if(systemset->Button_Temp)//数值显示

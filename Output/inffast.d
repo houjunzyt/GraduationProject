@@ -1,0 +1,11 @@
+..\output\inffast.o: ..\STemwin\PNG\inffast.c
+..\output\inffast.o: ..\STemwin\PNG\zutil.h
+..\output\inffast.o: ..\STemwin\PNG\zlib.h
+..\output\inffast.o: ..\STemwin\PNG\zconf.h
+..\output\inffast.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\inffast.o: D:\keil\ARM\ARMCC\Bin\..\include\string.h
+..\output\inffast.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\inffast.o: D:\keil\ARM\ARMCC\Bin\..\include\errno.h
+..\output\inffast.o: ..\STemwin\PNG\inftrees.h
+..\output\inffast.o: ..\STemwin\PNG\inflate.h
+..\output\inffast.o: ..\STemwin\PNG\inffast.h

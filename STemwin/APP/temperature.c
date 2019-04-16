@@ -224,7 +224,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 			TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
 		
 			WM_InvalidateWindow(pMsg->hWin);
-			WM_RestartTimer(pMsg->Data.v, 400);
+			WM_RestartTimer(pMsg->Data.v, 1000);
 		
 			break; 
 			
@@ -244,7 +244,7 @@ WM_HWIN CreateTempNum(void)
   WM_HWIN hWin;
 	static WM_HTIMER hTimerTime; 
   hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
-  hTimerTime = WM_CreateTimer(WM_GetClientWindow(hWin),0,400,0); //创建一个定时器 
+  hTimerTime = WM_CreateTimer(WM_GetClientWindow(hWin),0,1000,0); //创建一个定时器 
 	return hWin;
 }
 

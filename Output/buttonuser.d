@@ -1,0 +1,10 @@
+..\output\buttonuser.o: ..\STemwin\APP\buttonuser.c
+..\output\buttonuser.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\buttonuser.o: ..\STemwin\inc\GUI.h
+..\output\buttonuser.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\buttonuser.o: ..\STemwin\inc\GUI_ConfDefaults.h
+..\output\buttonuser.o: ..\STemwin\Config\GUIConf.h
+..\output\buttonuser.o: ..\STemwin\inc\GUI_Type.h
+..\output\buttonuser.o: ..\STemwin\inc\LCD.h
+..\output\buttonuser.o: ..\STemwin\inc\Global.h
+..\output\buttonuser.o: ..\STemwin\inc\GUI_Version.h

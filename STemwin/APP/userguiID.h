@@ -72,12 +72,26 @@
 #define ID_CALENDAR             (GUI_ID_USER_SYSTEMSET + 0x17)
 #define ID_SPINBOX_SEC          (GUI_ID_USER_SYSTEMSET + 0x18)
 #define ID_BUTTON_WIFI          (GUI_ID_USER_SYSTEMSET + 0x19)
+#define ID_BUTTON_Temp          (GUI_ID_USER_SYSTEMSET + 0x1A)
+#define ID_TEXT_Temp            (GUI_ID_USER_SYSTEMSET + 0x1B)
 
 //ÎÂ¶ÈAPP
 #define GUI_ID_USER_Temp  (GUI_ID_USER+0x60)
 #define ID_GRAPH_Temp  	  (GUI_ID_USER_Temp +0x01)
 #define ID_FRAMEWIN_Temp  (GUI_ID_USER_Temp +0x02)
-
+#define ID_FRAMEWIN_T0  (GUI_ID_USER_Temp + 0x03)
+#define ID_IMAGE_0  (GUI_ID_USER_Temp + 0x05)
+#define ID_IMAGE_1  (GUI_ID_USER_Temp + 0x06)
+#define ID_TEXT_T0  (GUI_ID_USER_Temp + 0x07)
+#define ID_TEXT_T1  (GUI_ID_USER_Temp + 0x09)
+#define ID_TEXT_T2  (GUI_ID_USER_Temp + 0x0A)
+#define ID_TEXT_T3  (GUI_ID_USER_Temp + 0x0B)
+#define ID_TEXT_T4  (GUI_ID_USER_Temp + 0x0C)
+#define ID_TEXT_T5  (GUI_ID_USER_Temp + 0x0D)
+#define ID_TEXT_T6  (GUI_ID_USER_Temp + 0x0E)
+#define ID_TEXT_T7  (GUI_ID_USER_Temp + 0x0F)
+#define ID_IMAGE_T0  (GUI_ID_USER_Temp + 0x10)
+#define ID_IMAGE_T1  (GUI_ID_USER_Temp + 0x11)
 
 
 

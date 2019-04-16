@@ -424,7 +424,8 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
 	int NCode;
 	static int Iconview0_Sel;
 	MENU_MSG_DATA* pData;
-	
+	SystemConfig * systemset=NULL;
+	systemset=GetSystemConfigStruct();
 	switch(pMsg->MsgId)
 	{
 		//用于绘制背景
@@ -459,8 +460,15 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
                 case 2:		//APP2
                
 									break;
-                case 3:		//APP3
-									CreateTempAPP(pMsg->hWin);//创建temp
+                case 3:		
+									if(systemset->Button_Temp)//数值显示
+									{
+										CreateTempNum();
+									}
+									else
+									{
+										CreateTempAPP(pMsg->hWin);//创建temp
+									}
 									break;
 								case 4:
 								

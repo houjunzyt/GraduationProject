@@ -23,6 +23,11 @@ ALIGN(RT_ALIGN_SIZE)
 static rt_uint8_t Thread2Stk[8192] __EXRAM ;
 static void Thread2(void* parameter);
 
+struct rt_thread DH11TCB;
+ALIGN(RT_ALIGN_SIZE)
+static rt_uint8_t DH11Stk[1024] __EXRAM ;
+static void DH11(void* parameter);
+
 int main(void)
 {	
 	printf("clk:%d\n",SystemCoreClock);

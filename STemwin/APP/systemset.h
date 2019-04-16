@@ -10,6 +10,7 @@
 typedef struct
 {
 	uint8_t Button_Wifi;//wifi的状态按钮
+	uint8_t Button_Temp;//温度显示的状态按钮	
 	
 }SystemConfig;
 

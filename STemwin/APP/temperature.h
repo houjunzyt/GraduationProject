@@ -10,7 +10,13 @@
 #include "MESSAGEBOX.h"
 #include "userguiid.h"
 #include "stm32f4xx.h"
+#include "DIALOG.h"
+
+#define ID_IMAGE_0_IMAGE_0   0x00
+#define ID_IMAGE_1_IMAGE_0   0x01
 
 void CreateTempAPP(WM_HWIN hWin);
+WM_HWIN CreateTempNum(void);
+
 
 #endif

@@ -22,7 +22,9 @@ static const GUI_WIDGET_CREATE_INFO _aDialogSystemInformation[] = {
 static const GUI_WIDGET_CREATE_INFO _aDialogGeneralSettings[] = {
   { WINDOW_CreateIndirect, "GeneralSettings", 0, 0,   0, 220, 240, FRAMEWIN_CF_MOVEABLE },
   { BUTTON_CreateIndirect, "Button", ID_BUTTON_WIFI,165,35, 45, 25, 0, 0x0, 0 },
-  { TEXT_CreateIndirect, "WIFI", ID_TEXT_WIFI, 40, 41, 80, 25, 0, 0x0, 0 },	
+  { TEXT_CreateIndirect, "WIFI", ID_TEXT_WIFI, 5, 41, 80, 25, 0, 0x0, 0 },	
+	{ BUTTON_CreateIndirect, "Button", ID_BUTTON_Temp,165,70, 45, 25, 0, 0x0, 0 },
+	{ TEXT_CreateIndirect, "Temp Numerical display", ID_TEXT_Temp, 5, 70, 110, 25, 0, 0x0, 0 },	
 };
 
 /*************************************************************
@@ -75,7 +77,6 @@ static void _cbSystemInformation(WM_MESSAGE * pMsg)
 			TEXT_SetFont(hItem, GUI_FONT_13_ASCII);
 			TEXT_SetTextColor(hItem, GUI_DARKGRAY);
 
-			/* ST Copyright */
 			hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_COPYRIGHT);//corpright
 			TEXT_SetFont(hItem, GUI_FONT_13_ASCII);
 			TEXT_SetTextColor(hItem, GUI_DARKGRAY);
@@ -109,6 +110,12 @@ static void _cbGeneralSettings(WM_MESSAGE * pMsg)
 			hItem = WM_GetDialogItem(pMsg->hWin, ID_BUTTON_WIFI);
 			BUTTON_SetBitmapEx(hItem,0,syssetting.Button_Wifi?&bmon:&bmoff,0,0);
 			BUTTON_SetText(hItem, "");
+		
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_Temp);
+			TEXT_SetTextAlign(hItem, GUI_TA_HCENTER | GUI_TA_VCENTER);
+			hItem = WM_GetDialogItem(pMsg->hWin, ID_BUTTON_Temp);
+			BUTTON_SetBitmapEx(hItem,0,syssetting.Button_Temp?&bmon:&bmoff,0,0);
+			BUTTON_SetText(hItem, "");
 			break;
 		case WM_NOTIFY_PARENT:
 			Id    = WM_GetId(pMsg->hWinSrc);
@@ -127,6 +134,20 @@ static void _cbGeneralSettings(WM_MESSAGE * pMsg)
 							break;
 					}
 					break;
+					
+				case ID_BUTTON_Temp: 
+					hItem = WM_GetDialogItem(pMsg->hWin, ID_BUTTON_Temp);
+					switch(NCode) 
+					{
+						case WM_NOTIFICATION_CLICKED:
+							break;
+						case WM_NOTIFICATION_RELEASED:
+							syssetting.Button_Temp=~syssetting.Button_Temp;
+							BUTTON_SetBitmapEx(hItem,0,syssetting.Button_Temp?&bmon:&bmoff,0,0);
+							break;
+					}
+					break;
+					
 				}
 			break;
 		default:
@@ -150,7 +171,9 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 
 			hItem = pMsg->hWin;
 			FRAMEWIN_AddCloseButton(hItem, FRAMEWIN_BUTTON_RIGHT, 0);   //右上角关闭button 
-			
+			FRAMEWIN_AddMaxButton(hItem,FRAMEWIN_BUTTON_RIGHT,2);   //添加最大化按钮
+			FRAMEWIN_AddMinButton(hItem,FRAMEWIN_BUTTON_RIGHT,2);   //添加最小化按钮	
+		
 			hItem = WM_GetDialogItem(pMsg->hWin, ID_IMAGE_INFO);//背景图片
 			IMAGE_SetBitmap(hItem, &bminfo);
 			hItem = WM_GetDialogItem(pMsg->hWin, ID_MULTIPAGE);
@@ -163,7 +186,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 			hDialog = GUI_CreateDialogBox(_aDialogGeneralSettings, 
 																		GUI_COUNTOF(_aDialogGeneralSettings), 
 																		&_cbGeneralSettings, WM_UNATTACHED, 0, 0);
-			MULTIPAGE_AddPage(hItem, hDialog, "WIFI");
+			MULTIPAGE_AddPage(hItem, hDialog, "GeneralSettings");
 			
 
 			MULTIPAGE_SelectPage(hItem, 0);  

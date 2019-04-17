@@ -1,31 +1,55 @@
-
 #include "dht11.h"
-#include "new_delay.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32开发板
-//DHT11 驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2015/12/29
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2014-2024
-//All rights reserved										  
-//////////////////////////////////////////////////////////////////////////////////
- 
-//复位DHT11
+#include "delay.h"
+
+/****************************************************
+*函数功能：DH11 GPIO初始化
+*传入参数：
+*返回值  ：
+****************************************************/
+void DH11_GPIO_Init(void)
+{
+		GPIO_InitTypeDef GPIO_InitStructure;
+		/*开启LED相关的GPIO外设时钟*/
+		RCC_AHB1PeriphClockCmd (RCC_AHB1Periph_GPIOB, ENABLE); 
+		/*选择要控制的GPIO引脚*/															   
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;	
+
+		/*设置引脚模式为输出模式*/
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;   
+    
+    /*设置引脚的输出类型为推挽输出*/
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    
+    /*设置引脚为上拉模式*/
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+
+		/*设置引脚速率为2MHz */   
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
+
+		/*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
+		GPIO_Init(GPIOB, &GPIO_InitStructure);	
+}
+	
+
+/****************************************************
+*函数功能：DH11复位
+*传入参数：
+*返回值  ：
+****************************************************/
 void DHT11_Rst(void)	   
 {                 
 	DHT11_IO_OUT(); 	//SET OUTPUT
-    DHT11_DQ_OUT=0; 	//拉低DQ
-    DWT_Delay_us(20000);    	//拉低至少18ms
-    DHT11_DQ_OUT=1; 	//DQ=1 
+	DHT11_DQ_OUT=0; 	//拉低DQ
+	DWT_Delay_us(20000);    	//拉低至少18ms
+	DHT11_DQ_OUT=1; 	//DQ=1 
 	DWT_Delay_us(30);     	//主机拉高20~40us
 }
-//等待DHT11的回应
-//返回1:未检测到DHT11的存在
-//返回0:存在
+
+/****************************************************
+*函数功能：等待DHT11的回应
+*传入参数：
+*返回值  ：1:未检测到DHT11的存在 0:存在
+****************************************************/
 u8 DHT11_Check(void) 	   
 {   
 	u8 retry=0;
@@ -45,8 +69,12 @@ u8 DHT11_Check(void)
 	if(retry>=100)return 1;	    
 	return 0;
 }
-//从DHT11读取一个位
-//返回值：1/0
+
+/****************************************************
+*函数功能：从DHT11读取一个位
+*传入参数：
+*返回值  ：1/0
+****************************************************/
 u8 DHT11_Read_Bit(void) 			 
 {
  	u8 retry=0;
@@ -65,8 +93,12 @@ u8 DHT11_Read_Bit(void)
 	if(DHT11_DQ_IN)return 1;
 	else return 0;		   
 }
-//从DHT11读取一个字节
-//返回值：读到的数据
+
+/****************************************************
+*函数功能：从DHT11读取一个字节
+*传入参数：
+*返回值  ：读到的数据
+****************************************************/
 u8 DHT11_Read_Byte(void)    
 {        
     u8 i,dat;
@@ -78,10 +110,12 @@ u8 DHT11_Read_Byte(void)
     }						    
     return dat;
 }
-//从DHT11读取一次数据
-//temp:温度值(范围:0~50°)
-//humi:湿度值(范围:20%~90%)
-//返回值：0,正常;1,读取失败
+
+/****************************************************
+*函数功能：从DHT11读取一次数据
+*传入参数：temp:温度值(范围:0~50°) humi:湿度值(范围:20%~90%)
+*返回值  ：0,正常;1,读取失败
+****************************************************/
 u8 DHT11_Read_Data(u8 *temp,u8 *humi)    
 {        
  	u8 buf[5];
@@ -101,13 +135,17 @@ u8 DHT11_Read_Data(u8 *temp,u8 *humi)
 	}else return 1;
 	return 0;	    
 }
-//初始化DHT11的IO口 DQ 同时检测DHT11的存在
-//返回1:不存在
-//返回0:存在    	 
+
+/****************************************************
+*函数功能：初始化DHT11的IO口 DQ 同时检测DHT11的存在
+*传入参数：temp:温度值(范围:0~50°) humi:湿度值(范围:20%~90%)
+*返回值  ：返回1:不存在，返回0:存在   
+****************************************************/
+  	 
 u8 DHT11_Init(void)
 {
 	RCC->AHB1ENR|=1<<1;    //使能PORTB时钟	   	  
-	GPIO_Set(GPIOB,PIN12,GPIO_MODE_OUT,GPIO_OTYPE_PP,GPIO_SPEED_50M,GPIO_PUPD_PU);//PB12设置  
+	DH11_GPIO_Init();
 	DHT11_Rst();
 	return DHT11_Check();
 }

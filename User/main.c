@@ -11,6 +11,7 @@
 #include "header.h"
 #include "WM.h"
 #include "iconviewdemo.h"
+#include "dht11.h"
 
 uint32_t GUI_FreeMem = 0;
 struct rt_thread Thread1TCB;
@@ -28,6 +29,9 @@ ALIGN(RT_ALIGN_SIZE)
 static rt_uint8_t DH11Stk[1024] __EXRAM ;
 static void DH11(void* parameter);
 
+rt_uint8_t DHT11_temperature;  	    
+rt_uint8_t DHT11_humidity;
+	
 int main(void)
 {	
 	printf("clk:%d\n",SystemCoreClock);
@@ -37,7 +41,7 @@ int main(void)
 									RT_NULL, /* 线程入口函数参数 */
 									&Thread1Stk[0], /* 线程栈起始地址 */
 									sizeof(Thread1Stk), /* 线程栈大小 */
-									3, /* 线程的优先级 */
+									4, /* 线程的优先级 */
 									40); /* 线程时间片 */									
 	rt_thread_startup(&Thread1TCB); /* 启动线程，开启调度 */	
 	rt_thread_init(&Thread2TCB, /* 线程控制块 */
@@ -46,9 +50,18 @@ int main(void)
 									RT_NULL, /* 线程入口函数参数 */
 									&Thread2Stk[0], /* 线程栈起始地址 */
 									sizeof(Thread2Stk), /* 线程栈大小 */
-									3, /* 线程的优先级 */
+									4, /* 线程的优先级 */
 									40); /* 线程时间片 */
 	rt_thread_startup(&Thread2TCB); /* 启动线程，开启调度 */
+	rt_thread_init(&DH11TCB, /* 线程控制块 */
+									"DHT11", /* 线程名字 */
+									DH11, /* 线程入口函数 */
+									RT_NULL, /* 线程入口函数参数 */
+									&DH11Stk[0], /* 线程栈起始地址 */
+									sizeof(DH11Stk), /* 线程栈大小 */
+									3, /* 线程的优先级 */
+									40); /* 线程时间片 */
+	rt_thread_startup(&DH11TCB); /* 启动线程，开启调度 */
 
 }
 
@@ -78,3 +91,17 @@ static void	Thread2(void *parameter)
 	}
 }
 
+static void DH11(void* parameter)
+{
+	DWT_Delay_Init();
+	while(DHT11_Init())
+	{
+		rt_kprintf("DHT11 Init Error!");
+		rt_thread_delay(1000);
+	}
+	while(1)
+	{
+		DHT11_Read_Data(&DHT11_temperature,&DHT11_humidity);	
+		rt_thread_delay(1000);
+	}
+}

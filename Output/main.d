@@ -130,3 +130,5 @@
 ..\output\main.o: ..\STemwin\APP\calender.h
 ..\output\main.o: ..\STemwin\APP\temperature.h
 ..\output\main.o: ..\STemwin\APP\hum.h
+..\output\main.o: ..\Driver\DH11\dht11.h
+..\output\main.o: ..\User\bitband.h

@@ -4,7 +4,8 @@
 
 #include "DIALOG.h"
 #include "userguiid.h"
-
+#include "board.h"
+#include <stdio.h>
 
 #define ID_IMAGE_0_IMAGE_0   0x00
 #define ID_IMAGE_1_IMAGE_0   0x01

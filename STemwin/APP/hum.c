@@ -1,6 +1,9 @@
 #include "hum.h"
 #include "humbackground.c"
 
+extern rt_uint8_t DHT11_temperature;  	    
+extern rt_uint8_t DHT11_humidity;
+
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { FRAMEWIN_CreateIndirect, "Humidity", ID_FRAMEWIN_0, 2, 53, 240, 240, 0, 0x0, 0 },
   { IMAGE_CreateIndirect, "Image", ID_IMAGE_H0, 0, 0, 230, 292, 0, 0, 0 },
@@ -42,6 +45,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
   const void * pData;
   WM_HWIN      hItem;
   U32          FileSize;
+	uint8_t      DHT11[50];
   switch (pMsg->MsgId) 
 	{
 		case WM_INIT_DIALOG:
@@ -65,12 +69,14 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 			hItem=pMsg->hWin;
 			hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_H0);//œ‘ æPM
 			TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
-			TEXT_SetText(hItem, "25°Ê");
+			
+			TEXT_SetText(hItem, "");
 			TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
 		
 			hItem=pMsg->hWin;
 			hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_H1);//œ‘ æ ™∂»
 			TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
+			sprintf((char *)DHT11,"%d \%RH %d °„C",DHT11_temperature,DHT11_humidity);
 			TEXT_SetText(hItem, "25°Ê");
 			TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
 		

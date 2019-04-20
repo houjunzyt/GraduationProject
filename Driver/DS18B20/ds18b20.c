@@ -1,6 +1,9 @@
 #include "ds18b20.h"
 #include "delay.h"	
 
+const uint8_t IDROM1[8]={0x28,0xf5,0x7b,0x79,0x17,0x13,0x01,0x76};//带板子的
+const uint8_t IDROM2[8]={0x28,0xff,0x66,0xc3,0x67,0x18,0x01,0x6f};//红色
+
 /****************************************************
 *函数功能：DS18B20 GPIO初始化
 *传入参数：
@@ -148,15 +151,23 @@ uint8_t DS18B20_Init(void)
 //从ds18b20得到温度值
 //精度：0.1C
 //返回值：温度值 （-550~1250） 
-short DS18B20_Get_Temp(void)
+short DS18B20_Get_Temp(uint8_t index)
 {
-	uint8_t temp;
+	uint8_t temp,i;
 	uint8_t TL,TH;
 	short tem;
 	DS18B20_Start();// ds1820 start convert
 	DS18B20_Rst();
-	DS18B20_Check();	 
-	DS18B20_Write_Byte(0xcc);// skip rom
+	DS18B20_Check();			
+	DS18B20_Write_Byte(0x55);//匹配rom ID
+	for(i=0;i<8;i++)         //·￠?í64??±à??
+	{
+		switch(index)
+		{
+			case 1 :DS18B20_Write_Byte(IDROM1[i]);break;
+			case 2 :DS18B20_Write_Byte(IDROM2[i]);break;		
+		}
+	}	
 	DS18B20_Write_Byte(0xbe);// convert	    
 	TL=DS18B20_Read_Byte(); // LSB   
 	TH=DS18B20_Read_Byte(); // MSB   
@@ -176,4 +187,14 @@ short DS18B20_Get_Temp(void)
 		return tem;	 	//返回温度值
 	else 
 		return -tem;    
+}
+
+void GetRomId(uint8_t *IdRoom)
+{
+	uint8_t i;
+	DS18B20_Write_Byte(0x33);// read ID cmd
+	for(i=0;i<8;i++)
+	{
+		IdRoom[i]=DS18B20_Read_Byte();//read
+	}	
 }

@@ -94,8 +94,9 @@ static void	Thread2(void *parameter)
 
 static void Sampling(void* parameter)
 {
-	short DS18B20_temperature=0;
-	char log[20];
+	uint8_t ID[8];
+	short DS18B20_temperature1=0,DS18B20_temperature2=0;
+	char log[40  ];
 	DWT_Delay_Init();
 //	while(DHT11_Init())
 //	{
@@ -111,9 +112,10 @@ static void Sampling(void* parameter)
 	while(1)
 	{
 //		DHT11_Read_Data(&DHT11_temperature,&DHT11_humidity);
-		DS18B20_temperature=DS18B20_Get_Temp();
+		DS18B20_temperature1=DS18B20_Get_Temp(1);
+		DS18B20_temperature2=DS18B20_Get_Temp(2);
 //		rt_kprintf("DS18B20:%d\n",DS18B20_temperature);
-		sprintf(log,"temp:%d\n",DS18B20_temperature);
+		sprintf(log,"temp:%d,%d\n",DS18B20_temperature1,DS18B20_temperature2);
 		k_UpdateLog(log);
 		rt_thread_delay(400);
 	}

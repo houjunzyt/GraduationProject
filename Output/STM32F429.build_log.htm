@@ -61,11 +61,16 @@ compiling kernellog.c...
 compiling rtc.c...
 compiling dht11.c...
 compiling ds18b20.c...
+..\Driver\DS18B20\ds18b20.c(200): warning:  #1-D: last line of file ends without a newline
+  }
+..\Driver\DS18B20\ds18b20.c: 1 warning, 0 errors
 compiling stm32f4xx_it.c...
 compiling main.c...
-..\User\main.c(120): warning:  #1-D: last line of file ends without a newline
+..\User\main.c(122): warning:  #1-D: last line of file ends without a newline
   }
-..\User\main.c: 1 warning, 0 errors
+..\User\main.c(97): warning:  #177-D: variable "ID"  was declared but never referenced
+        uint8_t ID[8];
+..\User\main.c: 2 warnings, 0 errors
 compiling board.c...
 compiling GUI_X_OS.c...
 compiling GUIConf.c...
@@ -356,9 +361,9 @@ compiling zutil.c...
   void  zcfree (opaque, ptr)
 ..\STemwin\PNG\zutil.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=263012 RO-data=828140 RW-data=4208716 ZI-data=1063148  
+Program Size: Code=263092 RO-data=828156 RW-data=4208716 ZI-data=1063148  
 FromELF: creating hex file...
-"..\Output\STM32F429.axf" - 0 Error(s), 108 Warning(s).
+"..\Output\STM32F429.axf" - 0 Error(s), 110 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -372,7 +377,7 @@ Package Vendor: Keil
   D:\KEIL\ARM\PACK\Keil\STM32F4xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:01:06
+Build Time Elapsed:  00:01:13
 </pre>
 </body>
 </html>

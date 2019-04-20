@@ -1,7 +1,7 @@
 ..\output\sys_startup.o: ..\STemwin\APP\sys_startup.c
-..\output\sys_startup.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\sys_startup.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\output\sys_startup.o: ..\STemwin\inc\GUI.h
-..\output\sys_startup.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\sys_startup.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
 ..\output\sys_startup.o: ..\STemwin\inc\GUI_ConfDefaults.h
 ..\output\sys_startup.o: ..\STemwin\Config\GUIConf.h
 ..\output\sys_startup.o: ..\STemwin\inc\GUI_Type.h
@@ -48,7 +48,7 @@
 ..\output\sys_startup.o: ..\STemwin\inc\KNOB.h
 ..\output\sys_startup.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\sys_startup.o: ..\Libraries\CMSIS\Include\core_cm4.h
-..\output\sys_startup.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\sys_startup.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\sys_startup.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 ..\output\sys_startup.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 ..\output\sys_startup.o: ..\Libraries\CMSIS\Include\core_cmSimd.h

@@ -2,9 +2,9 @@
 ..\output\crc32.o: ..\STemwin\PNG\zutil.h
 ..\output\crc32.o: ..\STemwin\PNG\zlib.h
 ..\output\crc32.o: ..\STemwin\PNG\zconf.h
-..\output\crc32.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
-..\output\crc32.o: D:\keil\ARM\ARMCC\Bin\..\include\string.h
-..\output\crc32.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
-..\output\crc32.o: D:\keil\ARM\ARMCC\Bin\..\include\errno.h
-..\output\crc32.o: D:\keil\ARM\ARMCC\Bin\..\include\limits.h
+..\output\crc32.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\crc32.o: D:\KEIL\ARM\ARMCC\Bin\..\include\string.h
+..\output\crc32.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\crc32.o: D:\KEIL\ARM\ARMCC\Bin\..\include\errno.h
+..\output\crc32.o: D:\KEIL\ARM\ARMCC\Bin\..\include\limits.h
 ..\output\crc32.o: ..\STemwin\PNG\crc32.h

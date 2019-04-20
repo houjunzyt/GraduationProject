@@ -75,13 +75,14 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 		
 			hItem=pMsg->hWin;
 			hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_H1);//显示湿度
-			TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
-			sprintf((char *)DHT11,"%d \%RH %d °C",DHT11_temperature,DHT11_humidity);
-			TEXT_SetText(hItem, "25℃");
+			TEXT_SetFont(hItem, GUI_FONT_16_ASCII);
+			TEXT_SetTextColor(hItem,GUI_WHITE);
+			sprintf((char *)DHT11,"%d \%RH %d °C",DHT11_humidity,DHT11_temperature);
+			TEXT_SetText(hItem,(const char *)DHT11);
 			TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
 		
 			WM_InvalidateWindow(pMsg->hWin);
-			WM_RestartTimer(pMsg->Data.v, 1000);
+			WM_RestartTimer(pMsg->Data.v, 400);
 		default:
 			WM_DefaultProc(pMsg);
 			break;
@@ -98,6 +99,6 @@ WM_HWIN CreateHumApp(void)
   WM_HWIN hWin;
 	static WM_HTIMER hTimerTime; 
   hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
-	hTimerTime = WM_CreateTimer(WM_GetClientWindow(hWin),0,1000,0); //创建一个定时器 
+	hTimerTime = WM_CreateTimer(WM_GetClientWindow(hWin),0,400,0); //创建一个定时器 
   return hWin;
 }

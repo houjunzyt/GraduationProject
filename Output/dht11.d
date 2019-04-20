@@ -2,7 +2,7 @@
 ..\output\dht11.o: ..\Driver\DH11\dht11.h
 ..\output\dht11.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\dht11.o: ..\Libraries\CMSIS\Include\core_cm4.h
-..\output\dht11.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\dht11.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\dht11.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 ..\output\dht11.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 ..\output\dht11.o: ..\Libraries\CMSIS\Include\core_cmSimd.h

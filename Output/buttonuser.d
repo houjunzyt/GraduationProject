@@ -1,7 +1,7 @@
 ..\output\buttonuser.o: ..\STemwin\APP\buttonuser.c
-..\output\buttonuser.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\buttonuser.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\output\buttonuser.o: ..\STemwin\inc\GUI.h
-..\output\buttonuser.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\buttonuser.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
 ..\output\buttonuser.o: ..\STemwin\inc\GUI_ConfDefaults.h
 ..\output\buttonuser.o: ..\STemwin\Config\GUIConf.h
 ..\output\buttonuser.o: ..\STemwin\inc\GUI_Type.h

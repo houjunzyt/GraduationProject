@@ -8,26 +8,26 @@
 ****************************************************/
 void DH11_GPIO_Init(void)
 {
-		GPIO_InitTypeDef GPIO_InitStructure;
-		/*开启LED相关的GPIO外设时钟*/
-		RCC_AHB1PeriphClockCmd (RCC_AHB1Periph_GPIOB, ENABLE); 
-		/*选择要控制的GPIO引脚*/															   
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;	
+	GPIO_InitTypeDef GPIO_InitStructure;
+	/*开启LED相关的GPIO外设时钟*/
+	RCC_AHB1PeriphClockCmd (RCC_AHB1Periph_GPIOB, ENABLE); 
+	/*选择要控制的GPIO引脚*/															   
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;	
 
-		/*设置引脚模式为输出模式*/
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;   
-    
-    /*设置引脚的输出类型为推挽输出*/
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    
-    /*设置引脚为上拉模式*/
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	/*设置引脚模式为输出模式*/
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;   
+	
+	/*设置引脚的输出类型为推挽输出*/
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	
+	/*设置引脚为上拉模式*/
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 
-		/*设置引脚速率为2MHz */   
-		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
+	/*设置引脚速率为2MHz */   
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
 
-		/*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
-		GPIO_Init(GPIOB, &GPIO_InitStructure);	
+	/*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
+	GPIO_Init(GPIOB, &GPIO_InitStructure);	
 }
 	
 
@@ -50,18 +50,20 @@ void DHT11_Rst(void)
 *传入参数：
 *返回值  ：1:未检测到DHT11的存在 0:存在
 ****************************************************/
-u8 DHT11_Check(void) 	   
+uint8_t DHT11_Check(void) 	   
 {   
-	u8 retry=0;
+	uint8_t retry=0;
 	DHT11_IO_IN();//SET INPUT	 
-    while (DHT11_DQ_IN&&retry<100)//DHT11会拉低40~80us
+  while(DHT11_DQ_IN&&retry<100)//DHT11会拉低40~80us
 	{
 		retry++;
 		DWT_Delay_us(1);
 	};	 
-	if(retry>=100)return 1;
-	else retry=0;
-    while (!DHT11_DQ_IN&&retry<100)//DHT11拉低后会再次拉高40~80us
+	if(retry>=100)
+		return 1;
+	else 
+		retry=0;
+  while(!DHT11_DQ_IN&&retry<100)//DHT11拉低后会再次拉高40~80us
 	{
 		retry++;
 		DWT_Delay_us(1);
@@ -75,9 +77,9 @@ u8 DHT11_Check(void)
 *传入参数：
 *返回值  ：1/0
 ****************************************************/
-u8 DHT11_Read_Bit(void) 			 
+uint8_t DHT11_Read_Bit(void) 			 
 {
- 	u8 retry=0;
+ 	uint8_t retry=0;
 	while(DHT11_DQ_IN&&retry<100)//等待变为低电平
 	{
 		retry++;
@@ -90,8 +92,10 @@ u8 DHT11_Read_Bit(void)
 		DWT_Delay_us(1);
 	}
 	DWT_Delay_us(40);//等待40us
-	if(DHT11_DQ_IN)return 1;
-	else return 0;		   
+	if(DHT11_DQ_IN)
+		return 1;
+	else 
+		return 0;		   
 }
 
 /****************************************************
@@ -99,16 +103,16 @@ u8 DHT11_Read_Bit(void)
 *传入参数：
 *返回值  ：读到的数据
 ****************************************************/
-u8 DHT11_Read_Byte(void)    
+uint8_t DHT11_Read_Byte(void)    
 {        
-    u8 i,dat;
-    dat=0;
+	uint8_t i,dat;
+	dat=0;
 	for (i=0;i<8;i++) 
 	{
-   		dat<<=1; 
-	    dat|=DHT11_Read_Bit();
-    }						    
-    return dat;
+		dat<<=1; 
+		dat|=DHT11_Read_Bit();
+  }						    
+  return dat;
 }
 
 /****************************************************
@@ -116,10 +120,10 @@ u8 DHT11_Read_Byte(void)
 *传入参数：temp:温度值(范围:0~50°) humi:湿度值(范围:20%~90%)
 *返回值  ：0,正常;1,读取失败
 ****************************************************/
-u8 DHT11_Read_Data(u8 *temp,u8 *humi)    
+uint8_t DHT11_Read_Data(uint8_t *temp,uint8_t *humi)    
 {        
- 	u8 buf[5];
-	u8 i;
+ 	uint8_t buf[5];
+	uint8_t i;
 	DHT11_Rst();
 	if(DHT11_Check()==0)
 	{
@@ -132,7 +136,9 @@ u8 DHT11_Read_Data(u8 *temp,u8 *humi)
 			*humi=buf[0];
 			*temp=buf[2];
 		}
-	}else return 1;
+	}
+	else 
+		return 1;
 	return 0;	    
 }
 
@@ -142,17 +148,10 @@ u8 DHT11_Read_Data(u8 *temp,u8 *humi)
 *返回值  ：返回1:不存在，返回0:存在   
 ****************************************************/
   	 
-u8 DHT11_Init(void)
+uint8_t DHT11_Init(void)
 {
 	RCC->AHB1ENR|=1<<1;    //使能PORTB时钟	   	  
 	DH11_GPIO_Init();
 	DHT11_Rst();
 	return DHT11_Check();
 }
-
-
-
-
-
-
-

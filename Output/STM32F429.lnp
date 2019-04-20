@@ -28,6 +28,7 @@
 "..\output\kernellog.o"
 "..\output\rtc.o"
 "..\output\dht11.o"
+"..\output\ds18b20.o"
 "..\output\stm32f4xx_it.o"
 "..\output\main.o"
 "..\output\board.o"

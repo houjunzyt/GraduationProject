@@ -2,7 +2,7 @@
 ..\output\delay.o: ..\Driver\Delay\delay.h
 ..\output\delay.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\delay.o: ..\Libraries\CMSIS\Include\core_cm4.h
-..\output\delay.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\delay.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\delay.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 ..\output\delay.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 ..\output\delay.o: ..\Libraries\CMSIS\Include\core_cmSimd.h

@@ -12,6 +12,7 @@
 #include "WM.h"
 #include "iconviewdemo.h"
 #include "dht11.h"
+#include "ds18b20.h"
 
 uint32_t GUI_FreeMem = 0;
 struct rt_thread Thread1TCB;
@@ -24,10 +25,10 @@ ALIGN(RT_ALIGN_SIZE)
 static rt_uint8_t Thread2Stk[8192] __EXRAM ;
 static void Thread2(void* parameter);
 
-struct rt_thread DH11TCB;
+struct rt_thread SamplingTCB;
 ALIGN(RT_ALIGN_SIZE)
-static rt_uint8_t DH11Stk[1024] __EXRAM ;
-static void DH11(void* parameter);
+static rt_uint8_t SamplingStk[1024] __EXRAM ;
+static void Sampling(void* parameter);
 
 rt_uint8_t DHT11_temperature;  	    
 rt_uint8_t DHT11_humidity;
@@ -53,15 +54,15 @@ int main(void)
 									4, /* 线程的优先级 */
 									40); /* 线程时间片 */
 	rt_thread_startup(&Thread2TCB); /* 启动线程，开启调度 */
-	rt_thread_init(&DH11TCB, /* 线程控制块 */
-									"DHT11", /* 线程名字 */
-									DH11, /* 线程入口函数 */
+	rt_thread_init(&SamplingTCB, /* 线程控制块 */
+									"Sampling", /* 线程名字 */
+									Sampling, /* 线程入口函数 */
 									RT_NULL, /* 线程入口函数参数 */
-									&DH11Stk[0], /* 线程栈起始地址 */
-									sizeof(DH11Stk), /* 线程栈大小 */
+									&SamplingStk[0], /* 线程栈起始地址 */
+									sizeof(SamplingStk), /* 线程栈大小 */
 									3, /* 线程的优先级 */
 									40); /* 线程时间片 */
-	rt_thread_startup(&DH11TCB); /* 启动线程，开启调度 */
+	rt_thread_startup(&SamplingTCB); /* 启动线程，开启调度 */
 
 }
 
@@ -91,17 +92,29 @@ static void	Thread2(void *parameter)
 	}
 }
 
-static void DH11(void* parameter)
+static void Sampling(void* parameter)
 {
+	short DS18B20_temperature=0;
+	char log[20];
 	DWT_Delay_Init();
-	while(DHT11_Init())
+//	while(DHT11_Init())
+//	{
+//		rt_kprintf("DHT11 Init Error!");
+//		rt_thread_delay(1000);
+//	}
+	while(DS18B20_Init())	//DS18B20初始化	
 	{
-		rt_kprintf("DHT11 Init Error!");
+		rt_kprintf("DS18B20 Init Error!");
+		k_UpdateLog("error");
 		rt_thread_delay(1000);
-	}
+	} 
 	while(1)
 	{
-		DHT11_Read_Data(&DHT11_temperature,&DHT11_humidity);	
-		rt_thread_delay(1000);
+//		DHT11_Read_Data(&DHT11_temperature,&DHT11_humidity);
+		DS18B20_temperature=DS18B20_Get_Temp();
+//		rt_kprintf("DS18B20:%d\n",DS18B20_temperature);
+		sprintf(log,"temp:%d\n",DS18B20_temperature);
+		k_UpdateLog(log);
+		rt_thread_delay(400);
 	}
 }

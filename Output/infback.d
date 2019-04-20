@@ -2,10 +2,10 @@
 ..\output\infback.o: ..\STemwin\PNG\zutil.h
 ..\output\infback.o: ..\STemwin\PNG\zlib.h
 ..\output\infback.o: ..\STemwin\PNG\zconf.h
-..\output\infback.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
-..\output\infback.o: D:\keil\ARM\ARMCC\Bin\..\include\string.h
-..\output\infback.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
-..\output\infback.o: D:\keil\ARM\ARMCC\Bin\..\include\errno.h
+..\output\infback.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\infback.o: D:\KEIL\ARM\ARMCC\Bin\..\include\string.h
+..\output\infback.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\infback.o: D:\KEIL\ARM\ARMCC\Bin\..\include\errno.h
 ..\output\infback.o: ..\STemwin\PNG\inftrees.h
 ..\output\infback.o: ..\STemwin\PNG\inflate.h
 ..\output\infback.o: ..\STemwin\PNG\inffast.h

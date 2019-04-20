@@ -3,8 +3,8 @@
 ..\output\trees.o: ..\STemwin\PNG\zutil.h
 ..\output\trees.o: ..\STemwin\PNG\zlib.h
 ..\output\trees.o: ..\STemwin\PNG\zconf.h
-..\output\trees.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
-..\output\trees.o: D:\keil\ARM\ARMCC\Bin\..\include\string.h
-..\output\trees.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
-..\output\trees.o: D:\keil\ARM\ARMCC\Bin\..\include\errno.h
+..\output\trees.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\trees.o: D:\KEIL\ARM\ARMCC\Bin\..\include\string.h
+..\output\trees.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\trees.o: D:\KEIL\ARM\ARMCC\Bin\..\include\errno.h
 ..\output\trees.o: ..\STemwin\PNG\trees.h

@@ -2,7 +2,7 @@
 ..\output\sdram.o: ..\Driver\Board_Driver\STM32F429I-Discovery\sdram.h
 ..\output\sdram.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\sdram.o: ..\Libraries\CMSIS\Include\core_cm4.h
-..\output\sdram.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\sdram.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\sdram.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 ..\output\sdram.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 ..\output\sdram.o: ..\Libraries\CMSIS\Include\core_cmSimd.h
@@ -38,5 +38,5 @@
 ..\output\sdram.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fmc.h
 ..\output\sdram.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_ltdc.h
 ..\output\sdram.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sai.h
-..\output\sdram.o: D:\keil\ARM\ARMCC\Bin\..\include\stdio.h
-..\output\sdram.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\sdram.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdio.h
+..\output\sdram.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h

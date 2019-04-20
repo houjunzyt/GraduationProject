@@ -3,8 +3,8 @@
 ..\output\pngerror.o: ..\STemwin\PNG\zlib.h
 ..\output\pngerror.o: ..\STemwin\PNG\zconf.h
 ..\output\pngerror.o: ..\STemwin\PNG\pngconf.h
-..\output\pngerror.o: D:\keil\ARM\ARMCC\Bin\..\include\setjmp.h
-..\output\pngerror.o: D:\keil\ARM\ARMCC\Bin\..\include\string.h
-..\output\pngerror.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
-..\output\pngerror.o: D:\keil\ARM\ARMCC\Bin\..\include\math.h
-..\output\pngerror.o: D:\keil\ARM\ARMCC\Bin\..\include\time.h
+..\output\pngerror.o: D:\KEIL\ARM\ARMCC\Bin\..\include\setjmp.h
+..\output\pngerror.o: D:\KEIL\ARM\ARMCC\Bin\..\include\string.h
+..\output\pngerror.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\pngerror.o: D:\KEIL\ARM\ARMCC\Bin\..\include\math.h
+..\output\pngerror.o: D:\KEIL\ARM\ARMCC\Bin\..\include\time.h

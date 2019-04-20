@@ -2,7 +2,7 @@
 ..\output\iconbitmap.o: ..\STemwin\APP\iconbitmap.h
 ..\output\iconbitmap.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\iconbitmap.o: ..\Libraries\CMSIS\Include\core_cm4.h
-..\output\iconbitmap.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\iconbitmap.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\iconbitmap.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 ..\output\iconbitmap.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 ..\output\iconbitmap.o: ..\Libraries\CMSIS\Include\core_cmSimd.h
@@ -39,11 +39,11 @@
 ..\output\iconbitmap.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_ltdc.h
 ..\output\iconbitmap.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sai.h
 ..\output\iconbitmap.o: ..\STemwin\inc\GUI.h
-..\output\iconbitmap.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\iconbitmap.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
 ..\output\iconbitmap.o: ..\STemwin\inc\GUI_ConfDefaults.h
 ..\output\iconbitmap.o: ..\STemwin\Config\GUIConf.h
 ..\output\iconbitmap.o: ..\STemwin\inc\GUI_Type.h
 ..\output\iconbitmap.o: ..\STemwin\inc\LCD.h
 ..\output\iconbitmap.o: ..\STemwin\inc\Global.h
 ..\output\iconbitmap.o: ..\STemwin\inc\GUI_Version.h
-..\output\iconbitmap.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\iconbitmap.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h

@@ -9,7 +9,7 @@
 ..\output\temperature.o: ..\STemwin\inc\Global.h
 ..\output\temperature.o: ..\STemwin\inc\WM_GUI.h
 ..\output\temperature.o: ..\STemwin\inc\GUI.h
-..\output\temperature.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\temperature.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
 ..\output\temperature.o: ..\STemwin\inc\GUI_Version.h
 ..\output\temperature.o: ..\STemwin\inc\BUTTON.h
 ..\output\temperature.o: ..\STemwin\inc\DIALOG_Intern.h
@@ -46,14 +46,14 @@
 ..\output\temperature.o: ..\STemwin\inc\TEXT.h
 ..\output\temperature.o: ..\STemwin\inc\TREEVIEW.h
 ..\output\temperature.o: ..\STemwin\inc\KNOB.h
-..\output\temperature.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
-..\output\temperature.o: D:\keil\ARM\ARMCC\Bin\..\include\string.h
-..\output\temperature.o: D:\keil\ARM\ARMCC\Bin\..\include\math.h
+..\output\temperature.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\temperature.o: D:\KEIL\ARM\ARMCC\Bin\..\include\string.h
+..\output\temperature.o: D:\KEIL\ARM\ARMCC\Bin\..\include\math.h
 ..\output\temperature.o: ..\STemwin\inc\MESSAGEBOX.h
 ..\output\temperature.o: ..\STemwin\APP\userguiid.h
 ..\output\temperature.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\temperature.o: ..\Libraries\CMSIS\Include\core_cm4.h
-..\output\temperature.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\temperature.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\temperature.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 ..\output\temperature.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 ..\output\temperature.o: ..\Libraries\CMSIS\Include\core_cmSimd.h

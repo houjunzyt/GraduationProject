@@ -2,7 +2,7 @@
 ..\output\stm32f429i_discovery.o: ..\Driver\Board_Driver\STM32F429I-Discovery\stm32f429i_discovery.h
 ..\output\stm32f429i_discovery.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\stm32f429i_discovery.o: ..\Libraries\CMSIS\Include\core_cm4.h
-..\output\stm32f429i_discovery.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\stm32f429i_discovery.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\stm32f429i_discovery.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 ..\output\stm32f429i_discovery.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 ..\output\stm32f429i_discovery.o: ..\Libraries\CMSIS\Include\core_cmSimd.h

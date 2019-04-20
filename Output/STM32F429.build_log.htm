@@ -5,11 +5,11 @@
 <h2>Tool Versions:</h2>
 IDE-Version: ¶ÃVision V5.25.2.0
 Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: h h, h, LIC=IK130-B93BI-WE9H7-EZDQL-FE8BV-I8H13
+License Information: hou jun, YXCF, LIC=DSNMM-XE7ZI-VHD87-E7UL9-XLR2M-0JC9M
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.25.2.0
-Toolchain Path:  D:\keil\ARM\ARMCC\Bin
+Toolchain:       MDK-ARM Professional  Version: 5.25.2.0
+Toolchain Path:  D:\KEIL\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 6 (build 750)
 Assembler:       Armasm.exe V5.06 update 6 (build 750)
 Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
@@ -21,11 +21,11 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.1.0
 Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
-F:\shared\STM32F429_Dis1\Project\STM32F429.uvprojx
-Project File Date:  04/16/2019
+G:\GitHub\STM32F429Discovery\Project\STM32F429.uvprojx
+Project File Date:  04/20/2019
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\keil\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\KEIL\ARM\ARMCC\Bin'
 *** Note: Rebuilding project, since 'Options->Output->Create Batch File' is selected.
 Rebuild target 'Project'
 assembling startup_stm32f429_439xx.s...
@@ -60,9 +60,10 @@ compiling getThreadInfo.c...
 compiling kernellog.c...
 compiling rtc.c...
 compiling dht11.c...
+compiling ds18b20.c...
 compiling stm32f4xx_it.c...
 compiling main.c...
-..\User\main.c(107): warning:  #1-D: last line of file ends without a newline
+..\User\main.c(120): warning:  #1-D: last line of file ends without a newline
   }
 ..\User\main.c: 1 warning, 0 errors
 compiling board.c...
@@ -85,13 +86,13 @@ compiling temperature.c...
         static WM_HTIMER hTimerTime; 
 ..\STemwin\APP\temperature.c: 1 warning, 0 errors
 compiling hum.c...
-..\STemwin\APP\hum.c(79): warning:  #192-D: unrecognized character escape sequence
-                        sprintf((char *)DHT11,"%d \%RH %d °„C",DHT11_temperature,DHT11_humidity);
-..\STemwin\APP\hum.c(79): warning:  #181-D: argument is incompatible with corresponding format string conversion
-                        sprintf((char *)DHT11,"%d \%RH %d °„C",DHT11_temperature,DHT11_humidity);
-..\STemwin\APP\hum.c(79): warning:  #224-D: the format string requires additional arguments
-                        sprintf((char *)DHT11,"%d \%RH %d °„C",DHT11_temperature,DHT11_humidity);
-..\STemwin\APP\hum.c(99): warning:  #550-D: variable "hTimerTime"  was set but never used
+..\STemwin\APP\hum.c(80): warning:  #192-D: unrecognized character escape sequence
+                        sprintf((char *)DHT11,"%d \%RH %d °„C",DHT11_humidity,DHT11_temperature);
+..\STemwin\APP\hum.c(80): warning:  #181-D: argument is incompatible with corresponding format string conversion
+                        sprintf((char *)DHT11,"%d \%RH %d °„C",DHT11_humidity,DHT11_temperature);
+..\STemwin\APP\hum.c(80): warning:  #224-D: the format string requires additional arguments
+                        sprintf((char *)DHT11,"%d \%RH %d °„C",DHT11_humidity,DHT11_temperature);
+..\STemwin\APP\hum.c(100): warning:  #550-D: variable "hTimerTime"  was set but never used
         static WM_HTIMER hTimerTime; 
 ..\STemwin\APP\hum.c: 4 warnings, 0 errors
 compiling clock.c...
@@ -355,23 +356,23 @@ compiling zutil.c...
   void  zcfree (opaque, ptr)
 ..\STemwin\PNG\zutil.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=262740 RO-data=828140 RW-data=4208716 ZI-data=1063148  
+Program Size: Code=263012 RO-data=828140 RW-data=4208716 ZI-data=1063148  
 FromELF: creating hex file...
 "..\Output\STM32F429.axf" - 0 Error(s), 108 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: Keil
-                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.13.0.pack
-                Keil.STM32F4xx_DFP.2.13.0
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.5.0.pack
+                Keil.STM32F4xx_DFP.2.5.0
                 STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_Project
-  D:\keil\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+  D:\KEIL\ARM\PACK\Keil\STM32F4xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:47
+Build Time Elapsed:  00:01:06
 </pre>
 </body>
 </html>

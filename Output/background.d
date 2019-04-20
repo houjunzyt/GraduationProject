@@ -1,7 +1,7 @@
 ..\output\background.o: ..\STemwin\APP\background.c
-..\output\background.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\background.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\output\background.o: ..\STemwin\inc\GUI.h
-..\output\background.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\background.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
 ..\output\background.o: ..\STemwin\inc\GUI_ConfDefaults.h
 ..\output\background.o: ..\STemwin\Config\GUIConf.h
 ..\output\background.o: ..\STemwin\inc\GUI_Type.h

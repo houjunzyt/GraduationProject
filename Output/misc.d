@@ -2,7 +2,7 @@
 ..\output\misc.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 ..\output\misc.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\misc.o: ..\Libraries\CMSIS\Include\core_cm4.h
-..\output\misc.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\misc.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\misc.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 ..\output\misc.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 ..\output\misc.o: ..\Libraries\CMSIS\Include\core_cmSimd.h

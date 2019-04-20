@@ -2,7 +2,7 @@
 ..\output\lcd_rgb.o: ..\Driver\Board_Driver\STM32F429I-Discovery\lcd_rgb.h
 ..\output\lcd_rgb.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\lcd_rgb.o: ..\Libraries\CMSIS\Include\core_cm4.h
-..\output\lcd_rgb.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\lcd_rgb.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\lcd_rgb.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 ..\output\lcd_rgb.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 ..\output\lcd_rgb.o: ..\Libraries\CMSIS\Include\core_cmSimd.h

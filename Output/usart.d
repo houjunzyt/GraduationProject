@@ -1,9 +1,9 @@
 ..\output\usart.o: ..\Driver\Usart\usart.c
 ..\output\usart.o: ..\Driver\Usart\usart.h
-..\output\usart.o: D:\keil\ARM\ARMCC\Bin\..\include\stdio.h
+..\output\usart.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdio.h
 ..\output\usart.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\output\usart.o: ..\Libraries\CMSIS\Include\core_cm4.h
-..\output\usart.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\usart.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdint.h
 ..\output\usart.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 ..\output\usart.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 ..\output\usart.o: ..\Libraries\CMSIS\Include\core_cmSimd.h

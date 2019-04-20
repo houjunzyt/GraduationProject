@@ -901,11 +901,11 @@ ARM Macro Assembler    Page 14
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
 erwork --depend=..\output\startup_stm32f429_439xx.d -o..\output\startup_stm32f4
-29_439xx.o -I.\RTE\_Project -ID:\keil\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Driver
-s\CMSIS\Device\ST\STM32F4xx\Include -ID:\keil\ARM\CMSIS\Include --predefine="__
-MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 525" --predefine="STM32F42
-9xx SETA 1" --list=..\output\startup_stm32f429_439xx.lst ..\Libraries\CMSIS\Dev
-ice\ST\STM32F4xx\Source\Templates\arm\startup_stm32f429_439xx.s
+29_439xx.o -I.\RTE\_Project -ID:\KEIL\ARM\PACK\Keil\STM32F4xx_DFP\2.5.0\Drivers
+\CMSIS\Device\ST\STM32F4xx\Include -ID:\KEIL\ARM\CMSIS\Include --predefine="__M
+ICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 525" --predefine="STM32F429
+xx SETA 1" --list=..\output\startup_stm32f429_439xx.lst ..\Libraries\CMSIS\Devi
+ce\ST\STM32F4xx\Source\Templates\arm\startup_stm32f429_439xx.s
 
 
 

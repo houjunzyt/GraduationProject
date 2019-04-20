@@ -1,6 +1,6 @@
 ..\output\image_png.o: ..\STemwin\PNG\IMAGE_PNG.c
 ..\output\image_png.o: ..\STemwin\inc\GUI.h
-..\output\image_png.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\image_png.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
 ..\output\image_png.o: ..\STemwin\inc\GUI_ConfDefaults.h
 ..\output\image_png.o: ..\STemwin\Config\GUIConf.h
 ..\output\image_png.o: ..\STemwin\inc\GUI_Type.h

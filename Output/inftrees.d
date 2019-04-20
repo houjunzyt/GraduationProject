@@ -2,8 +2,8 @@
 ..\output\inftrees.o: ..\STemwin\PNG\zutil.h
 ..\output\inftrees.o: ..\STemwin\PNG\zlib.h
 ..\output\inftrees.o: ..\STemwin\PNG\zconf.h
-..\output\inftrees.o: D:\keil\ARM\ARMCC\Bin\..\include\stddef.h
-..\output\inftrees.o: D:\keil\ARM\ARMCC\Bin\..\include\string.h
-..\output\inftrees.o: D:\keil\ARM\ARMCC\Bin\..\include\stdlib.h
-..\output\inftrees.o: D:\keil\ARM\ARMCC\Bin\..\include\errno.h
+..\output\inftrees.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\inftrees.o: D:\KEIL\ARM\ARMCC\Bin\..\include\string.h
+..\output\inftrees.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdlib.h
+..\output\inftrees.o: D:\KEIL\ARM\ARMCC\Bin\..\include\errno.h
 ..\output\inftrees.o: ..\STemwin\PNG\inftrees.h

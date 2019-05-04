@@ -1,6 +1,0 @@
---c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Driver\Board_Driver\STM32F429I-Discovery -I ..\Driver\Board_Driver\Common -I ..\Libraries\CMSIS\Include -I ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\User -I ..\Driver\Usart -I ..\Driver\Delay -I ..\RT-Thread\bsp -I ..\RT-Thread\components\finsh -I ..\RT-Thread\include -I ..\DspLib\Include -I ..\Driver\System -I ..\STemwin\APP -I ..\STemwin\Config -I ..\STemwin\inc -I ..\STemwin\PNG -I ..\Driver\DH11 -I ..\Driver\DS18B20
--I.\RTE\_Project
--ID:\KEIL\ARM\PACK\Keil\STM32F4xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
--ID:\KEIL\ARM\CMSIS\Include
--D__UVISION_VERSION="525" -DSTM32F429xx -DUSE_STDPERIPH_DRIVER -DSTM32F429_439xx -DUSE_DEFAULT_TIMEOUT_CALLBACK -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__FPU_PRESENT="1" -D__FPU_USED="1"
--o ..\output\pngrutil.o --omf_browse ..\output\pngrutil.crf --depend ..\output\pngrutil.d "..\STemwin\PNG\pngrutil.c"

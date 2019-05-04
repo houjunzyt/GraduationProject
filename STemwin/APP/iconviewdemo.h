@@ -18,6 +18,7 @@
 #include "calender.h"
 #include "temperature.h"
 #include "hum.h"
+#include "switch.h"
 
 typedef struct {
   char * sText;

@@ -395,7 +395,8 @@ static GUI_CONST_STORAGE unsigned short _acon[] = {
         0x65CA, 0x65CA, 0x7E0D, 0x9651, 0xBE97, 0xEF1D, 0xEF3E, 0xEF7D, 0xEF9D, 0xEF9D, 0xF7BE, 0xF7BE, 0xF7DE, 0xF7DE
 };
 
-GUI_CONST_STORAGE GUI_BITMAP bmon = {
+GUI_CONST_STORAGE GUI_BITMAP bmon = 
+{
   45, // xSize
   25, // ySize
   90, // BytesPerLine

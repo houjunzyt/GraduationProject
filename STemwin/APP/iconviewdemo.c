@@ -46,7 +46,8 @@ static const BITMAP_ITEM BitmapItemTab1[]=
 	{&bmcalendar,	"Calendar"},
 	{&bmhumifity,	"Humifity"},
 	{&bmtemperature,	"Temperature"},
-	{&bmwhenther,		"whenther"},
+	{&bmwhenther,		"Whenther"},
+	{&bmswitch,		"Switch"},	
 };
 
 /********************************************************
@@ -474,7 +475,7 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
 								
 									break;
 								case 5:
-//									k_UpdateLog("touch app6\n");
+									CreateSwitch();
 									break;
 									
 							}

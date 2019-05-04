@@ -49,6 +49,7 @@ SET CPU_CLOCK=0x00B71B00
 "D:\KEIL\ARM\ARMCC\Bin\ArmCC" --Via "..\output\systemset.__i"
 "D:\KEIL\ARM\ARMCC\Bin\ArmCC" --Via "..\output\temperature.__i"
 "D:\KEIL\ARM\ARMCC\Bin\ArmCC" --Via "..\output\hum.__i"
+"D:\KEIL\ARM\ARMCC\Bin\ArmCC" --Via "..\output\switch.__i"
 "D:\KEIL\ARM\ARMCC\Bin\ArmCC" --Via "..\output\clock.__i"
 "D:\KEIL\ARM\ARMCC\Bin\ArmCC" --Via "..\output\components.__i"
 "D:\KEIL\ARM\ARMCC\Bin\ArmCC" --Via "..\output\device.__i"

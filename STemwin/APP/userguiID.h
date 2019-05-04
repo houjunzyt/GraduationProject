@@ -103,9 +103,16 @@
 #define ID_TEXT_H0      (GUI_ID_USER_Hum + 0x04)
 #define ID_TEXT_H1      (GUI_ID_USER_Hum + 0x05)
 
-
-
-
-
+//¿ª¹ØAPP
+#define GUI_ID_USER_Swi     (GUI_ID_USER+0x90)
+#define ID_FRAMEWIN_Switch  (GUI_ID_USER_Swi + 0x00)
+#define ID_TEXT_Air         (GUI_ID_USER_Swi + 0x01)
+#define ID_TEXT_Wat         (GUI_ID_USER_Swi + 0x02)
+#define ID_TEXT_Was         (GUI_ID_USER_Swi + 0x03)
+#define ID_TEXT_Plu         (GUI_ID_USER_Swi + 0x04)
+#define ID_BUTTON_Air       (GUI_ID_USER_Swi + 0x05)
+#define ID_BUTTON_Wat       (GUI_ID_USER_Swi + 0x06)
+#define ID_BUTTON_Was       (GUI_ID_USER_Swi + 0x07)
+#define ID_BUTTON_Plu       (GUI_ID_USER_Swi + 0x08)
 
 #endif

@@ -15,8 +15,6 @@ typedef struct
 }SystemConfig;
 
 
-
-
 extern GUI_CONST_STORAGE GUI_BITMAP bminfo;
 void CreateSystemSetting(WM_HWIN hWin);
 

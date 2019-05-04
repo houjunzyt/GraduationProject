@@ -4,7 +4,6 @@ SystemConfig syssetting={0};
 
 static const GUI_WIDGET_CREATE_INFO _aDialog[] = 
 {
-  
   { FRAMEWIN_CreateIndirect, "System", ID_FRAMEWIN_INFO, 0, 0, 240, 294, 0, 0x64, 0 },
   { MULTIPAGE_CreateIndirect, "Multipage", ID_MULTIPAGE, 5, 20, 220, 240, 0, 0x0, 0 },  
 };

@@ -1,18 +1,18 @@
 /*********************************************************************
-*                SEGGER Microcontroller GmbH & Co. KG                *
+*                    SEGGER Microcontroller GmbH                     *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2018  SEGGER Microcontroller GmbH                *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.26 - Graphical user interface for embedded applications **
+** emWin V5.48 - Graphical user interface for embedded applications **
 emWin is protected by international copyright laws.   Knowledge of the
 source code may not be used to write a similar product.  This file may
-only be used in accordance with a license and should not be re-
+only  be used  in accordance  with  a license  and should  not be  re-
 distributed in any way. We appreciate your understanding and fairness.
 ----------------------------------------------------------------------
 File        : GUI_PNG.c
@@ -22,8 +22,10 @@ Purpose     : Implementation of GUI_PNG... functions
 
 #include <stddef.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "png.h"
+#include "pngstruct.h"
 
 #include "GUI_Private.h"
 #include "GUI_PNG_Private.h"
@@ -80,7 +82,7 @@ static int GUI_PNG__GetData(void * p, const U8 ** ppData, unsigned NumBytesReq, 
 
   pData = (U8 *)*ppData;
   pParam = (GUI_PNG_PARAM *)p;
-  memcpy(pData, (const void *)(pParam->pFileData + Off), NumBytesReq);
+  GUI__MEMCPY(pData, (const void *)(pParam->pFileData + Off), NumBytesReq);
   return NumBytesReq;
 }
 
@@ -98,7 +100,7 @@ static int GUI_PNG__GetData(void * p, const U8 ** ppData, unsigned NumBytesReq, 
 static void _png_cexcept_error(png_structp png_ptr, png_const_charp msg) {
   GUI_USE_PARA(png_ptr);
   GUI_USE_PARA(msg);
-  while (1); /* Stop on error */
+  GUI_DEBUG_ERROROUT("GUI_PNG.c:\nError in _png_cexcept_error().");
 }
 
 /*********************************************************************
@@ -108,10 +110,10 @@ static void _png_cexcept_error(png_structp png_ptr, png_const_charp msg) {
 static void PNGAPI _png_read_data(png_structp png_ptr, png_bytep data, png_size_t length) {
   GUI_PNG_CONTEXT * pContext;
   pContext = (GUI_PNG_CONTEXT *)png_ptr->io_ptr;
-  if ((png_size_t)pContext->pfGetData(pContext->pParam, (const U8 **)&data, length, pContext->Off) != length) {
+  if ((png_size_t)pContext->pfGetData(pContext->pParam, (const U8 **)&data, (unsigned)length, pContext->Off) != length) {
     _png_cexcept_error(png_ptr, "Error reading data!");
   }
-  pContext->Off += length;
+  pContext->Off += (unsigned)length;
 }
 
 /*********************************************************************
@@ -127,15 +129,19 @@ static png_voidp _malloc_fn(png_structp png_ptr, png_size_t size) {
     GUI_HMEM hMem;
 
     GUI_USE_PARA(png_ptr);
-    hMem = GUI_ALLOC_AllocNoInit(size);
-    p = (void *)GUI_LOCK_H(hMem);
+    hMem = GUI_ALLOC_AllocNoInit((GUI_ALLOC_DATATYPE)size);
+    if (hMem) {
+      p = (void *)GUI_LOCK_H(hMem);
+    } else {
+      p = NULL;
+    }
     return p;
   #else
     GUI_USE_PARA(png_ptr);
     return malloc(size);
   #endif
 }
- 
+
 /*********************************************************************
 *
 *       _free_fn
@@ -146,7 +152,7 @@ static png_voidp _malloc_fn(png_structp png_ptr, png_size_t size) {
 static void _free_fn(png_structp png_ptr, png_voidp ptr) {
   #if 1
     GUI_HMEM hMem;
-    
+
     GUI_USE_PARA(png_ptr);
     hMem = GUI_ALLOC_p2h(ptr);
     GUI_UNLOCK_H(ptr);
@@ -202,7 +208,7 @@ static int _GetImageHeader(png_structp * ppng_ptr, png_infop * pinfo_ptr, GUI_PN
   //
   // Get width, height, bit-depth and color-type
   //
-  png_get_IHDR(png_ptr, info_ptr, pWidth, pHeight, pBitDepth, pColorType, NULL, NULL, NULL);
+  png_get_IHDR(png_ptr, info_ptr, (png_uint_32 *)pWidth, (png_uint_32 *)pHeight, pBitDepth, pColorType, NULL, NULL, NULL);
   *ppng_ptr  = png_ptr;
   *pinfo_ptr = info_ptr;
   return 0;
@@ -217,16 +223,15 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
   png_infop   info_ptr = NULL;
   U32 Width, Height;
   int BitDepth, ColorType;
-  png_color bkgColor = {127, 127, 127};
-  png_color * pBkgColor; 
+
   U32 RowBytes;
   U32 Channels;
   double Gamma;
   U8 * pImageData;
   U8 * pImageDataOld;
   U8 ** ppRowPointers = NULL;
-  png_color_16 * pBackground;
-  int BitsPerPixel, BytesPerPixel, HasAlpha, HasTrans;
+
+  int BitsPerPixel, HasAlpha, HasTrans;
   unsigned i, x, y;
   int BkPixelIndex;
   LCD_PIXELINDEX * pBkGnd;
@@ -238,12 +243,30 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
   GUI_HMEM hColor;
   int xSize, xPos;
   LCD_PIXELINDEX * p;
-  
+  U8 r, g, b, a, Alpha;
+  U32 Color;
+  U32 BkColor, DataColor;
+
+#if (GUI_WINSUPPORT)
+  GUI_RECT Rect;
+  GUI_RECT ClipRect;
+#endif
+
   //
   // Get image header
   //
-  if (_GetImageHeader(&png_ptr, &info_ptr, pContext, &Width, &Height, &BitDepth, &ColorType)) {
+  HasAlpha = 0;
+  if (_GetImageHeader(&png_ptr, &info_ptr, pContext, (U32 *)&Width, (U32 *)&Height, &BitDepth, &ColorType)) {
     return 1;
+  }
+  if (ColorType & PNG_COLOR_MASK_ALPHA) {
+    HasAlpha = 1;
+  }
+  //
+  // If not already set, calculate HasAlpha
+  //
+  if ((HasAlpha == 0) && (ColorType != PNG_COLOR_TYPE_RGBA) && (ColorType != PNG_COLOR_TYPE_GA)) {
+    HasAlpha = (png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS) == PNG_INFO_tRNS) ? 1 : 0;
   }
   //
   // Expand images of all color-type and bit-depth to 3x8 bit RGB images, and
@@ -267,15 +290,21 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
   //
   // Set the background color to draw transparent and alpha images over.
   //
-  pBkgColor = &bkgColor;
-  if (png_get_bKGD(png_ptr, info_ptr, &pBackground)) {
-    png_set_background(png_ptr, pBackground, PNG_BACKGROUND_GAMMA_FILE, 1, 1.0);
-    pBkgColor->red   = (png_byte) pBackground->red;
-    pBkgColor->green = (png_byte) pBackground->green;
-    pBkgColor->blue  = (png_byte) pBackground->blue;
-  } else {
-    pBkgColor = NULL;
+  // IMPORTANT: Not all programs consider this information. Mozilla Firefox, IrfanView
+  //            and Adobe Photoshop Elements for example do not use background
+  //            information for drawing PNGs in all cases. If there are differences
+  //            in showing the background this could be the cause. If the same behavior
+  //            of this library is desired please comment out the following lines.
+  //
+#if 1 // Please set to 0 for ignoring the background information
+  {
+    png_color_16 * pBackground;
+
+    if (png_get_bKGD(png_ptr, info_ptr, &pBackground) && (HasAlpha == 0)) {
+      png_set_background(png_ptr, pBackground, PNG_BACKGROUND_GAMMA_FILE, 1, 1.0);
+    }
   }
+#endif
   //
   // If required set gamma conversion
   //
@@ -289,23 +318,26 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
   //
   // Get again width, height and the new bit-depth and color-type
   //
-  png_get_IHDR(png_ptr, info_ptr, &Width, &Height, &BitDepth, &ColorType, NULL, NULL, NULL);
+  png_get_IHDR(png_ptr, info_ptr, (png_uint_32 *)&Width, (png_uint_32 *)&Height, &BitDepth, &ColorType, NULL, NULL, NULL);
   //
   // Row_bytes is the width x number of channels
   //
-  RowBytes = png_get_rowbytes(png_ptr, info_ptr);
-  Channels = png_get_channels(png_ptr, info_ptr);
+  RowBytes = (U32)png_get_rowbytes(png_ptr, info_ptr);
+  Channels = (U32)png_get_channels(png_ptr, info_ptr);
   //
   // Now we can allocate memory to store the image
   //
   if ((pImageData = (png_byte *)_malloc_fn(NULL, RowBytes * Height * sizeof(png_byte))) == NULL) {
     png_error(png_ptr, "Out of memory");
+    return 1;
   }
   //
   // And allocate memory for an array of row-pointers
   //
   if ((ppRowPointers = (png_bytepp)_malloc_fn(NULL, Height * sizeof(png_bytep))) == NULL) {
     png_error(png_ptr, "Out of memory");
+    _free_fn(NULL, pImageData);
+    return 1;
   }
   //
   // Set the individual row-pointers to point at the correct offsets
@@ -331,21 +363,10 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
     hColor = GUI_ALLOC_AllocZero(Width * sizeof(U32));
     hBkGnd = GUI_ALLOC_AllocZero(Width * sizeof(LCD_PIXELINDEX));
     if (hColor && hBkGnd) {
-      #if (GUI_WINSUPPORT)
-        GUI_RECT Rect;
-        GUI_RECT ClipRect;
-      #endif
-
       pColor = (U32 *)GUI_LOCK_H(hColor);
       pBkGnd = (LCD_PIXELINDEX *)GUI_LOCK_H(hBkGnd);
       BitsPerPixel = GUI_GetBitsPerPixelEx(GUI_pContext->SelLayer);
-      if (BitsPerPixel <= 8) {
-        BytesPerPixel = 1;
-      } else if (BitsPerPixel <= 16) {
-        BytesPerPixel = 2;
-      } else {
-        BytesPerPixel = 4;
-      }
+      BitsPerPixel = (BitsPerPixel < 24) ? BitsPerPixel : 32;
       //
       // Get function pointer(s)
       //
@@ -370,8 +391,6 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
         // Read one line of pixel data
         //
         for (x = 0; x < Width; x++) {
-          U8 r, g, b, a;
-          U32 Color;
           r = *pImageData++;
           g = *pImageData++;
           b = *pImageData++;
@@ -382,9 +401,17 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
             } else if (a == 255) {
               HasTrans = 1;
             }
+#if (GUI_USE_ARGB)
+            Color = b + ((U16)g << 8) + ((U32)r << 16) + ((U32)(255 - a) << 24);
+#else
             Color = r + ((U16)g << 8) + ((U32)b << 16) + ((U32)a << 24);
+#endif
           } else {
+#if (GUI_USE_ARGB)
+            Color = b + ((U16)g << 8) + ((U32)r << 16) + ((U32)0xFF << 24);
+#else
             Color = r + ((U16)g << 8) + ((U32)b << 16);
+#endif
           }
           *pWrite++ = Color;
         }
@@ -407,7 +434,7 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
           }
           if (xSize > 0) {
             GUI_ReadRectEx(xPos, y0 + y, xPos + xSize - 1, y0 + y, p, GUI__apDevice[GUI_pContext->SelLayer]);
-            GUI__ExpandPixelIndices(p, xSize, GUI_GetBitsPerPixelEx(GUI_pContext->SelLayer));
+            GUI__ExpandPixelIndices(p, xSize, BitsPerPixel);
           }
         }
         #if (GUI_WINSUPPORT)
@@ -419,14 +446,20 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
           // Mix with background
           //
           for (x = 0; x < Width; x++) {
-            U32 BkColor, DataColor, Color;
-            U8 Alpha;
             DataColor = *(pColor + x);
             Alpha = DataColor >> 24;
+#if (GUI_USE_ARGB)
+            if (Alpha < 255) {
+#else
             if (Alpha) {
+#endif
               BkPixelIndex = *(pBkGnd + x);
               BkColor = pfIndex2Color(BkPixelIndex);
-              Color = GUI__MixColors(DataColor, BkColor, 255 - Alpha);
+#if (GUI_USE_ARGB)
+              Color = GUI__pfMixColors(DataColor, BkColor, Alpha);
+#else
+              Color = GUI__pfMixColors(DataColor, BkColor, 255 - Alpha);
+#endif
               *(pBkGnd + x) = pfColor2Index(Color);
             } else {
               *(pBkGnd + x) = pfColor2Index(DataColor);
@@ -437,10 +470,12 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
           // Store data
           //
           for (x = 0; x < Width; x++) {
-            U32 Color;
-            U8 Alpha;
             Alpha = *(pColor + x) >> 24;
+#if (GUI_USE_ARGB)
+            if (Alpha == 255) {
+#else
             if (Alpha == 0) {
+#endif
               Color = *(pColor + x);
               *(pBkGnd + x) = pfColor2Index(Color);
             }
@@ -450,7 +485,7 @@ static int _Draw(int x0, int y0, GUI_PNG_CONTEXT * pContext) {
         // Draw line of pixels
         //
         GUI__CompactPixelIndices(pBkGnd, Width, BitsPerPixel);
-        LCD_DrawBitmap(x0, y0 + y, Width, 1, 1, 1, BytesPerPixel * 8, 0, (U8 *)pBkGnd, NULL);
+        LCD_DrawBitmap(x0, y0 + y, Width, 1, 1, 1, BitsPerPixel, 0, (U8 *)pBkGnd, NULL);
       }
       pImageData = pImageDataOld;
       #if (GUI_WINSUPPORT)

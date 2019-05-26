@@ -1,0 +1,66 @@
+*{font-family:Microsoft YaHei;}
+
+
+QLineEdit#TimeEdit
+{
+    background:white;
+    padding-left:5px ;
+    padding-top:1px ;
+    border-top-left-radius:3px; /*左上添加圆角矩形*/
+    border-top-right-radius:3px;
+	border-bottom-left-radius:3px; /*左下添加圆角矩形*/
+    border-bottom-right-radius:3px;
+    border: 1px solid rgb(209 , 209 , 209);
+}
+
+QLineEdit#TimeEdit:hover
+{
+    padding-top:0px ;
+    border: 1px solid rgb(21 , 131 , 221);
+}
+
+
+
+QPushButton#SetOk
+{
+    color:white;
+    background-color:rgb(14 , 150 , 254);
+    border-radius:5px;
+}
+
+QPushButton#SetOk:hover
+{
+    color:white;
+    background-color:rgb(44 , 137 , 255);
+}
+
+QPushButton#SetOk:pressed
+{
+    color:white;
+    background-color:rgb(14 , 135 , 228);
+    padding-left:3px;
+    padding-top:3px;
+}
+
+
+QPushButton#SetBack
+{
+    color:white;
+    background-color:rgb(14 , 150 , 254);
+    border-radius:5px;
+}
+
+QPushButton#SetBack:hover
+{
+    color:white;
+    background-color:rgb(44 , 137 , 255);
+}
+
+QPushButton#SetBack:pressed
+{
+    color:white;
+    background-color:rgb(14 , 135 , 228);
+    padding-left:3px;
+    padding-top:3px;
+}
+}

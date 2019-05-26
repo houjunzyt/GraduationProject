@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/BackgroundPicture">
+        <file>image/background.jpg</file>
+    </qresource>
+    <qresource prefix="/APPICON">
+        <file>image/logo.png</file>
+    </qresource>
+    <qresource prefix="/ButtonPictur">
+        <file>image/cat_icon300.png</file>
+    </qresource>
+</RCC>

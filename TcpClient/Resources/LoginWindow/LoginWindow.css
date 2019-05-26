@@ -1,0 +1,96 @@
+*{font-family:Microsoft YaHei;}
+
+
+QLineEdit#IPEdit
+{
+    background:white;
+    padding-left:5px ;
+    padding-top:1px ;
+    border-top-left-radius:3px; /*左上添加圆角矩形*/
+    border-top-right-radius:3px;
+    border: 1px solid rgb(209 , 209 , 209);
+}
+
+QLineEdit#PORTEdit
+{
+    background:white;
+    padding-left:5px ;
+    padding-top:1px ;
+    border-bottom-left-radius:3px; /*左下添加圆角矩形*/
+    border-bottom-right-radius:3px;
+    border: 1px solid rgb(209 , 209 , 209);
+    border-top:transparent;
+}
+QLineEdit#IPEdit:hover
+{
+    padding-top:0px ;
+    border: 1px solid rgb(21 , 131 , 221);
+}
+QLineEdit#PORTEdit:hover
+{
+    padding-top:0px ;
+    border: 1px solid rgb(21 , 131 , 221);
+}
+
+
+QListView::item
+{
+    margin:3px;
+}
+
+QListView::item:selected
+{
+    border-radius:3px;
+    background-color:rgba(106 , 171 , 219 , 80);
+}
+
+QListView::item:hover
+{
+    border-radius:3px;
+    background-color:rgba(97 , 179 , 246 , 0.5);
+}
+
+QLabel#userHead
+{
+    border-radius:4px;
+}
+QPushButton#loginButton
+{
+    color:white;
+    background-color:rgb(14 , 150 , 254);
+    border-radius:5px;
+}
+
+QPushButton#loginButton:hover
+{
+    color:white;
+    background-color:rgb(44 , 137 , 255);
+}
+
+QPushButton#loginButton:pressed
+{
+    color:white;
+    background-color:rgb(14 , 135 , 228);
+    padding-left:3px;
+    padding-top:3px;
+}
+QPushButton#exitButton
+{
+    color:white;
+    background-color:rgb(14 , 150 , 254);
+    border-radius:5px;
+}
+
+QPushButton#exitButton:hover
+{
+    color:white;
+    background-color:rgb(44 , 137 , 255);
+}
+
+QPushButton#exitButton:pressed
+{
+    color:white;
+    background-color:rgb(14 , 135 , 228);
+    padding-left:3px;
+    padding-top:3px;
+}

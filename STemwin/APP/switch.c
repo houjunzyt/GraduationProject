@@ -28,6 +28,7 @@ static void _cbSwitchDialog(WM_MESSAGE * pMsg)
 			FRAMEWIN_AddCloseButton(hItem, FRAMEWIN_BUTTON_RIGHT, 0);   //右上角关闭button 
 			FRAMEWIN_AddMaxButton(hItem,FRAMEWIN_BUTTON_RIGHT,2);   //添加最大化按钮
 			FRAMEWIN_AddMinButton(hItem,FRAMEWIN_BUTTON_RIGHT,2);   //添加最小化按钮	
+			FRAMEWIN_SetTitleHeight(hItem,18);//设置高度
 			//text初始化
 			hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_Air);
 			TEXT_SetTextAlign(hItem, GUI_TA_HCENTER | GUI_TA_VCENTER);

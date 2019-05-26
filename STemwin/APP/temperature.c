@@ -1,5 +1,6 @@
 #include "temperature.h"
 #include "temperaturebackground.c"
+#include <stdio.h>
 
 static WM_HWIN  hTemp = 0;
 static GRAPH_DATA_Handle hDataTemp1 = 0;
@@ -7,6 +8,8 @@ static GRAPH_DATA_Handle hDataTemp2 = 0;
 static GRAPH_DATA_Handle hDataTemp3 = 0;
 static GRAPH_DATA_Handle hDataTemp4 = 0;
 static GRAPH_SCALE_Handle hScale = 0;
+
+extern short DS18B20_temperature1,DS18B20_temperature2,DS18B20_temperature3,DS18B20_temperature4;
 
 static const GUI_WIDGET_CREATE_INFO _aTemperatureDialogCreate[] = 
 {
@@ -43,10 +46,10 @@ static void _cbTempWindow(WM_MESSAGE * pMsg)
 			break;
 			
 		case WM_TIMER:
-			GRAPH_DATA_YT_AddValue(hDataTemp1 , 15);
-			GRAPH_DATA_YT_AddValue(hDataTemp2 , 20);
-			GRAPH_DATA_YT_AddValue(hDataTemp3 , 25);
-			GRAPH_DATA_YT_AddValue(hDataTemp4 , 37);
+			GRAPH_DATA_YT_AddValue(hDataTemp1 , DS18B20_temperature1/10);
+			GRAPH_DATA_YT_AddValue(hDataTemp2 , DS18B20_temperature2/10);
+			GRAPH_DATA_YT_AddValue(hDataTemp3 , DS18B20_temperature3/10);
+			GRAPH_DATA_YT_AddValue(hDataTemp4 , DS18B20_temperature4/10);
 			WM_InvalidateWindow(pMsg->hWin);
 			WM_RestartTimer(pMsg->Data.v, 400);
 			break; 
@@ -175,7 +178,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
   const void * pData;
   WM_HWIN      hItem;
   U32          FileSize;
-
+	uint8_t      tem[6];
   switch (pMsg->MsgId) 
 	{
 
@@ -184,6 +187,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 			FRAMEWIN_AddCloseButton(hItem, FRAMEWIN_BUTTON_RIGHT,2); //右上角关闭button    
 			FRAMEWIN_AddMaxButton(hItem,FRAMEWIN_BUTTON_RIGHT,2);   //添加最大化按钮
 			FRAMEWIN_AddMinButton(hItem,FRAMEWIN_BUTTON_RIGHT,2);   //添加最小化按钮	
+			FRAMEWIN_SetTitleHeight(hItem,18);//设置高度
 			hItem = WM_GetDialogItem(pMsg->hWin, ID_IMAGE_T0);
 			pData = _GetImageById(ID_IMAGE_0_IMAGE_0, &FileSize);
 			IMAGE_SetPNG(hItem, pData, FileSize);
@@ -201,26 +205,30 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 		  hItem=pMsg->hWin;
 			hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_T4);//显示温度值
 			TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
-			TEXT_SetText(hItem, "25℃");
+			sprintf((char *)tem,"%d.%dC",DS18B20_temperature1/10,DS18B20_temperature1%10);
+			TEXT_SetText(hItem,(char *)tem);
 			TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
 
 		  hItem=pMsg->hWin;
 			hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_T5);
 			TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
-			TEXT_SetText(hItem, "25℃");
+			sprintf((char *)tem,"%d.%dC",DS18B20_temperature2/10,DS18B20_temperature2%10);
+			TEXT_SetText(hItem,(char *)tem);
 			TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
 		
 			hItem=pMsg->hWin;
 			hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_T6);
 			TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
-			TEXT_SetText(hItem, "25℃");
+			sprintf((char *)tem,"%d.%dC",DS18B20_temperature3/10,DS18B20_temperature3%10);
+			TEXT_SetText(hItem,(char *)tem);
 			TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
 		
 		
 			hItem=pMsg->hWin;
 			hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_T7);
 			TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
-			TEXT_SetText(hItem, "25℃");
+			sprintf((char *)tem,"%d.%dC",DS18B20_temperature4/10,DS18B20_temperature4%10);
+			TEXT_SetText(hItem,(char *)tem);
 			TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
 		
 			WM_InvalidateWindow(pMsg->hWin);

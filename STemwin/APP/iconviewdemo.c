@@ -46,7 +46,7 @@ static const BITMAP_ITEM BitmapItemTab1[]=
 	{&bmcalendar,	"Calendar"},
 	{&bmhumifity,	"Humifity"},
 	{&bmtemperature,	"Temperature"},
-	{&bmwhenther,		"Whenther"},
+	{&bmwhenther,		"Weather"},
 	{&bmswitch,		"Switch"},	
 };
 

@@ -32,7 +32,8 @@ static void Sampling(void* parameter);
 
 rt_uint8_t DHT11_temperature;  	    
 rt_uint8_t DHT11_humidity;
-	
+short DS18B20_temperature1=0,DS18B20_temperature2=0,DS18B20_temperature3=0,DS18B20_temperature4=0;
+
 int main(void)
 {	
 	printf("clk:%d\n",SystemCoreClock);
@@ -55,7 +56,7 @@ int main(void)
 									40); /* 线程时间片 */
 	rt_thread_startup(&Thread2TCB); /* 启动线程，开启调度 */
 	rt_thread_init(&SamplingTCB, /* 线程控制块 */
-									"Sampling", /* 线程名字 */
+									"Sample", /* 线程名字 */
 									Sampling, /* 线程入口函数 */
 									RT_NULL, /* 线程入口函数参数 */
 									&SamplingStk[0], /* 线程栈起始地址 */
@@ -94,29 +95,25 @@ static void	Thread2(void *parameter)
 
 static void Sampling(void* parameter)
 {
-	uint8_t ID[8];
-	short DS18B20_temperature1=0,DS18B20_temperature2=0;
-	char log[40  ];
 	DWT_Delay_Init();
-//	while(DHT11_Init())
-//	{
-//		rt_kprintf("DHT11 Init Error!");
-//		rt_thread_delay(1000);
-//	}
+	while(DHT11_Init())
+	{
+		rt_kprintf("DHT11 Init Error!");
+		rt_thread_delay(1000);
+	}
 	while(DS18B20_Init())	//DS18B20初始化	
 	{
 		rt_kprintf("DS18B20 Init Error!");
-		k_UpdateLog("error");
 		rt_thread_delay(1000);
 	} 
 	while(1)
 	{
-//		DHT11_Read_Data(&DHT11_temperature,&DHT11_humidity);
+		DHT11_Read_Data(&DHT11_temperature,&DHT11_humidity);
 		DS18B20_temperature1=DS18B20_Get_Temp(1);
 		DS18B20_temperature2=DS18B20_Get_Temp(2);
-//		rt_kprintf("DS18B20:%d\n",DS18B20_temperature);
-		sprintf(log,"temp:%d,%d\n",DS18B20_temperature1,DS18B20_temperature2);
-		k_UpdateLog(log);
+		DS18B20_temperature3=DS18B20_Get_Temp(3);
+		DS18B20_temperature4=DS18B20_Get_Temp(4);
+		rt_kprintf("DS18B20:%d %d %d %d hum:%d %d\n",DS18B20_temperature1,DS18B20_temperature2,DS18B20_temperature3,DS18B20_temperature4,DHT11_humidity,DHT11_temperature);
 		rt_thread_delay(400);
 	}
 }

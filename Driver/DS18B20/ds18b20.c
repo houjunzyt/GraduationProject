@@ -1,8 +1,10 @@
 #include "ds18b20.h"
 #include "delay.h"	
 
-const uint8_t IDROM1[8]={0x28,0xf5,0x7b,0x79,0x17,0x13,0x01,0x76};//带板子的
-const uint8_t IDROM2[8]={0x28,0xff,0x66,0xc3,0x67,0x18,0x01,0x6f};//红色
+const uint8_t IDROM1[8]={0x28,0xff,0x23,0xc7,0x67,0x18,0x01,0x5a};
+const uint8_t IDROM2[8]={0x28,0xff,0x66,0xc3,0x67,0x18,0x01,0x6f};
+const uint8_t IDROM3[8]={0x28,0xff,0x99,0x80,0x60,0x18,0x02,0x56};
+const uint8_t IDROM4[8]={0x28,0xff,0x11,0xf4,0x32,0x17,0x03,0x77};
 
 /****************************************************
 *函数功能：DS18B20 GPIO初始化
@@ -160,12 +162,14 @@ short DS18B20_Get_Temp(uint8_t index)
 	DS18B20_Rst();
 	DS18B20_Check();			
 	DS18B20_Write_Byte(0x55);//匹配rom ID
-	for(i=0;i<8;i++)         //·￠?í64??±à??
+	for(i=0;i<8;i++)      
 	{
 		switch(index)
 		{
 			case 1 :DS18B20_Write_Byte(IDROM1[i]);break;
 			case 2 :DS18B20_Write_Byte(IDROM2[i]);break;		
+			case 3 :DS18B20_Write_Byte(IDROM3[i]);break;
+			case 4 :DS18B20_Write_Byte(IDROM4[i]);break;		
 		}
 	}	
 	DS18B20_Write_Byte(0xbe);// convert	    
@@ -198,3 +202,4 @@ void GetRomId(uint8_t *IdRoom)
 		IdRoom[i]=DS18B20_Read_Byte();//read
 	}	
 }
+

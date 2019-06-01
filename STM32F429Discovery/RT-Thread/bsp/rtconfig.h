@@ -145,7 +145,7 @@
 //  <i>Default: 128  (128Byte)
 #define RT_CONSOLEBUF_SIZE      128
 
-#define DEBUGUSART  USART1
+#define DEBUGUSART  UART5
 
 // <s>The device name for console
 //  <i>The device name for console

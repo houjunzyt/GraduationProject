@@ -135,3 +135,7 @@
 ..\output\main.o: ..\User\bitband.h
 ..\output\main.o: ..\Driver\DS18B20\ds18b20.h
 ..\output\main.o: ..\User\bitband.h
+..\output\main.o: ..\Driver\Timer\timer.h
+..\output\main.o: ..\Driver\Esp8266\esp8266.h
+..\output\main.o: ..\Driver\Gpio\gpio.h
+..\output\main.o: ..\User\bitband.h

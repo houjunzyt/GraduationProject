@@ -95,13 +95,16 @@ void Settime::on_SetOk_clicked()
    {
        if(ui->LocalTime->text()=="Local Time")//发送用户设定的时间
        {
+           QString current_date ="SetTime:";
            if(ui->TimeEdit->text()=="")//输入框为空
            {
                 ui->TimeEdit->setPlaceholderText(QStringLiteral("Pleas enter time !"));
            }
            else//输入框非空
            {
-                tcpClient->write(ui->TimeEdit->text().toLatin1()); //qt5出去了.toAscii()
+                current_date+=ui->TimeEdit->text().toLatin1();
+                current_date += "end";
+                tcpClient->write(current_date.toLatin1()); //qt5出去了.toAscii()
            }
        }
    }

@@ -337,7 +337,7 @@
               <MiscControls>--diag_suppress=1294</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,USE_DEFAULT_TIMEOUT_CALLBACK,ARM_MATH_CM4,__CC_ARM,ARM_MATH_MATRIX_CHECK,ARM_MATH_ROUNDING,__FPU_PRESENT=1,__FPU_USED=1,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Driver\Board_Driver\STM32F429I-Discovery;..\Driver\Board_Driver\Common;..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Driver\Usart;..\Driver\Delay;..\RT-Thread\bsp;..\RT-Thread\components\finsh;..\RT-Thread\include;..\DspLib\Include;..\Driver\System;..\STemwin\APP;..\STemwin\Config;..\STemwin\inc;..\STemwin\PNG;..\Driver\DH11;..\Driver\DS18B20</IncludePath>
+              <IncludePath>..\Driver\Board_Driver\STM32F429I-Discovery;..\Driver\Board_Driver\Common;..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Driver\Usart;..\Driver\Delay;..\RT-Thread\bsp;..\RT-Thread\components\finsh;..\RT-Thread\include;..\DspLib\Include;..\Driver\System;..\STemwin\APP;..\STemwin\Config;..\STemwin\inc;..\STemwin\PNG;..\Driver\DH11;..\Driver\DS18B20;..\Driver\Gpio;..\Driver\Esp8266;..\Driver\Timer</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -471,6 +471,11 @@
               <FileType>1</FileType>
               <FilePath>..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -545,6 +550,21 @@
               <FileName>ds18b20.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Driver\DS18B20\ds18b20.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Gpio\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Esp8266\esp8266.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Timer\timer.c</FilePath>
             </File>
           </Files>
         </Group>

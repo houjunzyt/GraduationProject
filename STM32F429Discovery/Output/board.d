@@ -65,3 +65,6 @@
 ..\output\board.o: ..\RT-Thread\include\rtthread.h
 ..\output\board.o: ..\RT-Thread\include\rthw.h
 ..\output\board.o: ..\Driver\System\rtc.h
+..\output\board.o: ..\Driver\Gpio\gpio.h
+..\output\board.o: ..\User\bitband.h
+..\output\board.o: ..\Driver\Timer\timer.h

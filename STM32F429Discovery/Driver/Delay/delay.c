@@ -1,4 +1,5 @@
 #include "delay.h"
+#include "rtthread.h"
 
 u32 TimingDelay=0;//用于计量Systick中断次数
 
@@ -54,4 +55,9 @@ uint32_t DWT_Delay_Init(void)
 	{
 		return 1; /*clock cycle counter not started*/
 	}
+}
+
+void DELAY_MS(uint32_t ms)
+{	
+	rt_thread_delay(ms);
 }

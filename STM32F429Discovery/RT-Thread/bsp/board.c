@@ -1,4 +1,6 @@
 #include "board.h"
+#include "gpio.h"
+#include "timer.h"
 
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
 #define RT_HEAP_SIZE 0x00090000 //max£º0x00100000
@@ -21,7 +23,9 @@ RT_WEAK void *rt_heap_end_get(void)
 void rt_hw_board_init()
 {	
 	SysTick_Config(SystemCoreClock / RT_TICK_PER_SECOND);
-	Usart1_Config();
+	GPIOInit();
+	TIMx_Configuration();
+	Usart_Config();
 	IOE_Config();
 	rt_heap=malloc(RT_HEAP_SIZE);
 	cpu_usage_init();

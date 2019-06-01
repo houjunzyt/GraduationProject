@@ -195,7 +195,7 @@ static void _cbClockSettings(WM_MESSAGE * pMsg)
   int Id, NCode;  
   static WM_HTIMER hTimerTime;
   static uint8_t DisableAutoRefresh = 0;
-   RTC_TimeTypeDef RTC_TimeStructure;
+  RTC_TimeTypeDef RTC_TimeStructure;
   hItem = pMsg->hWin;
   switch (pMsg->MsgId) 
 	{

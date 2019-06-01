@@ -13,5 +13,5 @@ __STATIC_INLINE void DWT_Delay_us(volatile uint32_t microseconds)
   /* Delay till end */
   while ((DWT->CYCCNT - clk_cycle_start) < microseconds);
 }
-
+void DELAY_MS(uint32_t ms);
 #endif

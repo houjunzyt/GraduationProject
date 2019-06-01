@@ -104,10 +104,14 @@ void Temperature::onTempGetData()
     if(GetIndex>=0)
     {
         QString data;
+        double temp1;
         nextIndex=buffer.indexOf("T2:");//判断命令
         if(nextIndex<0)
             return;
         data=Massage.mid(GetIndex+8,nextIndex-8-GetIndex);
+        temp1=data.toDouble();
+        temp1/=10;
+        data=QString::number(temp1);
         data+="℃";
         ui->T1->setText(data);//显示
         GetIndex=nextIndex;
@@ -118,6 +122,9 @@ void Temperature::onTempGetData()
         if(nextIndex<0)
             return;
         data=Massage.mid(GetIndex+3,nextIndex-3-GetIndex);
+        temp1=data.toDouble();
+        temp1/=10;
+        data=QString::number(temp1);
         data+="℃";
         ui->T2->setText(data);//显示
         GetIndex=nextIndex;
@@ -129,6 +136,9 @@ void Temperature::onTempGetData()
         if(nextIndex<0)
             return;
         data=Massage.mid(GetIndex+3,nextIndex-3-GetIndex);
+        temp1=data.toDouble();
+        temp1/=10;
+        data=QString::number(temp1);
         data+="℃";
         ui->T3->setText(data);//显示
         GetIndex=nextIndex;
@@ -139,6 +149,9 @@ void Temperature::onTempGetData()
         if(nextIndex<0)
             return;
         data=Massage.mid(GetIndex+3,nextIndex-3-GetIndex);
+        temp1=data.toDouble();
+        temp1/=10;
+        data=QString::number(temp1);
         data+="℃";
         ui->T4->setText(data);//显示
         GetIndex=nextIndex;

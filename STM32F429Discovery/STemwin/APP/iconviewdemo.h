@@ -19,6 +19,7 @@
 #include "temperature.h"
 #include "hum.h"
 #include "switch.h"
+#include "weather.h"
 
 typedef struct {
   char * sText;

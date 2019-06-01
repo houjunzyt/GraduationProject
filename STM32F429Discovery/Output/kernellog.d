@@ -127,3 +127,4 @@
 ..\output\kernellog.o: ..\STemwin\APP\temperature.h
 ..\output\kernellog.o: ..\STemwin\APP\hum.h
 ..\output\kernellog.o: ..\STemwin\APP\switch.h
+..\output\kernellog.o: ..\STemwin\APP\weather.h

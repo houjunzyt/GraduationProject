@@ -1,5 +1,6 @@
 #include "switch.h"
-
+#include "GPIO.h"
+#include "usart.h"
 Switchconfig Switch={0};
 
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = 
@@ -21,6 +22,7 @@ static void _cbSwitchDialog(WM_MESSAGE * pMsg)
   WM_HWIN hItem;
 	int     NCode;
   int     Id;
+	uint8_t Data[100];
   switch (pMsg->MsgId) 
 	{
 		case WM_INIT_DIALOG:
@@ -72,7 +74,17 @@ static void _cbSwitchDialog(WM_MESSAGE * pMsg)
 							break;
 						case WM_NOTIFICATION_RELEASED:
 							Switch.Air_conditioner=~Switch.Air_conditioner;
-							BUTTON_SetBitmapEx(hItem,0,Switch.Air_conditioner?&bmon:&bmoff,0,0);
+							BUTTON_SetBitmapEx(hItem,0,(PORT1)?&bmoff:&bmon,0,0);
+							if(PORT1)
+							{
+								PORT1=0;
+							}
+							else
+							{
+								PORT1=1;						
+							}
+							sprintf((char *)Data,"SSW:%d%d%d%d",(int)PORT1,(int)PORT2,(int)PORT3,(int)PORT4);
+							Usart_SendString(USART1,(char *)Data);
 							break;
 					}
 					break;
@@ -84,7 +96,17 @@ static void _cbSwitchDialog(WM_MESSAGE * pMsg)
 							break;
 						case WM_NOTIFICATION_RELEASED:
 							Switch.Water_heater=~Switch.Water_heater;
-							BUTTON_SetBitmapEx(hItem,0,Switch.Water_heater?&bmon:&bmoff,0,0);
+							BUTTON_SetBitmapEx(hItem,0,(PORT2)?&bmoff:&bmon,0,0);
+							if(PORT2)
+							{
+								PORT2=0;
+							}
+							else
+							{
+								PORT2=1;						
+							}
+							sprintf((char *)Data,"SSW:%d%d%d%d",(int)PORT1,(int)PORT2,(int)PORT3,(int)PORT4);
+							Usart_SendString(USART1,(char *)Data);
 							break;
 					}
 					break;
@@ -96,7 +118,17 @@ static void _cbSwitchDialog(WM_MESSAGE * pMsg)
 							break;
 						case WM_NOTIFICATION_RELEASED:
 							Switch.Washing=~Switch.Washing;
-							BUTTON_SetBitmapEx(hItem,0,Switch.Washing?&bmon:&bmoff,0,0);
+							BUTTON_SetBitmapEx(hItem,0,(PORT3)?&bmoff:&bmon,0,0);
+						  if(PORT3)
+							{
+								PORT3=0;
+							}
+							else
+							{
+								PORT3=1;						
+							}
+							sprintf((char *)Data,"SSW:%d%d%d%d",(int)PORT1,(int)PORT2,(int)PORT3,(int)PORT4);
+							Usart_SendString(USART1,(char *)Data);
 							break;
 					}
 					break;
@@ -108,7 +140,17 @@ static void _cbSwitchDialog(WM_MESSAGE * pMsg)
 							break;
 						case WM_NOTIFICATION_RELEASED:
 							Switch.Plug=~Switch.Plug;
-							BUTTON_SetBitmapEx(hItem,0,Switch.Plug?&bmon:&bmoff,0,0);
+							BUTTON_SetBitmapEx(hItem,0,(PORT4)?&bmoff:&bmon,0,0);
+						  if(PORT4)
+							{
+								PORT4=0;
+							}
+							else
+							{
+								PORT4=1;						
+							}
+							sprintf((char *)Data,"SSW:%d%d%d%d",(int)PORT1,(int)PORT2,(int)PORT3,(int)PORT4);
+							Usart_SendString(USART1,(char *)Data);
 							break;
 					}
 					break;

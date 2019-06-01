@@ -16,11 +16,14 @@
 #include "timer.h"
 #include "esp8266.h"
 #include "gpio.h"
+#include "adc.h"
 
 uint8_t Data[100];
 extern uint8_t USART1_RX_BUFF[512];
 extern uint32_t USART1_RX_CNT;
 extern uint32_t USART1_RX_FLAG;
+
+uint16_t ADC_ConvertedValue=0;
 
 const uint8_t weatherName[3][7][20]=
 {
@@ -51,6 +54,7 @@ static rt_uint8_t UartStk[2048] __EXRAM ;
 static void Usart(void* parameter);
 struct rt_thread UsartTCB;
 
+uint8_t weatherFlag=0,tempL=0,tempH=0,C=0,L=0;
 
 
 rt_uint8_t DHT11_temperature;  	    
@@ -127,6 +131,8 @@ static void	Thread2(void *parameter)
 
 static void Sampling(void* parameter)
 {
+//	rt_base_t level;
+//	Rheostat_Init();
 	DWT_Delay_Init();
 	while(DHT11_Init())
 	{
@@ -140,6 +146,9 @@ static void Sampling(void* parameter)
 	} 
 	while(1)
 	{
+//		level=rt_hw_interrupt_disable();
+//		ADC_ConvertedValue=ADC1_GetVaule();
+//		rt_hw_interrupt_enable(level);
 		DHT11_Read_Data(&DHT11_temperature,&DHT11_humidity);
 		DS18B20_temperature1=DS18B20_Get_Temp(1);
 		DS18B20_temperature2=DS18B20_Get_Temp(2);
@@ -180,7 +189,7 @@ static void Usart(void* parameter)
 			else
 			if(strstr((char *)USART1_RX_BUFF,"GetPM")!=NULL)
 			{
-				sprintf((char *)Data,"Temp:PM:%dendP",55);
+				sprintf((char *)Data,"Temp:PM:%dendP",ADC_ConvertedValue);
 				Usart_SendString(USART1,(char *)Data);
 			}			
 			else
@@ -285,13 +294,14 @@ static void Usart(void* parameter)
 			else
 			if(strstr((char *)USART1_RX_BUFF,"SetWeather")!=NULL)
 			{
+				weatherFlag=1;
 				char *p=NULL;
-				char date[8],wea[3],TEMPH[3],TEMPL[3],tempL,tempH;
+				char date[8],wea[3],TEMPH[3],TEMPL[3];
 				p=strstr((char *)USART1_RX_BUFF,"SetWeather");
 				strncpy(date,p+11,7);
 				strncpy(wea,date,2);		
-				strncpy(TEMPH,date+3,2);	
-				strncpy(TEMPL,date+5,2);		
+				strncpy(TEMPL,date+3,2);	
+				strncpy(TEMPH,date+5,2);		
 //				printf("wes:%s\n",date);
 				tempH=atoi(TEMPH);	
 				tempL=atoi(TEMPL);			
@@ -301,28 +311,29 @@ static void Usart(void* parameter)
 					case 'A':
 						switch(wea[1])
 						{
-							case '1':printf("weather:%s\n",weatherName[0][0]);break;
-							case '2':printf("weather:%s\n",weatherName[0][1]);break;
+							case '1':printf("weather:%s\n",weatherName[0][0]),C=0,L=0;break;
+							case '2':printf("weather:%s\n",weatherName[0][1]),C=0,L=0;break;
 						}
 						break;
 					case 'B':
 						switch(wea[1])
 						{
-							case '1':printf("weather:%s\n",weatherName[1][0]);break;
-							case '2':printf("weather:%s\n",weatherName[1][1]);break;
-							case '3':printf("weather:%s\n",weatherName[1][2]);break;
-							case '4':printf("weather:%s\n",weatherName[1][3]);break;
-							case '5':printf("weather:%s\n",weatherName[1][4]);break;
-							case '6':printf("weather:%s\n",weatherName[1][5]);break;
+							case '1':printf("weather:%s\n",weatherName[1][0]),C=1,L=0;break;
+							case '2':printf("weather:%s\n",weatherName[1][1]),C=1,L=1;break;
+							case '3':printf("weather:%s\n",weatherName[1][2]),C=1,L=2;break;
+							case '4':printf("weather:%s\n",weatherName[1][3]),C=1,L=3;break;
+							case '5':printf("weather:%s\n",weatherName[1][4]),C=1,L=4;break;
+							case '6':printf("weather:%s\n",weatherName[1][5]),C=1,L=5;break;
 						}
 						break;
 					case 'C':
 						switch(wea[1])
 						{
-							case '1':printf("weather:%s\n",weatherName[2][0]);break;
+							case '1':printf("weather:%s\n",weatherName[2][0]),C=2,L=0;break;
 						}
 						break;
 				}
+				rt_kprintf("wea:%s,%d-%d\n",weatherName[C][L],tempL,tempH);
 			}			
 		}		
 		rt_thread_delay(50);

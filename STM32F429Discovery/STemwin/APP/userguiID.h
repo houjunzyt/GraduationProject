@@ -115,4 +115,12 @@
 #define ID_BUTTON_Was       (GUI_ID_USER_Swi + 0x07)
 #define ID_BUTTON_Plu       (GUI_ID_USER_Swi + 0x08)
 
+//ÌìÆøapp
+#define GUI_ID_USER_Wea     (GUI_ID_USER+0xA0)
+#define ID_FRAMEWIN_Weather (GUI_ID_USER_Wea + 0x00)
+#define ID_TEXT_WEA         (GUI_ID_USER_Wea + 0x01)
+#define ID_TEXT_WTE         (GUI_ID_USER_Wea + 0x02)
+#define ID_TEXT_wea         (GUI_ID_USER_Wea + 0x03)
+#define ID_TEXT_wte         (GUI_ID_USER_Wea + 0x04)
+
 #endif

@@ -68,3 +68,4 @@
 ..\output\board.o: ..\Driver\Gpio\gpio.h
 ..\output\board.o: ..\User\bitband.h
 ..\output\board.o: ..\Driver\Timer\timer.h
+..\output\board.o: ..\Driver\Adc\adc.h

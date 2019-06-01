@@ -3,7 +3,8 @@
 
 extern rt_uint8_t DHT11_temperature;  	    
 extern rt_uint8_t DHT11_humidity;
-
+extern uint16_t ADC_ConvertedValue;
+			
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { FRAMEWIN_CreateIndirect, "Humidity", ID_FRAMEWIN_0, 2, 53, 240, 240, 0, 0x0, 0 },
   { IMAGE_CreateIndirect, "Image", ID_IMAGE_H0, 0, 0, 230, 292, 0, 0, 0 },
@@ -70,8 +71,8 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 			hItem=pMsg->hWin;
 			hItem=WM_GetDialogItem(pMsg->hWin,ID_TEXT_H0);//ÏÔÊ¾PM
 			TEXT_SetFont(hItem, GUI_FONT_24_ASCII);
-			
-			TEXT_SetText(hItem, "");
+			sprintf((char *)DHT11,"%d",ADC_ConvertedValue);	
+			TEXT_SetText(hItem,DHT11);
 			TEXT_SetTextAlign(hItem,GUI_TA_HCENTER|GUI_TA_VCENTER);
 		
 			hItem=pMsg->hWin;

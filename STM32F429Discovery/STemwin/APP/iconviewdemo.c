@@ -472,7 +472,7 @@ void cb_BkWindow(WM_MESSAGE *pMsg)
 									}
 									break;
 								case 4:
-								
+									CreatWeather();
 									break;
 								case 5:
 									CreateSwitch();

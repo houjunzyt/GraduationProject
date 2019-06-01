@@ -131,6 +131,7 @@
 ..\output\main.o: ..\STemwin\APP\temperature.h
 ..\output\main.o: ..\STemwin\APP\hum.h
 ..\output\main.o: ..\STemwin\APP\switch.h
+..\output\main.o: ..\STemwin\APP\weather.h
 ..\output\main.o: ..\Driver\DH11\dht11.h
 ..\output\main.o: ..\User\bitband.h
 ..\output\main.o: ..\Driver\DS18B20\ds18b20.h
@@ -139,3 +140,4 @@
 ..\output\main.o: ..\Driver\Esp8266\esp8266.h
 ..\output\main.o: ..\Driver\Gpio\gpio.h
 ..\output\main.o: ..\User\bitband.h
+..\output\main.o: ..\Driver\Adc\adc.h

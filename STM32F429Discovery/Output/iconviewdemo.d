@@ -127,3 +127,4 @@
 ..\output\iconviewdemo.o: ..\STemwin\APP\temperature.h
 ..\output\iconviewdemo.o: ..\STemwin\APP\hum.h
 ..\output\iconviewdemo.o: ..\STemwin\APP\switch.h
+..\output\iconviewdemo.o: ..\STemwin\APP\weather.h

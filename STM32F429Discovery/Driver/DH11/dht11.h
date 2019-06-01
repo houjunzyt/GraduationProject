@@ -20,18 +20,3 @@ void DHT11_Rst(void);	//¸´Î»DHT11
 
 #endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

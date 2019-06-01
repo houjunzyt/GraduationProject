@@ -1,6 +1,7 @@
 #include "board.h"
 #include "gpio.h"
 #include "timer.h"
+#include "adc.h"
 
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
 #define RT_HEAP_SIZE 0x00090000 //max£º0x00100000

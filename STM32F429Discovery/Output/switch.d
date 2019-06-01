@@ -86,3 +86,7 @@
 ..\output\switch.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sai.h
 ..\output\switch.o: D:\KEIL\ARM\ARMCC\Bin\..\include\string.h
 ..\output\switch.o: ..\STemwin\APP\userguiid.h
+..\output\switch.o: ..\Driver\Gpio\GPIO.h
+..\output\switch.o: ..\User\bitband.h
+..\output\switch.o: ..\Driver\Usart\usart.h
+..\output\switch.o: D:\KEIL\ARM\ARMCC\Bin\..\include\stdio.h
